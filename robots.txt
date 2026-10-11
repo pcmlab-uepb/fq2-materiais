@@ -1,0 +1,3 @@
+# material didático de uso interno (FQ II 2026.2, UEPB)
+User-agent: *
+Disallow: /

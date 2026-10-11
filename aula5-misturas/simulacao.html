@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulação — Misturas Simples e Sistemas Binários (FQ II)</title>
+<style>
+  :root{--bg:#12211c;--bg2:#1b332b;--chalk:#f2f0e6;--cyan:#7fd4e8;--yellow:#ffe97a;
+        --pink:#e8a0d8;--green:#a5d6a7;--red:#ff8f7a;--ink:#0d1714}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:linear-gradient(160deg,#2f6e4f,#152a23);color:var(--chalk);
+       font-family:"DejaVu Sans","Verdana",system-ui,sans-serif;line-height:1.5;padding:18px}
+  .wrap{max-width:1120px;margin:0 auto}
+  h1{font-size:1.35rem;color:var(--cyan);margin-bottom:4px}
+  .sub{font-size:.86rem;opacity:.78;margin-bottom:16px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .tabs button{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+       border-radius:999px;padding:7px 16px;font:inherit;font-size:.86rem;cursor:pointer}
+  .tabs button[aria-selected="true"]{background:var(--cyan);color:var(--ink);border-color:var(--cyan);font-weight:700}
+  .mod{display:none} .mod.on{display:block}
+  .card{background:rgba(13,23,20,.45);border:2px solid rgba(242,240,230,.14);border-radius:14px;
+        padding:16px 18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:330px 1fr;gap:14px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:.8rem;color:var(--yellow);margin:9px 0 3px}
+  input[type=range]{width:100%}
+  .val{font-variant-numeric:tabular-nums;color:var(--cyan);font-weight:700}
+  button.go{background:var(--yellow);color:var(--ink);border:0;border-radius:9px;padding:10px 16px;
+        font:inherit;font-weight:700;cursor:pointer;margin-top:12px;width:100%}
+  button.go:hover{filter:brightness(1.08)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(242,240,230,.12);
+        font-variant-numeric:tabular-nums}
+  th{color:var(--cyan);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  .pos{color:var(--red)} .neg{color:var(--cyan)} .zero{opacity:.6}
+  canvas{width:100%;max-width:580px;background:rgba(255,255,255,.03);border-radius:10px}
+  .fb{margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.88rem;border-left:5px solid var(--yellow);
+      background:rgba(255,233,122,.09)}
+  .fb.ok{border-left-color:var(--green);background:rgba(165,214,167,.1)}
+  .fb.err{border-left-color:var(--red);background:rgba(255,143,122,.1)}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .opts button{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+       border-radius:8px;padding:7px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+  small{display:block;font-size:.76rem;opacity:.7;margin-top:6px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;margin-top:6px;opacity:.9}
+  .legend i{display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.76rem;font-weight:700}
+  .tag.liq{background:rgba(127,212,232,.25);color:var(--cyan)}
+  .tag.vap{background:rgba(255,233,122,.25);color:var(--yellow)}
+  .tag.two{background:rgba(232,160,216,.25);color:var(--pink)}
+</style>
+</head>
+<body><div class="wrap">
+  <h1>Simulação — Misturas Simples e Sistemas Binários</h1>
+  <div class="sub">Físico-Química II · Aula 5 (Unidade 1) · Prof. Dr. Rodrigo José de Oliveira — UEPB/PCM Lab.<br>
+    Regra do jogo: <b>preveja antes de mexer</b> — anote sua previsão e só depois confira no painel.</div>
+
+  <div class="tabs">
+    <button data-m="m1" aria-selected="true">1 · Energia de mistura e lacuna de miscibilidade</button>
+    <button data-m="m2" aria-selected="false">2 · Diagrama T–x e regra da alavanca</button>
+  </div>
+
+  <!-- ============================ MÓDULO 1 ============================ -->
+  <div class="mod on" id="m1">
+    <div class="grid">
+      <div class="card">
+        <label>Fração molar de B: x<sub>B</sub> = <span class="val" id="vxB">0,50</span></label>
+        <input type="range" id="xB" min="0.02" max="0.98" step="0.01" value="0.5">
+        <label>Parâmetro de interação: Ω/RT = <span class="val" id="vw">0,50</span></label>
+        <input type="range" id="w" min="0" max="4" step="0.05" value="0.5">
+        <div class="legend">
+          <span><i style="background:#ffe97a"></i>Δ<sub>mix</sub>G/nRT</span>
+          <span><i style="background:#ff8f7a"></i>Δ<sub>mix</sub>H/nRT</span>
+          <span><i style="background:#e8a0d8"></i>−TΔ<sub>mix</sub>S/nRT</span>
+        </div>
+        <small>Modelo (solução regular):
+          Δ<sub>mix</sub>G = RT(n<sub>A</sub> ln x<sub>A</sub> + n<sub>B</sub> ln x<sub>B</sub>) + Ω·n<sub>A</sub>x<sub>B</sub>,
+          com Ω/RT = w. São plotadas as grandezas molares adimensionais (divididas por nRT).</small>
+        <button class="go" id="b1">Calcular</button>
+      </div>
+      <div class="card">
+        <canvas id="gplot" width="580" height="360"></canvas>
+        <table>
+          <tr><th>Grandeza (por n·RT)</th><th>Valor em x<sub>B</sub></th><th>Leitura</th></tr>
+          <tbody id="tab1"></tbody>
+        </table>
+        <div class="fb" id="fb1">Escolha x<sub>B</sub> e Ω/RT e clique em <b>Calcular</b>.</div>
+      </div>
+    </div>
+    <div class="card">
+      <b>Previsão antes de conferir:</b> a mistura separa-se espontaneamente em DUAS fases líquidas quando…
+      <div class="opts">
+        <button data-p="a">Ω/RT &lt; 2</button>
+        <button data-p="b">Ω/RT = 2</button>
+        <button data-p="c">Ω/RT &gt; 2</button>
+        <button data-p="d">em qualquer Ω/RT &gt; 0</button>
+      </div>
+      <div id="fbp1"></div>
+      <small>Dica: a lacuna de miscibilidade aparece quando a curva de Δ<sub>mix</sub>G passa a ter
+        <b>dois mínimos</b> e a <b>tangente comum</b> entre eles corta a curva — o sistema então se
+        separa nas composições dos dois mínimos.</small>
+    </div>
+  </div>
+
+  <!-- ============================ MÓDULO 2 ============================ -->
+  <div class="mod" id="m2">
+    <div class="grid">
+      <div class="card">
+        <label>Composição global: z<sub>A</sub> = <span class="val" id="vz">0,50</span> (fração MOLAR de A)</label>
+        <input type="range" id="zA" min="0.02" max="0.98" step="0.01" value="0.5">
+        <label>Temperatura: T = <span class="val" id="vT">368,2</span> K (<span class="val" id="vTc">95,0</span> °C)</label>
+        <input type="range" id="Tsl" min="350" max="386" step="0.25" value="368.15">
+        <small>Sistema: <b>benzeno (A) + tolueno (B)</b> a 1 atm (101,325 kPa). Par próximo da idealidade,
+          descrito pela <b>lei de Raoult</b> com as pressões de vapor dadas pela equação de Antoine.
+          O etanol–água REAL forma azeótropo — caso em que as curvas de bolha e orvalho se tocam.</small>
+        <button class="go" id="b2">Calcular</button>
+        <div class="legend">
+          <span><i style="background:#ffe97a"></i>curva de bolha (líquido)</span>
+          <span><i style="background:#7fd4e8"></i>curva de orvalho (vapor)</span>
+        </div>
+      </div>
+      <div class="card">
+        <canvas id="txplot" width="580" height="400"></canvas>
+        <table>
+          <tr><th>Leitura</th><th>Valor</th><th>Comentário</th></tr>
+          <tbody id="tab2"></tbody>
+        </table>
+        <div class="fb" id="fb2">Escolha z<sub>A</sub> e T e clique em <b>Calcular</b>.</div>
+      </div>
+    </div>
+    <div class="card">
+      <b>Previsão antes de conferir:</b> com z<sub>A</sub> = 0,50 a 368,2 K (95 °C) e 1 atm, o sistema está…
+      <div class="opts">
+        <button data-r="liq">todo líquido</button>
+        <button data-r="vap">todo vapor</button>
+        <button data-r="two">líquido + vapor (duas fases)</button>
+      </div>
+      <div id="fbp2"></div>
+      <small><b>Atenção:</b> a regra da alavanca devolve frações MOLARES (em mols), não em massa.
+        Perto do azeótropo, converter entre mol e massa muda as porcentagens.</small>
+    </div>
+  </div>
+</div>
+<script>
+/* ---------------- utilidades ---------------- */
+const $ = s => document.querySelector(s);
+const fmt = (x, d = 2) => x.toLocaleString("pt-BR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const RNUM = 8.314462618;   // J K^-1 mol^-1 (CODATA/NIST)
+
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  document.querySelectorAll(".mod").forEach(m => m.classList.toggle("on", m.id === b.dataset.m));
+}));
+
+/* ================================================================== */
+/* MÓDULO 1 — Energia de mistura (solução regular)                    */
+/*   g(x,w) = x ln x + (1-x)ln(1-x) + w x(1-x)   (adimensional, /nRT)  */
+/* ================================================================== */
+function gterm(x) { return (x <= 0 || x >= 1) ? 0 : x * Math.log(x) + (1 - x) * Math.log(1 - x); }
+function gval(x, w) { return gterm(x) + w * x * (1 - x); }        // ΔmixG / nRT
+function hval(x, w) { return w * x * (1 - x); }                    // ΔmixH / nRT
+function eval_(x)   { return gterm(x); }                           // -TΔmixS / nRT
+
+/* binodal (tangente comum) do modelo simétrico:
+   resolve ln(x/(1-x)) + w(1-2x) = 0  no intervalo (0, 1/2); x2 = 1-x1 */
+function binodal(w) {
+  if (w <= 2) return null;
+  const f = x => Math.log(x / (1 - x)) + w * (1 - 2 * x);
+  let lo = 1e-7, hi = 0.5;
+  for (let i = 0; i < 120; i++) {
+    const mid = 0.5 * (lo + hi);
+    if (f(mid) > 0) hi = mid; else lo = mid;
+  }
+  const x1 = 0.5 * (lo + hi);
+  return {x1, x2: 1 - x1, b: gval(x1, w)};
+}
+
+function desenha1(xB, w) {
+  const c = $("#gplot"), g = c.getContext("2d");
+  const W = c.width, H = c.height, m = {l: 52, r: 16, t: 16, b: 40};
+  const ymin = -0.78, ymax = 0.14;
+  g.clearRect(0, 0, W, H);
+  const X = x => m.l + x * (W - m.l - m.r);
+  const Y = v => H - m.b - (v - ymin) / (ymax - ymin) * (H - m.t - m.b);
+  // eixos
+  g.strokeStyle = "rgba(242,240,230,.55)"; g.lineWidth = 1.3;
+  g.beginPath(); g.moveTo(m.l, m.t); g.lineTo(m.l, H - m.b); g.lineTo(W - m.r, H - m.b); g.stroke();
+  // grade + rótulos y
+  g.fillStyle = "rgba(242,240,230,.75)"; g.font = "11px DejaVu Sans";
+  for (let v = -0.6; v <= 0.1; v += 0.2) {
+    g.strokeStyle = "rgba(242,240,230,.10)"; g.beginPath();
+    g.moveTo(m.l, Y(v)); g.lineTo(W - m.r, Y(v)); g.stroke();
+    g.fillText(fmt(v, 1), 8, Y(v) + 4);
+  }
+  g.fillText("x_B", W - m.r - 26, H - 12);
+  g.fillText("G/nRT", 8, m.t + 10);
+  // lacuna de miscibilidade
+  const bd = binodal(w);
+  if (bd) {
+    g.fillStyle = "rgba(232,160,216,.14)";
+    g.fillRect(X(bd.x1), m.t, X(bd.x2) - X(bd.x1), H - m.t - m.b);
+    // tangente comum (horizontal, pois os dois mínimos têm igual profundidade)
+    g.strokeStyle = "#e8a0d8"; g.lineWidth = 1.8; g.setLineDash([6, 4]);
+    g.beginPath(); g.moveTo(X(bd.x1), Y(bd.b)); g.lineTo(X(bd.x2), Y(bd.b)); g.stroke();
+    g.setLineDash([]);
+    [[bd.x1, "#e8a0d8"], [bd.x2, "#e8a0d8"]].forEach(([xv, col]) => {
+      g.fillStyle = col; g.beginPath(); g.arc(X(xv), Y(bd.b), 4, 0, 7); g.fill();
+    });
+    g.fillStyle = "#e8a0d8";
+    g.fillText("fase 1  x=" + fmt(bd.x1, 3), X(bd.x1) - 8, Y(bd.b) - 8);
+    g.fillText("fase 2  x=" + fmt(bd.x2, 3), X(bd.x2) - 78, Y(bd.b) - 8);
+  }
+  // curvas
+  const curva = (fn, cor, larg) => {
+    g.strokeStyle = cor; g.lineWidth = larg; g.beginPath();
+    for (let i = 0; i <= 200; i++) {
+      const x = 0.005 + (0.99) * i / 200;
+      const yv = Math.max(ymin, Math.min(ymax, fn(x)));
+      i ? g.lineTo(X(x), Y(yv)) : g.moveTo(X(x), Y(yv));
+    }
+    g.stroke();
+  };
+  curva(x => eval_(x), "#e8a0d8", 1.8);          // -TΔS
+  curva(x => hval(x, w), "#ff8f7a", 1.8);        // ΔH
+  curva(x => gval(x, w), "#ffe97a", 2.8);        // ΔG (principal)
+  // marcador do x_B atual
+  const yv = Math.max(ymin, Math.min(ymax, gval(xB, w)));
+  g.fillStyle = "#fff"; g.beginPath(); g.arc(X(xB), Y(yv), 4.5, 0, 7); g.fill();
+  g.strokeStyle = "#0d1714"; g.lineWidth = 1.5; g.stroke();
+}
+
+function atualiza1() {
+  const xB = +$("#xB").value, w = +$("#w").value;
+  $("#vxB").textContent = fmt(xB, 2);
+  $("#vw").textContent = fmt(w, 2);
+  const dG = gval(xB, w), dH = hval(xB, w), eS = eval_(xB);
+  const dS = -eS;                    // ΔmixS / nR  (≥ 0)
+  const bd = binodal(w);
+  const unstable = bd && xB > bd.x1 && xB < bd.x2;
+  $("#tab1").innerHTML =
+    `<tr><td>Δ<sub>mix</sub>G / nRT</td><td class="${dG < 0 ? 'neg' : 'pos'}">${fmt(dG, 4)}</td>
+        <td>${dG < 0 ? "misturar é espontâneo" : "misturar não é espontâneo nesta composição"}</td></tr>` +
+    `<tr><td>Δ<sub>mix</sub>H / nRT</td><td class="${dH > 0 ? 'pos' : (dH < 0 ? 'neg' : 'zero')}">${fmt(dH, 4)}</td>
+        <td>${w === 0 ? "ideal: ΔmixH = 0" : (dH > 0 ? "Ω &gt; 0: interações A–B desfavoráveis (endotérmico)" : "Ω &lt; 0: favorável (exotérmico)")}</td></tr>` +
+    `<tr><td>−TΔ<sub>mix</sub>S / nRT</td><td class="neg">${fmt(eS, 4)}</td>
+        <td>Δ<sub>mix</sub>S / nR = ${fmt(dS, 4)} &gt; 0 — a mistura aumenta a entropia</td></tr>` +
+    (bd
+      ? `<tr><td>Lacuna de miscibilidade</td><td class="pos">Ω/RT = ${fmt(w, 2)} &gt; 2</td>
+           <td>${unstable ? "x_B cai DENTRO da lacuna" : "x_B fora da lacuna"} — fases em x = ${fmt(bd.x1, 3)} e ${fmt(bd.x2, 3)}</td></tr>`
+      : `<tr><td>Lacuna de miscibilidade</td><td class="zero">Ω/RT = ${fmt(w, 2)} ≤ 2</td>
+           <td>mistura homogênea: Δ<sub>mix</sub>G tem um único mínimo</td></tr>`);
+  desenha1(xB, w);
+  let fb;
+  if (w === 0) {
+    fb = `<b>Ideal (Ω/RT = 0):</b> a curva de Δ<sub>mix</sub>G é o termo −TΔ<sub>mix</sub>S, sempre negativa,
+      com um único mínimo em x_B = 0,5. A mistura é espontânea em toda a faixa — dirigida pela entropia.`;
+  } else if (w <= 2) {
+    fb = `<b>Desvio moderado (0 &lt; Ω/RT ≤ 2):</b> a repulsão A–B encurva Δ<sub>mix</sub>G para cima,
+      mas ainda há um só mínimo. A mistura continua homogênea (real, mas miscível em todas as proporções).`;
+  } else {
+    fb = `<b>Lacuna de miscibilidade (Ω/RT &gt; 2):</b> a curva desenvolve <i>dois mínimos</i>.
+      A <b>tangente comum</b> entre eles corta a curva e o sistema se separa espontaneamente nas duas
+      composições de equilíbrio, <b>x = ${fmt(bd.x1, 3)}</b> e <b>x = ${fmt(bd.x2, 3)}</b>.
+      Qualquer composição global entre esses valores cai na região bifásica (área roxa).`;
+  }
+  $("#fb1").innerHTML = fb;
+}
+$("#b1").addEventListener("click", atualiza1);
+$("#xB").addEventListener("input", atualiza1);
+$("#w").addEventListener("input", atualiza1);
+document.querySelectorAll(".opts button[data-p]").forEach(b => b.addEventListener("click", () => {
+  const ok = b.dataset.p === "c";
+  $("#fbp1").innerHTML = ok
+    ? `<div class="fb ok">Correto: só para <b>Ω/RT &gt; 2</b> a curva de Δ<sub>mix</sub>G ganha dois mínimos
+       e a tangente comum aparece. O caso-limite Ω/RT = 2 (x = 0,5) é crítico; abaixo dele a mistura é homogênea.
+       Coloque Ω/RT = 2,5 no slider e veja as duas fases em x ≈ 0,145 e 0,855.</div>`
+    : `<div class="fb err">Não. Confira no slider: com Ω/RT ≤ 2 há um único mínimo (homogêneo).
+       A lacuna exige repulsão A–B forte o bastante para criar <b>dois mínimos</b> — isso só ocorre
+       acima de Ω/RT = 2.</div>`;
+}));
+
+/* ================================================================== */
+/* MÓDULO 2 — Diagrama T–x e regra da alavanca                        */
+/*   Raoult ideal: P = x_A p_A* + x_B p_B*  (Antoine, mmHg, °C)        */
+/*   benzeno (A) e tolueno (B), P_total = 760 mmHg = 101,325 kPa       */
+/* ================================================================== */
+const P_TOT = 760.0;   // mmHg
+const pAbz  = Tc => Math.pow(10, 6.90565 - 1211.033 / (220.790 + Tc));  // benzeno
+const pBtol = Tc => Math.pow(10, 6.95464 - 1344.800 / (219.482 + Tc)); // tolueno
+
+// composições em equilíbrio a uma temperatura (linha de amarração)
+function liqAt(Tc) { const pa = pAbz(Tc), pb = pBtol(Tc); return (P_TOT - pb) / (pa - pb); }
+function vapAt(Tc) { const pa = pAbz(Tc), x = liqAt(Tc); return x * pa / P_TOT; }
+
+function desenha2(zA, TK) {
+  const c = $("#txplot"), g = c.getContext("2d");
+  const W = c.width, H = c.height, m = {l: 62, r: 18, t: 16, b: 42};
+  const Tmin = 350, Tmax = 386;
+  g.clearRect(0, 0, W, H);
+  const X = x => m.l + x * (W - m.l - m.r);
+  const Y = T => H - m.b - (T - Tmin) / (Tmax - Tmin) * (H - m.t - m.b);
+  // eixos
+  g.strokeStyle = "rgba(242,240,230,.55)"; g.lineWidth = 1.3;
+  g.beginPath(); g.moveTo(m.l, m.t); g.lineTo(m.l, H - m.b); g.lineTo(W - m.r, H - m.b); g.stroke();
+  g.fillStyle = "rgba(242,240,230,.78)"; g.font = "11px DejaVu Sans";
+  for (let T = 352; T <= 386; T += 4) g.fillText(T + " K", 6, Y(T) + 4);
+  for (let x = 0; x <= 1.001; x += 0.2) g.fillText(fmt(x, 1), X(x) - 8, H - m.b + 15);
+  g.fillText("z_A (fração molar de A)", W - m.r - 150, H - 8);
+  // região bifásica: caminha pela curva de bolha e volta pela de orvalho
+  g.fillStyle = "rgba(232,160,216,.13)"; g.beginPath();
+  let started = false;
+  for (let i = 0; i <= 120; i++) { const T = 353.3 + (383.8 - 353.3) * i / 120, x = liqAt(T - 273.15);
+    if (x < 0 || x > 1) continue; started ? g.lineTo(X(x), Y(T)) : (g.moveTo(X(x), Y(T)), started = true); }
+  for (let i = 120; i >= 0; i--) { const T = 353.3 + (383.8 - 353.3) * i / 120, y = vapAt(T - 273.15);
+    if (y < 0 || y > 1) continue; g.lineTo(X(y), Y(T)); }
+  g.closePath(); g.fill();
+  // curvas de bolha e orvalho
+  const traca = (fn, cor, larg) => { g.strokeStyle = cor; g.lineWidth = larg; g.beginPath(); let st = false;
+    for (let i = 0; i <= 240; i++) { const T = 353.3 + (383.8 - 353.3) * i / 240, v = fn(T - 273.15);
+      if (v < 0 || v > 1) continue; st ? g.lineTo(X(v), Y(T)) : (g.moveTo(X(v), Y(T)), st = true); }
+    g.stroke(); };
+  traca(liqAt, "#ffe97a", 2.6);   // bolha
+  traca(vapAt, "#7fd4e8", 2.6);   // orvalho
+  // isopleta (z_A constante)
+  g.strokeStyle = "rgba(242,240,230,.5)"; g.lineWidth = 1.2; g.setLineDash([4, 4]);
+  g.beginPath(); g.moveTo(X(zA), m.t); g.lineTo(X(zA), H - m.b); g.stroke();
+  // linha de amarração no T atual
+  const Tc = TK - 273.15;
+  const xl = liqAt(Tc), yv = vapAt(Tc);
+  if (xl >= 0 && xl <= 1 && yv >= 0 && yv <= 1) {
+    g.strokeStyle = "#e8a0d8"; g.lineWidth = 1.8; g.setLineDash([]);
+    g.beginPath(); g.moveTo(X(xl), Y(TK)); g.lineTo(X(yv), Y(TK)); g.stroke();
+    g.fillStyle = "#7fd4e8"; g.beginPath(); g.arc(X(xl), Y(TK), 4, 0, 7); g.fill();
+    g.fillStyle = "#ffe97a"; g.beginPath(); g.arc(X(yv), Y(TK), 4, 0, 7); g.fill();
+  }
+  // ponto (z_A, T)
+  g.fillStyle = "#fff"; g.beginPath(); g.arc(X(zA), Y(TK), 5, 0, 7); g.fill();
+  g.strokeStyle = "#0d1714"; g.lineWidth = 1.6; g.stroke();
+}
+
+function atualiza2() {
+  const zA = +$("#zA").value, TK = +$("#Tsl").value, Tc = TK - 273.15;
+  $("#vz").textContent = fmt(zA, 2);
+  $("#vT").textContent = fmt(TK, 1);
+  $("#vTc").textContent = fmt(Tc, 1);
+  const pa = pAbz(Tc), pb = pBtol(Tc);
+  let regiao, xl = NaN, yv = NaN, fl = NaN, fv = NaN;
+  if (pa <= P_TOT)            regiao = "liq";
+  else if (pb >= P_TOT)       regiao = "vap";
+  else {
+    xl = (P_TOT - pb) / (pa - pb); yv = xl * pa / P_TOT;
+    if (zA < xl)        regiao = "liq";
+    else if (zA > yv)   regiao = "vap";
+    else { regiao = "two"; fl = (yv - zA) / (yv - xl); fv = (zA - xl) / (yv - xl); }
+  }
+  const tag = {liq: '<span class="tag liq">tudo líquido</span>',
+               vap: '<span class="tag vap">tudo vapor</span>',
+               two: '<span class="tag two">líquido + vapor</span>'}[regiao];
+  $("#tab2").innerHTML =
+    `<tr><td>Região do diagrama</td><td>${tag}</td><td>onde cai o ponto (z_A, T)</td></tr>` +
+    `<tr><td>p_A*(T) / p_B*(T)</td><td>${fmt(pa, 1)} / ${fmt(pb, 1)} mmHg</td>
+        <td>pressões de vapor dos puros (Antoine) a ${fmt(Tc, 1)} °C</td></tr>` +
+    (regiao === "two"
+      ? `<tr><td>Composição do LÍQUIDO x_A</td><td class="neg">${fmt(xl, 3)}</td><td>linha de amarração ↔ curva de bolha</td></tr>` +
+        `<tr><td>Composição do VAPOR y_A</td><td class="pos">${fmt(yv, 3)}</td><td>linha de amarração ↔ curva de orvalho</td></tr>` +
+        `<tr><td>Fração MOLAR de líquido f_líq</td><td>${fmt(fl, 3)}</td><td>(y − z)/(y − x) — em MOLS</td></tr>` +
+        `<tr><td>Fração MOLAR de vapor f_vap</td><td>${fmt(fv, 3)}</td><td>(z − x)/(y − x) — em MOLS</td></tr>`
+      : `<tr><td>Fração de fase</td><td class="zero">1,000 / 0,000</td><td>fora da região bifásica</td></tr>`);
+  desenha2(zA, TK);
+  let fb;
+  if (regiao === "liq") {
+    fb = `<b>Tudo líquido.</b> A ${fmt(Tc, 1)} °C a pressão de ebulição da mistura ainda não foi
+      atingida (ou z_A está à esquerda da curva de bolha). Diminua a temperatura não; aumente-a para ferver.`;
+  } else if (regiao === "vap") {
+    fb = `<b>Tudo vapor.</b> A ${fmt(Tc, 1)} °C o sistema já está acima da curva de orvalho — só há fase gasosa.`;
+  } else {
+    const mais = fl >= fv ? "líquido" : "vapor";
+    fb = `<b>Duas fases (região bifásica).</b> A alavanca deu f_líq = ${fmt(fl, 3)} e f_vap = ${fmt(fv, 3)}:
+      o sistema é <b>${fmt(Math.max(fl, fv) * 100, 0)} % (mol) de ${mais}</b>.
+      Repare que z_A = ${fmt(zA, 2)} está mais perto de ${fl >= fv ? "x_A (fase líquida)" : "y_A (fase vapor)"}
+      — a fase com composição mais próxima da global é sempre a mais abundante.
+      <b>Lembre: fração molar (mol), não massa.</b>`;
+  }
+  $("#fb2").innerHTML = fb;
+}
+$("#b2").addEventListener("click", atualiza2);
+$("#zA").addEventListener("input", atualiza2);
+$("#Tsl").addEventListener("input", atualiza2);
+document.querySelectorAll(".opts button[data-r]").forEach(b => b.addEventListener("click", () => {
+  const ok = b.dataset.r === "two";
+  $("#fbp2").innerHTML = ok
+    ? `<div class="fb ok">Correto: a 95 °C, x_A = 0,404 e y_A = 0,626; como z_A = 0,50 está ENTRE os dois,
+       o sistema é bifásico. Clique em Calcular e confira os valores na tabela.</div>`
+    : `<div class="fb err">Confira: a 95 °C a linha de amarração vai de x_A ≈ 0,40 (líquido) a y_A ≈ 0,63 (vapor).
+       Com z_A = 0,50 entre esses valores, o sistema tem as DUAS fases. Clique em Calcular para ver a alavanca.</div>`;
+}));
+
+/* inicializa */
+atualiza1(); atualiza2();
+</script>
+</body>
+</html>

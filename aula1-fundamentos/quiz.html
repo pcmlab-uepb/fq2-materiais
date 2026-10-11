@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aula 1 — Fundamentos da Termodinâmica (Unidade 1)</title>
+<style>
+  :root{
+    --chalk:#f5f2e8; --yellow:#ffe97a; --pink:#e8a0d8; --cyan:#7fd4e8;
+    --green:#a5d6a7; --orange:#ffb74d; --ink:#16201b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{min-height:100%}
+  body{
+    background:linear-gradient(160deg,#2f6e4f 0%,#265c43 55%,#1f5540 100%);
+    color:var(--chalk);
+    font-family:"DejaVu Sans","Verdana","Segoe UI",system-ui,sans-serif;
+    padding:28px 20px 60px; line-height:1.5;
+  }
+  .wrap{max-width:940px;margin:0 auto}
+  header{margin-bottom:22px}
+  .disc{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+  h1{font-size:1.5rem;margin:.25rem 0 .5rem;text-shadow:0 2px 0 rgba(22,32,27,.55)}
+  .meta{font-size:.9rem;color:rgba(245,242,232,.72)}
+  .bar{height:8px;border-radius:6px;background:rgba(22,32,27,.45);margin-top:16px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--cyan);transition:width .35s ease}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;
+       font-size:.86rem;color:rgba(245,242,232,.8);flex-wrap:wrap}
+  .toggle{cursor:pointer;border:2px solid rgba(245,242,232,.5);background:transparent;color:var(--chalk);
+          border-radius:999px;padding:6px 14px;font:inherit;font-size:.82rem}
+  .toggle[aria-pressed="true"]{background:var(--yellow);color:var(--ink);border-color:var(--yellow);font-weight:700}
+  .card{background:rgba(22,32,27,.30);border:2px solid rgba(245,242,232,.22);border-radius:16px;
+        padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+  .qnum{font-size:.82rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .stem{font-size:1.18rem;font-weight:700;margin-bottom:20px}
+  .opts{display:grid;gap:11px}
+  button.opt{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;
+    background:rgba(245,242,232,.06);border:2px solid rgba(245,242,232,.28);color:var(--chalk);
+    border-radius:12px;padding:14px 16px;font:inherit;font-size:1rem;cursor:pointer;transition:.15s}
+  button.opt:hover:not(:disabled){background:rgba(245,242,232,.14);border-color:var(--chalk)}
+  button.opt:disabled{cursor:default}
+  button.opt .k{font-weight:700;color:var(--cyan);min-width:1.2em}
+  button.opt.ok{background:rgba(165,214,167,.22);border-color:var(--green)}
+  button.opt.ok .k{color:var(--green)}
+  button.opt.bad{background:rgba(232,160,216,.18);border-color:var(--pink)}
+  button.opt.bad .k{color:var(--pink)}
+  button.opt.dim{opacity:.45}
+  .fb{margin-top:18px;border-left:5px solid var(--cyan);border-radius:8px;padding:14px 16px;
+      background:rgba(22,32,27,.42);font-size:.97rem}
+  .fb.good{border-left-color:var(--green)}
+  .fb.bad{border-left-color:var(--pink)}
+  .fb b{color:var(--yellow)}
+  .fb.good b{color:var(--green)}
+  .fb.bad b{color:var(--pink)}
+  .nav{margin-top:20px;display:flex;justify-content:flex-end;gap:12px}
+  .go{background:var(--cyan);color:var(--ink);border:0;border-radius:10px;padding:12px 26px;
+      font:inherit;font-weight:700;cursor:pointer}
+  .go:disabled{opacity:.4;cursor:not-allowed}
+  .count{font-variant-numeric:tabular-nums;color:var(--yellow);font-weight:700}
+  .done{text-align:center}
+  .score{font-size:3.2rem;font-weight:700;color:var(--cyan);text-shadow:0 3px 0 rgba(22,32,27,.5)}
+  .score small{font-size:1.2rem;color:rgba(245,242,232,.7)}
+  .verdict{margin:10px 0 22px;font-size:1.1rem;color:var(--yellow)}
+  .rev{text-align:left;background:rgba(22,32,27,.3);border:2px solid rgba(245,242,232,.18);
+       border-radius:14px;padding:18px;margin-top:8px}
+  .rev h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:12px}
+  .rev li{list-style:none;padding:10px 0;border-bottom:1px solid rgba(245,242,232,.12);font-size:.94rem}
+  .rev li:last-child{border-bottom:0}
+  .rev .tag{font-weight:700}
+  .rev .tag.ok{color:var(--green)}
+  .rev .tag.no{color:var(--pink)}
+  .hint{font-size:.82rem;color:rgba(245,242,232,.6);margin-top:14px;text-align:center}
+</style></head><body>
+<div class="wrap">
+  <header>
+    <div class="disc">Físico-Química II</div>
+    <h1>Aula 1 — Fundamentos da Termodinâmica (Unidade 1)</h1>
+    <div class="meta">Princípio 12 (erro deliberado): cada questão tem um distrator que representa o erro típico do aluno, com feedback explicando por que está errado.</div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="row">
+      <span>Questão <b id="qi">1</b> de <b id="qn">0</b> · acertos: <b id="hits">0</b></span>
+      <button class="toggle" id="ta" aria-pressed="false">Modo aula (25s p/ revelar)</button>
+    </div>
+  </header>
+  <main id="main"></main>
+  <div class="hint">Atalhos: 1–4 respondem · Enter avança · R reinicia</div>
+</div>
+<script>
+function q_verdict_low(){ return (QUIZ.verdict_low || "Vale rever os slides da energia interna e da 1ª Lei (6–9) e os de termoquímica e entropia (12–18) antes da próxima aula."); }
+const QUIZ = {"schema": "maic-like/quiz@1", "discipline": "Físico-Química II", "lesson": "Aula 1 — Fundamentos da Termodinâmica (Unidade 1)", "language": "pt-BR", "principle": "Princípio 12 (erro deliberado): cada questão tem um distrator que representa o erro típico do aluno, com feedback explicando por que está errado.", "questions": [{"id": "q1", "scene": "cena_04", "stem": "Um béquer com água a 40 °C está sobre a bancada. O que é correto dizer sobre ele?", "options": [{"key": "A", "text": "Ele contém calor, e por isso está mais quente que o ambiente", "correct": false, "feedback": "ARMADILHA DA AULA: calor (q) é energia EM TRÂNSITO, não uma propriedade do corpo. Quem o sistema tem é energia interna U. Só faz sentido falar de calor quando há transferência — o béquer 'contém' água com certa energia interna."}, {"key": "B", "text": "Ele tem energia interna; calor só existe enquanto há transferência", "correct": true, "feedback": "Correto. U é função de estado (estoque); q e w são transferências (trânsito). A contabilidade é ΔU = q + w — o sistema não 'guarda' calor nem trabalho."}, {"key": "C", "text": "Ele não tem energia interna, pois está parado", "correct": false, "feedback": "Toda matéria em T > 0 K tem energia interna (soma de todas as energias das partículas). Estar em repouso é não ter energia CINÉTICA macroscópica — nada a ver com U."}, {"key": "D", "text": "Tem mais calor do que um béquer a 20 °C, e o dobro de energia interna", "correct": false, "feedback": "Dois erros: 'mais calor' (calor não é propriedade) e o dobro de U (U não é linear em T em geral, e não foi medida a variação)."}]}, {"id": "q2", "scene": "cena_07", "stem": "1,00 mol de gás perfeito a 300 K expande de 1,00 L para 2,00 L. Compare o trabalho: (i) isotérmica REVERSÍVEL; (ii) isotérmica IRREVERSÍVEL contra p_ext = 100 kPa. Considere ΔU = q + w (Atkins).", "options": [{"key": "A", "text": "w_rev = −1,73 kJ e w_irrev = −0,10 kJ; o reversível entrega mais trabalho", "correct": true, "feedback": "Correto. w_rev = −nRT ln(V₂/V₁) = −1,73 kJ; w_irrev = −p_extΔV = −0,10 kJ. O caminho reversível é o de |w| máximo — a área sob a isoterma é maior que a área da reta horizontal."}, {"key": "B", "text": "w_rev = +1,73 kJ e w_irrev = +0,10 kJ, pois o gás realizou trabalho", "correct": false, "feedback": "Sinal invertido — o erro nº 1 da termoquímica. Na convenção ΔU = q + w, com w = −∫p_extdV, energia que SAI como trabalho é NEGATIVA (dV > 0, expansão)."}, {"key": "C", "text": "Os dois valem o mesmo, pois os estados inicial e final são os mesmos", "correct": false, "feedback": "q e w NÃO são funções de estado: dependem do caminho. O que não depende do caminho é ΔU (aqui zero, isotérmico, gás perfeito) e ΔH."}, {"key": "D", "text": "w_rev = −1,73 kJ e w_irrev = −1,73 kJ, pois a área é a mesma", "correct": false, "feedback": "A área só é igual se o caminho for o mesmo. Contra p_ext fixa o caminho é uma reta horizontal: a área é bem menor que a da isoterma."}]}, {"id": "q3", "scene": "cena_10", "stem": "Alguém afirma: \"basta medir o calor trocado para obter ΔH\". A afirmação é correta quando:", "options": [{"key": "A", "text": "O processo ocorre a pressão constante e sem trabalho não-expansivo", "correct": true, "feedback": "Correto. Com p constante e só trabalho de expansão, ΔH = q_p. É por isso que a entalpia é 'a moeda da pressão constante': quase toda reação de bancada cumpre essa condição."}, {"key": "B", "text": "Sempre — ΔH é igual ao calor em qualquer processo", "correct": false, "feedback": "Não. Em recipiente rígido (V constante) quem mede o calor é ΔU = q_V. A relação ΔH = q exige p constante."}, {"key": "C", "text": "Sempre — desde que o sistema seja um gás perfeito", "correct": false, "feedback": "Ser gás perfeito ajuda a calcular Δ(pV) = Δ(nRT), mas não cria a igualdade: a condição é de PROCESSO (p constante), não de substância."}, {"key": "D", "text": "Quando a reação é exotérmica", "correct": false, "feedback": "O sinal de ΔH não muda a condição. Exotérmica ou endotérmica, ΔH = q só a pressão constante."}]}, {"id": "q4", "scene": "cena_14", "stem": "Com ΔfH°(CO, g) = −110,5 kJ mol⁻¹ e ΔfH°(CO₂, g) = −393,5 kJ mol⁻¹ (298 K), qual é o ΔH° de CO(g) + ½O₂(g) → CO₂(g)?", "options": [{"key": "A", "text": "−283,0 kJ mol⁻¹", "correct": true, "feedback": "Correto. −393,5 − (−110,5) = −283,0. É Hess em ação: o CO é o intermediário da escada até o CO₂ e a diferença das formações dá a etapa que faltava."}, {"key": "B", "text": "+283,0 kJ mol⁻¹", "correct": false, "feedback": "Sinal trocado. Essa reação libera calor (é combustão do CO) — ΔH negativo."}, {"key": "C", "text": "−504,0 kJ mol⁻¹", "correct": false, "feedback": "Somou em vez de subtrair. Na escada, a etapa desejada = (formação dos produtos) − (formação dos reagentes): −393,5 − (−110,5)."}, {"key": "D", "text": "Não dá para saber sem a entalpia da ligação C≡O", "correct": false, "feedback": "Dá sim: as duas entalpias de formação já contêm tudo. Hess existe justamente para evitar reconstruir o caminho por energias de ligação."}]}, {"id": "q5", "scene": "cena_15", "stem": "Para N₂(g) + 3H₂(g) → 2NH₃(g): ΔH°(298 K) = −92,2 kJ mol⁻¹ e ΔCp° = −45,5 J K⁻¹ mol⁻¹. Estime ΔH° a 350 K.", "options": [{"key": "A", "text": "−94,6 kJ mol⁻¹", "correct": true, "feedback": "Correto. Kirchhoff: ΔH(T₂) = ΔH(T₁) + ΔCp·ΔT = −92,2 + (−45,5×10⁻³)(52) = −94,6 kJ mol⁻¹. As tabelas vêm a 298 K; usá-las a 350 K é o erro evitado aqui."}, {"key": "B", "text": "−92,2 kJ mol⁻¹, pois ΔH não depende da temperatura", "correct": false, "feedback": "ΔH de reação depende de T sempre que ΔCp ≠ 0. A correção aqui vale −2,4 kJ mol⁻¹ (≈ 2,6 %) — pequena, mas real e mensurável."}, {"key": "C", "text": "−89,8 kJ mol⁻¹", "correct": false, "feedback": "Sinal do termo de Kirchhoff invertido: como ΔCp < 0, o ΔH fica MAIS negativo ao subir a temperatura."}, {"key": "D", "text": "−137,7 kJ mol⁻¹", "correct": false, "feedback": "Somou ΔCp·ΔT sem converter J em kJ (45,5 × 52 = 2366, jogado como 2366 kJ). Fator 1000 perdido — a checagem de unidades resolve."}]}, {"id": "q6", "scene": "cena_17", "stem": "A −10 °C, a água líquida congela espontaneamente. O ΔS do SISTEMA (água) é negativo. Isso viola a Segunda Lei?", "options": [{"key": "A", "text": "Não: o calor liberado aumenta a entropia da vizinhança mais do que a perda do sistema, e ΔS_universo > 0", "correct": true, "feedback": "Correto. A Segunda Lei fala do UNIVERSO: ΔS_univ = ΔS_sis + ΔS_viz ≥ 0. O sistema pode 'arrumar-se' desde que pague com juros na vizinhança. É a lição do café que esfria, ao contrário."}, {"key": "B", "text": "Sim: a entropia nunca pode diminuir em nenhum processo real", "correct": false, "feedback": "ARMADILHA DA AULA: a entropia do SISTEMA pode diminuir (congelamento, cristalização, síntese). O que não pode diminuir é a do UNIVERSO em processo espontâneo."}, {"key": "C", "text": "Não, porque a entropia é 'desordem' e o gelo é apenas mais ordenado, não menos entrópico", "correct": false, "feedback": "A conclusão acerta por acidente, mas a razão está errada: entropia é CONTAGEM de microestados (S = k_B ln W), não sinônimo vago de 'bagunça'. O gelo tem menos microestados acessíveis — ΔS_sis < 0 de verdade."}, {"key": "D", "text": "Sim: só é espontâneo se ΔS_sistema > 0", "correct": false, "feedback": "Critério errado. ΔS_sis > 0 vale para o SISTEMA ISOLADO. Fora disso (aqui, água em contato com a vizinhança), o critério é ΔS_universo ≥ 0."}]}]};
+const SECS = 25;
+let i = 0, hits = 0, log = [], answered = false, timer = null, left = SECS, classMode = false;
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function startTimer(){
+  clearInterval(timer);
+  if(!classMode || answered) { return; }
+  left = SECS;
+  timer = setInterval(() => {
+    left--;
+    const el = document.getElementById('cd');
+    if(el) el.textContent = left;
+    if(left <= 0){ clearInterval(timer); revealByTimer(); }
+  }, 1000);
+}
+
+function revealByTimer(){
+  if(answered) return;
+  answered = true;
+  const q = QUIZ.questions[i];
+  q.options.forEach(o => {
+    const b = document.querySelector('button.opt[data-k="'+o.key+'"]');
+    if(b){ b.disabled = true; if(o.correct) b.classList.add('ok'); else b.classList.add('dim'); }
+  });
+  showFeedback(null, q.options.find(o => o.correct));
+}
+
+function render(){
+  if(i >= QUIZ.questions.length) return finish();
+  answered = false;
+  const q = QUIZ.questions[i];
+  $('#qi').textContent = i + 1;
+  $('#hits').textContent = hits;
+  $('#bar').style.width = (i / QUIZ.questions.length * 100) + '%';
+  $('#main').innerHTML =
+    '<div class="card">' +
+      '<div class="qnum">Questão ' + (i+1) + '</div>' +
+      '<div class="stem">' + esc(q.stem) + '</div>' +
+      '<div class="opts">' + q.options.map(o =>
+        '<button class="opt" data-k="' + o.key + '"><span class="k">' + o.key +
+        '</span><span>' + esc(o.text) + '</span></button>').join('') + '</div>' +
+      '<div id="fb"></div>' +
+      '<div class="nav"><button class="go" id="next" disabled>Próxima →</button></div>' +
+    '</div>';
+  document.querySelectorAll('button.opt').forEach(b =>
+    b.addEventListener('click', () => answer(b.dataset.k)));
+  $('#next').addEventListener('click', () => { i++; render(); });
+  if(classMode){
+    const f = document.createElement('div');
+    f.className = 'hint';
+    f.innerHTML = 'Revelando em <span class="count" id="cd">' + SECS + '</span>s';
+    $('#main').querySelector('.card').appendChild(f);
+    startTimer();
+  }
+}
+
+function answer(k){
+  if(answered) return;
+  answered = true; clearInterval(timer);
+  const q = QUIZ.questions[i];
+  const picked = q.options.find(o => o.key === k);
+  const right = q.options.find(o => o.correct);
+  q.options.forEach(o => {
+    const b = document.querySelector('button.opt[data-k="'+o.key+'"]');
+    b.disabled = true;
+    if(o.correct) b.classList.add('ok');
+    else if(o.key === k) b.classList.add('bad');
+    else b.classList.add('dim');
+  });
+  if(picked.correct) hits++;
+  log.push({stem: q.stem, picked: k, right: right.key, ok: picked.correct});
+  $('#hits').textContent = hits;
+  showFeedback(picked, right);
+  $('#next').disabled = false;
+  $('#next').focus();
+}
+
+function showFeedback(picked, right){
+  const cls = picked ? (picked.correct ? 'good' : 'bad') : 'bad';
+  const head = picked
+    ? (picked.correct ? 'Correto — alternativa ' + picked.key : 'Errado — você marcou ' + picked.key + '; a correta é ' + right.key)
+    : 'Tempo esgotado — a correta é ' + right.key;
+  const body = picked ? picked.feedback : right.feedback;
+  const fb = $('#fb');
+  fb.innerHTML = '<div class="fb ' + cls + '"><b>' + head + '.</b> ' + esc(body) + '</div>';
+  const n = $('#next'); if(n) n.disabled = false;
+}
+
+function finish(){
+  clearInterval(timer);
+  $('#bar').style.width = '100%';
+  const pct = Math.round(hits / QUIZ.questions.length * 100);
+  const verdict = pct === 100 ? 'Domínio completo do conceito.'
+    : pct >= 67 ? 'Bom — revise as questões erradas antes da prática.'
+    : q_verdict_low();
+  $('#main').innerHTML =
+    '<div class="card done">' +
+      '<div class="score">' + hits + '<small>/' + QUIZ.questions.length + '</small></div>' +
+      '<div class="verdict">' + verdict + '</div>' +
+      '<div class="rev"><h3>Revisão</h3><ul>' +
+        log.map((l, n) => '<li><span class="tag ' + (l.ok ? 'ok' : 'no') + '">' +
+          (l.ok ? '✔' : '✘') + '</span> <b>Q' + (n+1) + '.</b> ' + esc(l.stem) +
+          (l.ok ? '' : ' <em>(marcou ' + l.picked + '; correta: ' + l.right + ')</em>') + '</li>').join('') +
+      '</ul></div>' +
+      '<div class="nav" style="justify-content:center"><button class="go" id="again">Refazer</button></div>' +
+    '</div>';
+  $('#again').addEventListener('click', () => { i = 0; hits = 0; log = []; render(); });
+}
+
+$('#ta').addEventListener('click', e => {
+  classMode = !classMode;
+  e.target.setAttribute('aria-pressed', String(classMode));
+  render();
+});
+$('#qn').textContent = QUIZ.questions.length;
+document.addEventListener('keydown', e => {
+  if(e.key >= '1' && e.key <= '4'){
+    const k = ['A','B','C','D'][Number(e.key) - 1];
+    if(!answered && document.querySelector('button.opt[data-k="'+k+'"]')) answer(k);
+  }
+  if(e.key === 'Enter'){ const n = document.getElementById('next'); if(n && !n.disabled) n.click(); }
+  if(e.key.toLowerCase() === 'r'){ i = 0; hits = 0; log = []; render(); }
+});
+render();
+</script></body></html>

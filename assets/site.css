@@ -1,0 +1,29 @@
+:root{--fg:#17202a;--muted:#5b6b7c;--bg:#f6f8fa;--card:#fff;--line:#dde3ea;--accent:#0b6b5f;--accent2:#8a4b0f}
+@media(prefers-color-scheme:dark){:root{--fg:#e8eef4;--muted:#a3b1c0;--bg:#11161c;--card:#18202a;--line:#2a3441;--accent:#5fd3bf;--accent2:#e0a354}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+header.site{background:var(--accent);color:#fff;padding:1.4rem 1rem}
+header.site .w{max-width:960px;margin:0 auto}
+header.site h1{margin:0;font-size:1.35rem;letter-spacing:.2px}
+header.site p{margin:.35rem 0 0;opacity:.9;font-size:.9rem}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}
+h2{font-size:1.1rem;margin:2rem 0 .6rem}
+a{color:var(--accent)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem;display:flex;flex-direction:column}
+.card h3{margin:0 0 .3rem;font-size:1.05rem;text-wrap:balance}
+.card .tag{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.card p{margin:.5rem 0 .9rem;color:var(--muted);font-size:.92rem}
+ul.links{list-style:none;margin:auto 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
+ul.links li{margin:0}
+ul.links a{display:inline-flex;align-items:center;min-height:40px;border:1.5px solid var(--accent);color:var(--accent);border-radius:999px;padding:.4rem .9rem;font-size:.9rem;text-decoration:none;background:transparent}
+ul.links a:hover{background:var(--accent);color:#fff}
+ul.links a.primary{background:var(--accent);color:#fff}
+ul.links a.sim{border-color:var(--accent2);color:var(--accent2)}
+ul.links a.sim:hover{background:var(--accent2);color:#fff}
+ul.links li span.tag{font-size:.82rem;color:var(--muted);text-transform:none;letter-spacing:0}
+ol,ul.plain{padding-left:1.2rem}
+ol li{margin:.35rem 0}
+.note{background:var(--card);border-left:3px solid var(--accent);padding:.8rem 1rem;border-radius:0 8px 8px 0;color:var(--muted);font-size:.9rem}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:.82rem;padding:1.2rem 1rem;text-align:center}
+.back{display:inline-block;margin-bottom:1rem;font-size:.9rem}

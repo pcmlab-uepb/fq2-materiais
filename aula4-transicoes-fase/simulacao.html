@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulação — Termodinâmica das transições de fase (FQ II)</title>
+<style>
+  :root{--bg:#12211c;--bg2:#1b332b;--chalk:#f2f0e6;--cyan:#7fd4e8;--yellow:#ffe97a;
+        --pink:#e8a0d8;--green:#a5d6a7;--red:#ff8f7a;--ink:#0d1714}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:linear-gradient(160deg,#2f6e4f,#152a23);color:var(--chalk);
+       font-family:"DejaVu Sans","Verdana",system-ui,sans-serif;line-height:1.5;padding:18px}
+  .wrap{max-width:1120px;margin:0 auto}
+  h1{font-size:1.35rem;color:var(--cyan);margin-bottom:4px}
+  .sub{font-size:.86rem;opacity:.75;margin-bottom:16px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .tabs button{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+       border-radius:999px;padding:7px 16px;font:inherit;font-size:.86rem;cursor:pointer}
+  .tabs button[aria-selected="true"]{background:var(--cyan);color:var(--ink);border-color:var(--cyan);font-weight:700}
+  .mod{display:none} .mod.on{display:block}
+  .card{background:rgba(13,23,20,.45);border:2px solid rgba(242,240,230,.14);border-radius:14px;
+        padding:16px 18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:340px 1fr;gap:14px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:.8rem;color:var(--yellow);margin:9px 0 3px}
+  select{background:var(--bg2);color:var(--chalk);border:1px solid rgba(242,240,230,.3);
+         border-radius:7px;padding:6px;font:inherit;width:100%}
+  .val{font-variant-numeric:tabular-nums;color:var(--cyan);font-weight:700}
+  .big{font-size:1.25rem}
+  button.go{background:var(--yellow);color:var(--ink);border:0;border-radius:9px;padding:10px 16px;
+        font:inherit;font-weight:700;cursor:pointer;margin-top:12px;width:100%}
+  button.go:hover{filter:brightness(1.08)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(242,240,230,.12);
+        font-variant-numeric:tabular-nums;vertical-align:top}
+  th{color:var(--cyan);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  .pos{color:var(--red)} .neg{color:var(--cyan)} .zero{opacity:.6}
+  canvas{width:100%;background:rgba(255,255,255,.03);border-radius:10px}
+  .fb{margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.88rem;border-left:5px solid var(--yellow);
+      background:rgba(255,233,122,.09)}
+  .fb.ok{border-left-color:var(--green);background:rgba(165,214,167,.1)}
+  .fb.err{border-left-color:var(--red);background:rgba(255,143,122,.1)}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .opts button{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+       border-radius:8px;padding:7px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+  .opts button:hover{border-color:var(--cyan)}
+  small{display:block;font-size:.76rem;opacity:.68;margin-top:6px}
+  .src{font-size:.74rem;opacity:.62;margin-top:8px;font-style:italic}
+  .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+  .pill.up{background:rgba(255,143,122,.18);color:var(--red)}
+  .pill.dn{background:rgba(127,212,232,.18);color:var(--cyan)}
+</style>
+</head>
+<body><div class="wrap">
+  <h1>Simulação — Termodinâmica das transições de fase</h1>
+  <div class="sub">Físico-Química II · Aula 4 · Prof. Dr. Rodrigo José de Oliveira — UEPB/PCM Lab.
+    Equação de Clapeyron, Clausius-Clapeyron e classificação de Ehrenfest.
+    R = 8,314462618 J K⁻¹ mol⁻¹; temperaturas em kelvin.</div>
+
+  <div class="tabs">
+    <button data-m="m1" aria-selected="true">1 · Calculadora de Clapeyron</button>
+    <button data-m="m2" aria-selected="false">2 · Ehrenfest: 1ª × 2ª ordem</button>
+  </div>
+
+  <!-- ============================ MÓDULO 1 ============================ -->
+  <div class="mod on" id="m1">
+    <div class="grid">
+      <div class="card">
+        <label>Substância</label>
+        <select id="sub">
+          <option value="agua" selected>Água (H₂O)</option>
+          <option value="co2">Dióxido de carbono (CO₂)</option>
+          <option value="benzeno">Benzeno (C₆H₆)</option>
+        </select>
+        <label>Transição (curva de coexistência)</label>
+        <select id="trans"></select>
+        <table style="margin-top:14px">
+          <tbody id="tabd"></tbody>
+        </table>
+        <div class="fb" id="fb1">Escolha a substância e a transição e clique em <b>Calcular dp/dT</b>.
+          Antes, <b>preveja o sinal</b> da inclinação: ela sobe (ΔV &gt; 0) ou desce (ΔV &lt; 0)?</div>
+      </div>
+      <div class="card">
+        <canvas id="cv1" width="640" height="400"></canvas>
+        <div style="margin-top:10px">Inclinação da curva:
+          <span id="sinal" class="pill up">—</span>
+          <span class="val big" id="dpdt" style="margin-left:10px">—</span></div>
+        <table style="margin-top:8px">
+          <tr><th>Leitura</th><th>Valor</th></tr>
+          <tbody id="tabr"></tbody>
+        </table>
+        <button class="go" id="calc">Calcular dp/dT</button>
+        <div class="src" id="fonte">Valores tabelados — ver nota ao pé da página.</div>
+      </div>
+    </div>
+    <div class="card">
+      <b>Previsão antes de conferir:</b> o coeficiente angular dp/dT = ΔH/(T ΔV) é…
+      <div class="opts">
+        <button data-r="pos">positivo — a curva sobe com T (ΔV &gt; 0)</button>
+        <button data-r="neg">negativo — a curva desce com T (ΔV &lt; 0)</button>
+      </div>
+      <div id="fbp"></div>
+      <small>Regra prática: para TRANSIÇÕES DE FUSÃO, quase toda substância tem V(m, líquido) &gt; V(m, sólido)
+        → ΔV &gt; 0 → dp/dT &gt; 0. A água é a exceção famosa: o gelo é menos denso que o líquido, ΔV &lt; 0 e a
+        linha de fusão tem inclinação negativa.</small>
+    </div>
+  </div>
+
+  <!-- ============================ MÓDULO 2 ============================ -->
+  <div class="mod" id="m2">
+    <div class="card">
+      <b>Classificação de Ehrenfest</b> — o critério é o comportamento das derivadas do potencial químico μ.
+      Mude a ordem e compare como G(T), as primeiras derivadas (S, V) e a segunda derivada (C<sub>p</sub>) se comportam
+      em T de transição.
+      <div class="opts" style="margin:10px 0 4px">
+        <button id="o1" data-o="1" style="border-color:var(--cyan)">1ª ordem (fusão, vaporização)</button>
+        <button id="o2" data-o="2">2ª ordem (condutor→supercondutor, λ do CuZn)</button>
+      </div>
+      <canvas id="cv2" width="1000" height="360" style="margin-top:8px"></canvas>
+      <div class="fb" id="fb2"></div>
+      <small>1ª ordem: μ contínuo, mas S<sub>m</sub> e V<sub>m</sub> DESCONTÍNUOS (salto) — calor latente e
+        C<sub>p</sub> → ∞. 2ª ordem: S<sub>m</sub> e V<sub>m</sub> CONTÍNUOS, sem calor latente; a anomalia aparece
+        em C<sub>p</sub> (salto finito) e nos outros segundos derivados (α, κ<sub>T</sub>).</small>
+    </div>
+    <div class="card" id="predBox">
+      <b>Previsão antes de conferir (ordem selecionada acima):</b> ao atravessar a transição, a entropia S(T)…
+      <div class="opts">
+        <button data-p="salto">dá um SALTO (descontínua)</button>
+        <button data-p="cont">passa CONTÍNUA</button>
+      </div>
+      <div id="fbp2"></div>
+    </div>
+  </div>
+
+  <div class="src">
+    <b>Fontes dos valores tabelados.</b> Água: ΔH_fus = 6,008 kJ mol⁻¹ e ΔH_vap = 40,657 kJ mol⁻¹ (NIST,
+    <i>WebBook</i>); densidades do gelo (0,9167) e do líquido (0,99984) g cm⁻³ a 0 °C (NIST/CRC).
+    Benzeno: ΔH_fus = 10,59 kJ mol⁻¹ e densidades 0,879→0,891 g cm⁻³ (Atkins, <i>Physical Chemistry</i> 11ª ed.,
+    ex. 4.12a); ΔH_vap = 30,8 kJ mol⁻¹, T<sub>b</sub> = 80,1 °C (Atkins, Tabela 2.3). CO₂: ponto triplo
+    216,55 K / 5,185 bar (Atkins); ΔH_fus ≈ 8,65 kJ mol⁻¹, densidades do sólido (1,562) e do líquido (1,18) g cm⁻³
+    (CRC Handbook). Nas vaporizações, ΔV ≈ V_m(gás) = RT/p (gás perfeito). R = 8,314462618 J K⁻¹ mol⁻¹ (CODATA).
+    <b>Nada aqui é ajuste de curva: cada número sai da fórmula dp/dT = ΔH/(T ΔV).</b>
+  </div>
+</div>
+<script>
+/* ---------------- utilidades ---------------- */
+const $ = s => document.querySelector(s);
+const fmt = (x, d = 2) => Number(x).toLocaleString("pt-BR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const R = 8.314462618;                       // J K^-1 mol^-1 (CODATA / NIST)
+const ATM = 101325;                          // Pa
+
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  document.querySelectorAll(".mod").forEach(m => m.classList.toggle("on", m.id === b.dataset.m));
+}));
+
+/* ---------------- módulo 1: Clapeyron ---------------- */
+const SUBS = {
+  agua: {
+    nome: "Água (H₂O)",
+    transicoes: {
+      fusao: { rot:"Fusão s→l  (0 °C)", T:273.15, dH:6008, dV:-1.634, p0:ATM,
+        fonte:"ΔH_fus = 6,008 kJ mol⁻¹ (NIST); ΔV_fus = V(l) − V(s) a partir de ρ(gelo) = 0,9167 e ρ(líq) = 0,99984 g cm⁻³ a 0 °C (NIST) → ΔV = −1,63 cm³ mol⁻¹." },
+      vap: { rot:"Vaporização l→g  (ebulição normal)", T:373.15, dH:40657, dV:30601, p0:ATM,
+        fonte:"ΔH_vap = 40,657 kJ mol⁻¹ (NIST, a 373,15 K); ΔV_vap ≈ V_m(g) = RT/p (gás perfeito)." }
+    }
+  },
+  co2: {
+    nome: "Dióxido de carbono (CO₂)",
+    transicoes: {
+      fusao: { rot:"Fusão s→l  (ponto triplo, 216,55 K)", T:216.55, dH:8650, dV:9.121, p0:518500,
+        fonte:"Ponto triplo 216,55 K / 5,185 bar (Atkins); ΔH_fus ≈ 8,65 kJ mol⁻¹; ΔV a partir de ρ(s) = 1,562 e ρ(l) = 1,18 g cm⁻³ (CRC)." }
+    }
+  },
+  benzeno: {
+    nome: "Benzeno (C₆H₆)",
+    transicoes: {
+      fusao: { rot:"Fusão s→l  (5,5 °C)", T:278.65, dH:10590, dV:1.1968, p0:ATM,
+        fonte:"Atkins, ex. 4.12(a): ΔH_fus = 10,59 kJ mol⁻¹; ρ passa de 0,879 (s) a 0,891 g cm⁻³ (l)." },
+      vap: { rot:"Vaporização l→g  (ebulição normal)", T:353.25, dH:30800, dV:28890, p0:ATM,
+        fonte:"Atkins, Tabela 2.3: ΔH_vap = 30,8 kJ mol⁻¹ e T_b = 80,1 °C; ΔV ≈ V_m(g) = RT/p." }
+    }
+  }
+};
+
+function dpdT(tr) { return tr.dH / (tr.T * (tr.dV * 1e-6)); }   // Pa/K
+
+function preencheTransicoes() {
+  const sub = SUBS[$("#sub").value];
+  const sel = $("#trans");
+  sel.innerHTML = "";
+  Object.keys(sub.transicoes).forEach(k => {
+    const o = document.createElement("option");
+    o.value = k; o.textContent = sub.transicoes[k].rot;
+    sel.appendChild(o);
+  });
+}
+function linhaDado(nome, html) { return `<tr><td>${nome}</td><td>${html}</td></tr>`; }
+
+function desenhaClapeyron(tr) {
+  const c = $("#cv1"), g = c.getContext("2d");
+  const W = c.width, H = c.height, m = {l:70, r:18, t:18, b:44};
+  g.clearRect(0, 0, W, H);
+  const dp = dpdT(tr);                       // Pa/K
+  const tspan = 5;                            // ±5 K na janela
+  const pspan = Math.abs(dp) * tspan;         // ±pspan Pa
+  const T0 = tr.T, p0 = tr.p0;
+  const X = T => m.l + (T - (T0 - tspan)) / (2 * tspan) * (W - m.l - m.r);
+  const Y = p => H - m.b - (p - (p0 - pspan)) / (2 * pspan) * (H - m.t - m.b);
+  // eixos
+  g.strokeStyle = "rgba(242,240,230,.55)"; g.lineWidth = 1.4;
+  g.beginPath(); g.moveTo(m.l, m.t); g.lineTo(m.l, H - m.b); g.lineTo(W - m.r, H - m.b); g.stroke();
+  g.fillStyle = "rgba(242,240,230,.85)"; g.font = "12px DejaVu Sans";
+  g.fillText("T / K", W - m.r - 38, H - 14);
+  g.fillText("p / Pa", 12, m.t + 10);
+  // rótulos de fase (acima/abaixo da linha)
+  g.font = "13px DejaVu Sans";
+  g.fillStyle = "rgba(127,212,232,.85)"; g.fillText("fase α (l/s gás)", m.l + 12, m.t + 22);
+  g.fillText("fase β (s p/ fusão / l p/ vapor)", m.l + 12, H - m.b - 12);
+  // linha de coexistência
+  g.strokeStyle = "#ffe97a"; g.lineWidth = 3; g.beginPath();
+  g.moveTo(X(T0 - tspan), Y(p0 - dp * tspan));
+  g.lineTo(X(T0 + tspan), Y(p0 + dp * tspan));
+  g.stroke();
+  // ponto de referência
+  g.fillStyle = "#e8a0d8"; g.beginPath();
+  g.arc(X(T0), Y(p0), 4.5, 0, 2 * Math.PI); g.fill();
+  g.fillStyle = "#e8a0d8"; g.font = "12px DejaVu Sans";
+  g.fillText(`(${fmt(T0, 2)} K ; ${fmt(p0 / 1000, 1)} kPa)`, X(T0) + 8, Y(p0) - 8);
+  // inclinação
+  g.fillStyle = "#f2f0e6"; g.font = "bold 13px DejaVu Sans";
+  g.fillText("dp/dT " + (dp > 0 ? "> 0  ▲" : "< 0  ▼"), m.l + 12, m.t + 42);
+}
+
+function atualiza1() {
+  const sub = SUBS[$("#sub").value];
+  const tr = sub.transicoes[$("#trans").value];
+  const dp = dpdT(tr);
+  // quadro de dados de entrada
+  $("#tabd").innerHTML =
+    linhaDado("T de transição", `${fmt(tr.T, 2)} K`) +
+    linhaDado("ΔH<sub>trs</sub>", `${fmt(tr.dH / 1000, 3)} kJ mol⁻¹`) +
+    linhaDado("ΔV<sub>trs</sub>", `${fmt(tr.dV, 3)} cm³ mol⁻¹`);
+  // resultado
+  $("#dpdt").textContent = `${fmt(dp / 1000, 3)} kPa K⁻¹`;
+  const pill = $("#sinal");
+  if (dp > 0) { pill.className = "pill up"; pill.textContent = "positiva ▲ (sobe com T)"; }
+  else { pill.className = "pill dn"; pill.textContent = "negativa ▼ (desce com T)"; }
+  const dT1atm = ATM / dp;                    // K por +1 atm
+  $("#tabr").innerHTML =
+    linhaDado("dp/dT", `<span class="${dp > 0 ? 'pos' : 'neg'}">${fmt(dp / 1000, 3)} kPa K⁻¹</span>`) +
+    linhaDado("dp/dT (em atm)", `${fmt(dp / ATM, 2)} atm K⁻¹`) +
+    linhaDado("ΔT para +1 atm", `${fmt(dT1atm, 3)} K`) +
+    linhaDado("sinal de ΔV", `${tr.dV > 0 ? "> 0" : "< 0"}`);
+  $("#fonte").innerHTML = "Fonte: " + tr.fonte;
+  desenhaClapeyron(tr);
+  let fb = `<b>${sub.nome} — ${tr.rot}.</b> dp/dT = ΔH/(T ΔV) = ` +
+    `${fmt(tr.dH / 1000, 2)} kJ mol⁻¹ ÷ (${fmt(tr.T, 2)} K × ${fmt(tr.dV, 3)} cm³ mol⁻¹). `;
+  if (dp < 0) fb += `Como ΔV &lt; 0 e ΔH &gt; 0, a inclinação é <b>negativa</b>: aumentar a pressão ABAIXA a ` +
+    `temperatura de fusão. É o caso da água (o gelo é menos denso).`;
+  else fb += `Como ΔH &gt; 0 e ΔV &gt; 0, a inclinação é <b>positiva</b>: aumentar a pressão ELEVA a temperatura da ` +
+    `transição. É o comportamento da maioria das substâncias.`;
+  $("#fb1").innerHTML = fb;
+  // reinicia a previsão para não "entregar" a resposta da nova seleção
+  $("#fbp").innerHTML = "";
+}
+$("#sub").addEventListener("change", () => { preencheTransicoes(); atualiza1(); $("#fbp").innerHTML = ""; });
+$("#trans").addEventListener("change", atualiza1);
+$("#calc").addEventListener("click", atualiza1);
+
+document.querySelectorAll("#m1 .opts button").forEach(b => b.addEventListener("click", () => {
+  const sub = SUBS[$("#sub").value], tr = sub.transicoes[$("#trans").value];
+  const dp = dpdT(tr);
+  const certo = dp > 0 ? "pos" : "neg";
+  const ok = (b.dataset.r === certo);
+  $("#fbp").innerHTML = ok
+    ? `<div class="fb ok">Correto. ΔV = ${fmt(tr.dV, 3)} cm³ mol⁻¹ ${tr.dV > 0 ? "&gt;" : "&lt;"} 0; ` +
+      `com ΔH &gt; 0, dp/dT ${dp > 0 ? "&gt;" : "&lt;"} 0. O gráfico a seguir mostra a curva ` +
+      `${dp > 0 ? "subindo" : "descendo"} com a temperatura.</div>`
+    : `<div class="fb err">Reveja o sinal de ΔV. Aqui ΔV = ${fmt(tr.dV, 3)} cm³ mol⁻¹ ` +
+      `(${tr.dV > 0 ? "o estado β ocupa MAIS volume" : "o estado β ocupa MENOS volume"}) → dp/dT ` +
+      `${dp > 0 ? "positivo" : "negativo"}. Lembre: dp/dT = ΔH/(T ΔV) e ΔH &gt; 0 na fusão e na vaporização.</div>`;
+}));
+
+/* ---------------- módulo 2: Ehrenfest ---------------- */
+let ORDEM = 1;
+function painel(g, x0, y0, w, h, titulo) {
+  g.strokeStyle = "rgba(242,240,230,.5)"; g.lineWidth = 1.3;
+  g.strokeRect(x0, y0, w, h);
+  g.fillStyle = "#7fd4e8"; g.font = "bold 13px DejaVu Sans";
+  g.fillText(titulo, x0, y0 - 8);
+}
+function desenhaEhrenfest(ordem) {
+  const c = $("#cv2"), g = c.getContext("2d");
+  const W = c.width, H = c.height;
+  g.clearRect(0, 0, W, H);
+  const gap = 44, padL = 14, padR = 14, padT = 30, padB = 34;
+  const pw = (W - padL - padR - 2 * gap) / 3;
+  const y0 = padT, h = H - padT - padB;
+  const Ttr = 0.5;                       // posição relativa de T_trs no eixo x (0..1)
+
+  // --- painel 1: G(T) ---
+  let x0 = padL;
+  painel(g, x0, y0, pw, h, "G (ou μ) × T");
+  {
+    const X = r => x0 + r * pw, Y = v => y0 + h - v * h;
+    // segmentos com inclinações diferentes, contínuos em Ttr
+    g.strokeStyle = "#ffe97a"; g.lineWidth = 2.8; g.beginPath();
+    g.moveTo(X(0), Y(0.90)); g.lineTo(X(Ttr), Y(0.52)); g.lineTo(X(1), Y(0.02)); g.stroke();
+    g.strokeStyle = "rgba(232,160,216,.85)"; g.setLineDash([4, 4]); g.lineWidth = 1.2;
+    g.beginPath(); g.moveTo(X(Ttr), y0); g.lineTo(X(Ttr), y0 + h); g.stroke(); g.setLineDash([]);
+    g.fillStyle = "#e8a0d8"; g.font = "11px DejaVu Sans";
+    g.fillText("T_trs", X(Ttr) - 14, y0 + h + 16);
+    g.fillStyle = "#f2f0e6"; g.font = "11px DejaVu Sans";
+    g.fillText("contínuo (sem salto)", x0 + 6, y0 + 14);
+  }
+
+  // --- painel 2: S, V (primeiras derivadas) ---
+  x0 = padL + pw + gap;
+  const cont = (ordem === 2);
+  painel(g, x0, y0, pw, h, "S e V (1ªs derivadas) × T");
+  {
+    const X = r => x0 + r * pw, Y = v => y0 + h - v * h;
+    g.strokeStyle = "rgba(232,160,216,.85)"; g.setLineDash([4, 4]); g.lineWidth = 1.2;
+    g.beginPath(); g.moveTo(X(Ttr), y0); g.lineTo(X(Ttr), y0 + h); g.stroke(); g.setLineDash([]);
+    if (cont) {
+      // 2ª ordem: contínua, com mudança de inclinação (kink)
+      g.strokeStyle = "#a5d6a7"; g.lineWidth = 2.8; g.beginPath();
+      g.moveTo(X(0), Y(0.30)); g.lineTo(X(Ttr), Y(0.55)); g.lineTo(X(1), Y(0.92)); g.stroke();
+      g.fillStyle = "#a5d6a7"; g.font = "11px DejaVu Sans";
+      g.fillText("contínua (kink)", x0 + 6, y0 + 14);
+    } else {
+      // 1ª ordem: salto (descontínua)
+      g.strokeStyle = "#ffe97a"; g.lineWidth = 2.8; g.beginPath();
+      g.moveTo(X(0), Y(0.30)); g.lineTo(X(Ttr), Y(0.30)); g.stroke();
+      g.beginPath(); g.moveTo(X(Ttr), Y(0.62)); g.lineTo(X(1), Y(0.62)); g.stroke();
+      g.strokeStyle = "#ff8f7a"; g.setLineDash([5, 4]); g.lineWidth = 2;
+      g.beginPath(); g.moveTo(X(Ttr), Y(0.30)); g.lineTo(X(Ttr), Y(0.62)); g.stroke(); g.setLineDash([]);
+      g.fillStyle = "#ff8f7a"; g.font = "bold 11px DejaVu Sans";
+      g.fillText("SALTO ΔS = ΔH/T", x0 + 6, y0 + 14);
+    }
+    g.fillStyle = "#e8a0d8"; g.font = "11px DejaVu Sans";
+    g.fillText("T_trs", X(Ttr) - 14, y0 + h + 16);
+  }
+
+  // --- painel 3: Cp (segunda derivada) ---
+  x0 = padL + 2 * (pw + gap);
+  painel(g, x0, y0, pw, h, "C\u209A (2ª derivada) × T");
+  {
+    const X = r => x0 + r * pw, Y = v => y0 + h - v * h;
+    g.strokeStyle = "rgba(232,160,216,.85)"; g.setLineDash([4, 4]); g.lineWidth = 1.2;
+    g.beginPath(); g.moveTo(X(Ttr), y0); g.lineTo(X(Ttr), y0 + h); g.stroke(); g.setLineDash([]);
+    if (cont) {
+      // 2ª ordem: salto finito / pico finito (tipo λ)
+      g.strokeStyle = "#a5d6a7"; g.lineWidth = 2.8; g.beginPath();
+      g.moveTo(X(0), Y(0.20)); g.lineTo(X(Ttr - 0.02), Y(0.20));
+      g.quadraticCurveTo(X(Ttr), Y(0.78), X(Ttr + 0.02), Y(0.42));
+      g.lineTo(X(1), Y(0.42)); g.stroke();
+      g.fillStyle = "#a5d6a7"; g.font = "11px DejaVu Sans";
+      g.fillText("finita (salto/pico λ)", x0 + 6, y0 + 14);
+    } else {
+      // 1ª ordem: pico infinito (delta)
+      g.strokeStyle = "#ffe97a"; g.lineWidth = 2.8; g.beginPath();
+      g.moveTo(X(0), Y(0.14)); g.lineTo(X(Ttr - 0.015), Y(0.14));
+      g.lineTo(X(Ttr - 0.015), Y(0.98)); g.lineTo(X(Ttr + 0.015), Y(0.98)); g.lineTo(X(Ttr + 0.015), Y(0.14));
+      g.lineTo(X(1), Y(0.14)); g.stroke();
+      g.fillStyle = "#ff8f7a"; g.font = "bold 11px DejaVu Sans";
+      g.fillText("C\u209A → ∞", x0 + 6, y0 + 14);
+    }
+    g.fillStyle = "#e8a0d8"; g.font = "11px DejaVu Sans";
+    g.fillText("T_trs", X(Ttr) - 14, y0 + h + 16);
+  }
+
+  // legenda de rodapé
+  g.fillStyle = "#f2f0e6"; g.font = "italic 12px DejaVu Sans";
+  g.fillText(ordem === 1
+    ? "1ª ORDEM: G contínuo; S e V com SALTO (calor latente); C\u209A → ∞ na T de transição."
+    : "2ª ORDEM: G contínuo; S e V contínuos (sem calor latente); C\u209A finita, mas com salto/pico.",
+    padL, H - 8);
+}
+function destacaOrdem() {
+  $("#o1").style.borderColor = ORDEM === 1 ? "var(--cyan)" : "rgba(242,240,230,.35)";
+  $("#o2").style.borderColor = ORDEM === 2 ? "var(--cyan)" : "rgba(242,240,230,.35)";
+  $("#o1").style.fontWeight = ORDEM === 1 ? "700" : "normal";
+  $("#o2").style.fontWeight = ORDEM === 2 ? "700" : "normal";
+}
+$("#o1").addEventListener("click", () => { ORDEM = 1; destacaOrdem(); desenhaEhrenfest(1); $("#fb2").innerHTML = ""; $("#fbp2").innerHTML = ""; });
+$("#o2").addEventListener("click", () => { ORDEM = 2; destacaOrdem(); desenhaEhrenfest(2); $("#fb2").innerHTML = ""; $("#fbp2").innerHTML = ""; });
+
+$("#fb2").innerHTML = "";
+document.querySelectorAll("#predBox .opts button").forEach(b => b.addEventListener("click", () => {
+  const esperado = ORDEM === 2 ? "cont" : "salto";
+  const ok = (b.dataset.p === esperado);
+  if (ok) {
+    $("#fbp2").innerHTML = `<div class="fb ok">Correto para ${ORDEM}ª ordem. ` +
+      (ORDEM === 1
+        ? "Na 1ª ordem há calor latente: S = H/T dá um salto finito em T_trs — por isso a T fica constante durante a transição."
+        : "Na 2ª ordem não há calor latente: S e V atravessam a transição continuamente, e a anomalia aparece em C\u209A (salto/pico finito).")
+      + `</div>`;
+  } else {
+    $("#fbp2").innerHTML = `<div class="fb err">Não para a ${ORDEM}ª ordem. ` +
+      (ORDEM === 1
+        ? "1ª ordem TEM descontinuidade (salto) em S e V — é a definição: as primeiras derivadas de μ pulam."
+        : "2ª ordem NÃO tem salto em S nem em V — elas são contínuas; o salto finito vai para a C\u209A.")
+      + `</div>`;
+  }
+}));
+
+/* inicializa */
+preencheTransicoes(); atualiza1(); destacaOrdem(); desenhaEhrenfest(ORDEM);
+</script>
+</body>
+</html>

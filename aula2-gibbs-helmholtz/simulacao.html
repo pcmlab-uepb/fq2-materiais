@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulação — Potenciais de Helmholtz (A) e Gibbs (G) (FQ II)</title>
+<style>
+  :root{--bg:#12211c;--bg2:#1b332b;--chalk:#f2f0e6;--cyan:#7fd4e8;--yellow:#ffe97a;
+        --pink:#e8a0d8;--green:#a5d6a7;--red:#ff8f7a;--ink:#0d1714}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:linear-gradient(160deg,#2f6e4f,#152a23);color:var(--chalk);
+       font-family:"DejaVu Sans","Verdana",system-ui,sans-serif;line-height:1.5;padding:18px}
+  .wrap{max-width:1120px;margin:0 auto}
+  h1{font-size:1.35rem;color:var(--cyan);margin-bottom:4px}
+  .sub{font-size:.86rem;opacity:.75;margin-bottom:16px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .tabs button{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+       border-radius:999px;padding:7px 16px;font:inherit;font-size:.86rem;cursor:pointer}
+  .tabs button[aria-selected="true"]{background:var(--cyan);color:var(--ink);border-color:var(--cyan);font-weight:700}
+  .mod{display:none} .mod.on{display:block}
+  .card{background:rgba(13,23,20,.45);border:2px solid rgba(242,240,230,.14);border-radius:14px;
+        padding:16px 18px;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:330px 1fr;gap:14px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:.8rem;color:var(--yellow);margin:9px 0 3px}
+  select,input[type=range]{width:100%}
+  select{background:var(--bg2);color:var(--chalk);border:1px solid rgba(242,240,230,.3);
+         border-radius:7px;padding:6px;font:inherit}
+  .val{font-variant-numeric:tabular-nums;color:var(--cyan);font-weight:700}
+  button.go{background:var(--yellow);color:var(--ink);border:0;border-radius:9px;padding:10px 16px;
+        font:inherit;font-weight:700;cursor:pointer;margin-top:12px;width:100%}
+  button.go:hover{filter:brightness(1.08)}
+  button.mini{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+        border-radius:8px;padding:6px 12px;font:inherit;font-size:.82rem;cursor:pointer;margin-top:10px}
+  button.mini:hover{background:rgba(242,240,230,.1)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(242,240,230,.12);
+        font-variant-numeric:tabular-nums}
+  th{color:var(--cyan);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  .pos{color:var(--red)} .neg{color:var(--cyan)} .zero{opacity:.6}
+  canvas{width:100%;max-width:600px;background:rgba(255,255,255,.03);border-radius:10px}
+  .fb{margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.88rem;border-left:5px solid var(--yellow);
+      background:rgba(255,233,122,.09)}
+  .fb.ok{border-left-color:var(--green);background:rgba(165,214,167,.1)}
+  .fb.err{border-left-color:var(--red);background:rgba(255,143,122,.1)}
+  .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .opts button{background:transparent;border:2px solid rgba(242,240,230,.35);color:var(--chalk);
+       border-radius:8px;padding:7px 12px;font:inherit;font-size:.85rem;cursor:pointer}
+  .opts button:hover{background:rgba(242,240,230,.1)}
+  small{display:block;font-size:.76rem;opacity:.68;margin-top:6px}
+  .eq{font-family:"DejaVu Serif",Georgia,serif;font-size:1.02rem;color:var(--pink)}
+</style>
+</head>
+<body><div class="wrap">
+  <h1>Simulação — Potenciais de Helmholtz (A) e Gibbs (G)</h1>
+  <div class="sub">Físico-Química II · Aula 2 (Unidade 1) · Prof. Dr. Rodrigo José de Oliveira — UEPB/PCM Lab.
+    Gás perfeito e célula eletroquímica; SI (R = 8,314462618 J K⁻¹ mol⁻¹; F = 96485,33212 C mol⁻¹).</div>
+
+  <div class="tabs">
+    <button data-m="m1" aria-selected="true">1 · Espontaneidade (ΔG = ΔH − TΔS)</button>
+    <button data-m="m2" aria-selected="false">2 · Trabalho máximo (A × G)</button>
+  </div>
+
+  <!-- ============================ MÓDULO 1 ============================ -->
+  <div class="mod on" id="m1">
+    <div class="grid">
+      <div class="card">
+        <label>Reação (valores tabelados a 298 K)</label>
+        <select id="rx">
+          <option value="178.29,160.59" selected>CaCO₃(s) → CaO(s) + CO₂(g) — ΔH &gt; 0, ΔS &gt; 0</option>
+          <option value="-91.88,-198.75">N₂ + 3H₂ → 2NH₃ — ΔH &lt; 0, ΔS &lt; 0</option>
+          <option value="-98.05,62.92">H₂O₂(l) → H₂O(l) + ½O₂(g) — ΔH &lt; 0, ΔS &gt; 0</option>
+          <option value="-6.01,-22.00">H₂O(l) → H₂O(s) — ΔH &lt; 0, ΔS &lt; 0</option>
+          <option value="50,-100">Genérica — ΔH &gt; 0, ΔS &lt; 0 (nunca espontânea)</option>
+        </select>
+        <label>ΔH <span class="val" id="vdH">+178,3</span> kJ mol⁻¹</label>
+        <input type="range" id="dH" min="-200" max="200" step="0.01" value="178.29">
+        <label>ΔS <span class="val" id="vdS">+160,6</span> J K⁻¹ mol⁻¹</label>
+        <input type="range" id="dS" min="-300" max="300" step="0.01" value="160.59">
+        <label>T <span class="val" id="vT">298</span> K</label>
+        <input type="range" id="T" min="200" max="1500" step="1" value="298">
+        <button class="go" id="calc1">Calcular ΔG</button>
+      </div>
+      <div class="card">
+        <canvas id="gT" width="600" height="380"></canvas>
+        <table>
+          <tr><th>Grandeza</th><th>Valor</th><th>Leitura</th></tr>
+          <tbody id="tab1"></tbody>
+        </table>
+        <div class="fb" id="fb1">Ajuste os controles e clique em <b>Calcular ΔG</b>. Antes, responda à
+          pergunta de previsão abaixo: dado o <i>sinal</i> de ΔH e ΔS, o que você espera?</div>
+      </div>
+    </div>
+    <div class="card">
+      <b>Previsão antes de conferir:</b> para os valores atuais de ΔH e ΔS, o regime de espontaneidade é…
+      <div class="opts" id="pred1">
+        <button data-r="sempre">sempre espontâneo (ΔG &lt; 0 em toda T)</button>
+        <button data-r="nunca">nunca espontâneo (ΔG &gt; 0 em toda T)</button>
+        <button data-r="acima">espontâneo acima de T_inv (ΔH &gt; 0, ΔS &gt; 0)</button>
+        <button data-r="abaixo">espontâneo abaixo de T_inv (ΔH &lt; 0, ΔS &lt; 0)</button>
+      </div>
+      <div id="fbp1"></div>
+      <small>ΔG = ΔH − TΔS. Quando ΔH e ΔS têm o MESMO sinal existe uma temperatura de inversão
+        T_inv = ΔH/ΔS onde ΔG = 0 (equilíbrio): o processo só é espontâneo de um lado dela.</small>
+    </div>
+  </div>
+
+  <!-- ============================ MÓDULO 2 ============================ -->
+  <div class="mod" id="m2">
+    <div class="card">
+      <b>Dois trabalhos, duas funções.</b> A energia de Helmholtz A = U − TS é o trabalho <i>total</i>
+      máximo (a T constante); a de Gibbs G = H − TS é o trabalho de <i>não-expansão</i> máximo
+      (a T e p constantes) — o trabalho elétrico de uma pilha, por exemplo.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <label>Célula eletroquímica — n (elétrons)</label>
+        <input type="range" id="nc" min="1" max="4" step="1" value="2">
+        <label>E° <span class="val" id="vE">1,10</span> V</label>
+        <input type="range" id="E" min="0.2" max="2" step="0.01" value="1.1">
+        <button class="go" id="calc2a">Calcular ΔG = −nFE°</button>
+        <button class="mini" id="presetCell">Exemplo: pilha de Daniell (n = 2, E° = 1,10 V)</button>
+      </div>
+      <div class="card">
+        <table>
+          <tr><th>Grandeza</th><th>Valor</th><th>Significado</th></tr>
+          <tbody id="tab2"></tbody>
+        </table>
+        <div class="fb" id="fb2">Ajuste <b>n</b> e <b>E°</b> e clique em <b>Calcular</b>. Numa pilha que
+          funciona, o trabalho é feito <i>pelo</i> sistema: espera-se ΔG negativo — preveja antes.</div>
+        <div class="opts" id="pred2" style="margin-top:12px">
+          <button data-r="neg">ΔG &lt; 0 — a pilha fornece trabalho elétrico</button>
+          <button data-r="pos">ΔG &gt; 0 — a pilha precisa de trabalho</button>
+        </div>
+        <div id="fbp2"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <b>Gás perfeito:</b> <span class="eq">G(p) = G° + nRT ln(p / p°)</span> — com p° = 1 bar.
+      Numa mudança isotérmica, <span class="eq">ΔG = nRT ln(p₂ / p₁)</span>.
+      <div class="grid" style="margin-top:12px;grid-template-columns:330px 1fr">
+        <div>
+          <label>n <span class="val" id="vn">0,022</span> mol</label>
+          <input type="range" id="ng" min="0.005" max="0.5" step="0.001" value="0.022">
+          <label>p₁ <span class="val" id="vp1">2505</span> psi</label>
+          <input type="range" id="p1" min="20" max="3000" step="5" value="2505">
+          <label>p₂ <span class="val" id="vp2">14,5</span> psi</label>
+          <input type="range" id="p2" min="1" max="3000" step="0.5" value="14.5">
+          <label>T <span class="val" id="vTg">295</span> K</label>
+          <input type="range" id="Tg" min="250" max="500" step="1" value="295">
+          <button class="go" id="calc2b">Calcular ΔG</button>
+        </div>
+        <div>
+          <table>
+            <tr><th>Grandeza</th><th>Valor</th><th>Leitura</th></tr>
+            <tbody id="tab3"></tbody>
+          </table>
+          <div class="fb" id="fb3"></div>
+          <small>1 psi = 6894,757293168 Pa. Só a razão p₂/p₁ importa. Para um gás perfeito isotérmico,
+            ΔA = ΔG (pois G = A + nRT), então aqui o trabalho total máximo e o de não-expansão coincidem.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+/* ---------------- utilidades ---------------- */
+const $ = s => document.querySelector(s);
+const fmt = (x, d = 2) => x.toLocaleString("pt-BR", {minimumFractionDigits: d, maximumFractionDigits: d});
+const R = 8.314462618;                 // J K^-1 mol^-1 (CODATA 2018)
+const F = 96485.33212;                 // C mol^-1 (Faraday, CODATA 2018)
+const PSI = 6894.757293168;            // Pa por psi
+
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  document.querySelectorAll(".mod").forEach(m => m.classList.toggle("on", m.id === b.dataset.m));
+}));
+
+/* ================= MÓDULO 1: espontaneidade ================= */
+function regime(dH, dS) {
+  if (dH < 0 && dS > 0) return "sempre";
+  if (dH > 0 && dS < 0) return "nunca";
+  if (dH > 0 && dS > 0) return "acima";   // espontâneo se T > T_inv
+  if (dH < 0 && dS < 0) return "abaixo";  // espontâneo se T < T_inv
+  return "limite";
+}
+function ler1() { return {dH: +$("#dH").value, dS: +$("#dS").value, T: +$("#T").value}; }
+function atualizaRotulos1() {
+  const p = ler1();
+  $("#vdH").textContent = (p.dH >= 0 ? "+" : "−") + fmt(Math.abs(p.dH), 1);
+  $("#vdS").textContent = (p.dS >= 0 ? "+" : "−") + fmt(Math.abs(p.dS), 1);
+  $("#vT").textContent = p.T;
+}
+function desenhaGT(p, dG, Tinv) {
+  const c = $("#gT"), g = c.getContext("2d");
+  const W = c.width, H = c.height, m = {l: 68, r: 20, t: 20, b: 46};
+  g.clearRect(0, 0, W, H);
+  const T0 = 200, T1 = 1500;
+  const gm = dG => p.dH - gm * p.dS / 1000;
+  // limites de ΔG na janela
+  let lo = Math.min(gm(T0), gm(T1), 0), hi = Math.max(gm(T0), gm(T1), 0);
+  const pad = Math.max(5, (hi - lo) * 0.08); lo -= pad; hi += pad;
+  const X = T => m.l + (T - T0) / (T1 - T0) * (W - m.l - m.r);
+  const Y = G => H - m.b - (G - lo) / (hi - lo) * (H - m.t - m.b);
+  // eixos
+  g.strokeStyle = "rgba(242,240,230,.55)"; g.lineWidth = 1.4;
+  g.beginPath(); g.moveTo(m.l, m.t); g.lineTo(m.l, H - m.b); g.lineTo(W - m.r, H - m.b); g.stroke();
+  g.fillStyle = "rgba(242,240,230,.8)"; g.font = "12px DejaVu Sans";
+  g.fillText("T / K", W - m.r - 40, H - 14); g.fillText("ΔG / kJ mol⁻¹", 6, m.t + 10);
+  // ΔG = 0
+  g.strokeStyle = "rgba(242,240,230,.35)"; g.setLineDash([5, 5]);
+  g.beginPath(); g.moveTo(m.l, Y(0)); g.lineTo(W - m.r, Y(0)); g.stroke(); g.setLineDash([]);
+  g.fillStyle = "rgba(242,240,230,.6)"; g.fillText("0", m.l - 16, Y(0) + 4);
+  // curva ΔG(T)
+  g.strokeStyle = "#ffe97a"; g.lineWidth = 2.6; g.beginPath();
+  g.moveTo(X(T0), Y(gm(T0))); g.lineTo(X(T1), Y(gm(T1))); g.stroke();
+  // T_inv
+  if (isFinite(Tinv) && Tinv >= T0 && Tinv <= T1) {
+    g.strokeStyle = "#e8a0d8"; g.lineWidth = 1.6; g.setLineDash([4, 4]);
+    g.beginPath(); g.moveTo(X(Tinv), m.t); g.lineTo(X(Tinv), H - m.b); g.stroke(); g.setLineDash([]);
+    g.fillStyle = "#e8a0d8";
+    g.fillText("T_inv = " + fmt(Tinv, 0) + " K", X(Tinv) + 4, m.t + 14);
+  }
+  // ponto atual
+  if (p.T >= T0 && p.T <= T1) {
+    g.fillStyle = "#7fd4e8"; g.beginPath(); g.arc(X(p.T), Y(dG), 5, 0, 2 * Math.PI); g.fill();
+    g.fillText("T = " + p.T + " K", X(p.T) + 8, Y(dG) - 8);
+  }
+}
+function atualiza1() {
+  atualizaRotulos1();
+  const p = ler1();
+  const dG = p.dH - p.T * p.dS / 1000;                 // kJ mol^-1
+  const Tinv = p.dS !== 0 ? p.dH * 1000 / p.dS : NaN;  // K
+  const reg = regime(p.dH, p.dS);
+  const cls = Math.abs(dG) < 1e-9 ? "zero" : (dG > 0 ? "pos" : "neg");
+  let linTinv;
+  if (reg === "sempre")      linTinv = "não existe — ΔG &lt; 0 em toda T";
+  else if (reg === "nunca")  linTinv = "não existe — ΔG &gt; 0 em toda T";
+  else if (isFinite(Tinv))   linTinv = fmt(Tinv, 0) + " K (" + fmt(Tinv - 273.15, 0) + " °C)";
+  else                       linTinv = "—";
+  $("#tab1").innerHTML =
+    `<tr><td>ΔG = ΔH − TΔS</td><td class="${cls}">${fmt(dG, 1)} kJ mol⁻¹</td><td>${
+       dG < 0 ? "negativo ⇒ espontâneo a p, T const." : (dG > 0 ? "positivo ⇒ não espontâneo" : "= 0 ⇒ equilíbrio")}</td></tr>` +
+    `<tr><td>T_inv = ΔH/ΔS</td><td>${linTinv}</td><td>onde ΔG = 0</td></tr>` +
+    `<tr><td>Sinal</td><td>ΔH ${p.dH >= 0 ? "> 0" : "< 0"} , ΔS ${p.dS >= 0 ? "> 0" : "< 0"}</td><td>${
+       reg === "sempre" ? "os dois favorecem ⇒ sempre espontâneo"
+       : reg === "nunca" ? "os dois se opõem ⇒ nunca espontâneo"
+       : reg === "acima" ? "compete com T ⇒ espontâneo se T > T_inv"
+       : "compete com T ⇒ espontâneo se T < T_inv"}</td></tr>`;
+  desenhaGT(p, dG, Tinv);
+  let fb;
+  if (reg === "sempre")
+    fb = `<b>Sempre espontâneo.</b> ΔH < 0 (libera energia) e ΔS > 0 (aumenta a desordem): os dois
+      termos empurram juntos e ΔG < 0 para toda temperatura, como na decomposição do H₂O₂.`;
+  else if (reg === "nunca")
+    fb = `<b>Nunca espontâneo.</b> ΔH > 0 e ΔS < 0 opõem-se em qualquer T: a reação é endotérmica
+      E ordena o sistema — ΔG > 0 sempre. É o caso inverso de uma decomposição.`;
+  else if (reg === "acima")
+    fb = `<b>Espontâneo acima de T_inv.</b> Com ΔH e ΔS positivos, em T baixa o ΔH domina (ΔG > 0);
+      subindo a temperatura o termo −TΔS cresce até virar o jogo em T_inv = ΔH/ΔS = ${fmt(Tinv, 0)} K
+      (${fmt(Tinv - 273.15, 0)} °C). É a lógica da decomposição do CaCO₃: só acima de ~837 °C.`;
+  else if (reg === "abaixo")
+    fb = `<b>Espontâneo abaixo de T_inv.</b> Com ΔH e ΔS negativos, em T baixa o ΔH negativo vence
+      (ΔG < 0); em T alta o termo −TΔS domina e ΔG fica positivo. Inversão em T_inv = ΔH/ΔS =
+      ${fmt(Tinv, 0)} K (${fmt(Tinv - 273.15, 0)} °C). É o caso da síntese da amônia.`;
+  else
+    fb = `Caso-limite (ΔH = 0 ou ΔS = 0): aqui ΔG = ${fmt(dG, 1)} kJ mol⁻¹. Se ΔS = 0, ΔG = ΔH
+      (não depende de T); se ΔH = 0, ΔG = −TΔS.`;
+  $("#fb1").innerHTML = fb;
+}
+["dH", "dS", "T"].forEach(id => $("#" + id).addEventListener("input", atualiza1));
+$("#rx").addEventListener("change", () => {
+  const [h, s] = $("#rx").value.split(",").map(Number);
+  $("#dH").value = h; $("#dS").value = s;
+  atualiza1();
+});
+$("#calc1").addEventListener("click", atualiza1);
+document.querySelectorAll("#pred1 button").forEach(b => b.addEventListener("click", () => {
+  const p = ler1(), reg = regime(p.dH, p.dS), r = b.dataset.r;
+  const ok = (r === reg);
+  const nome = {sempre: "sempre espontâneo", nunca: "nunca espontâneo",
+                acima: "espontâneo acima de T_inv", abaixo: "espontâneo abaixo de T_inv"};
+  $("#fbp1").innerHTML = ok
+    ? `<div class="fb ok">Correto: com ΔH ${p.dH >= 0 ? "> 0" : "< 0"} e ΔS ${p.dS >= 0 ? "> 0" : "< 0"},
+       o regime é <b>${nome[reg]}</b>. Boa leitura dos sinais — prever o sinal de ΔG antes de calcular é o
+       hábito que evita o erro de direção.</div>`
+    : `<div class="fb err">Ainda não. Olhe os sinais: ΔH ${p.dH >= 0 ? "> 0" : "< 0"} e
+       ΔS ${p.dS >= 0 ? "> 0" : "< 0"}. Quando os dois favorecem a mudança (ΔH < 0, ΔS > 0) é sempre
+       espontâneo; quando se opõem cabe a T decidir. Reveja a caixa de feedback e refaça.</div>`;
+}));
+
+/* ================= MÓDULO 2a: célula ================= */
+function atualiza2a() {
+  const n = +$("#nc").value, E = +$("#E").value;
+  $("#vE").textContent = fmt(E, 2);
+  const dG = -n * F * E;                 // J/mol
+  const wne = -dG;                       // trabalho não-expansivo máximo, J/mol
+  $("#tab2").innerHTML =
+    `<tr><td>ΔG = −nFE°</td><td class="neg">${fmt(dG / 1000, 1)} kJ mol⁻¹</td>
+       <td>espontâneo: a pilha fornece energia</td></tr>
+     <tr><td>w não-expansivo, máx</td><td class="neg">${fmt(wne / 1000, 1)} kJ mol⁻¹</td>
+       <td>trabalho elétrico máximo (= −ΔG)</td></tr>
+     <tr><td>Fases condensadas</td><td class="zero">ΔV ≈ 0</td>
+       <td>logo ΔA ≈ ΔG (sem trabalho de expansão)</td></tr>`;
+  $("#fb2").innerHTML =
+    `<b>Célula eletroquímica.</b> ΔG = −nFE° = −(${n}) × 96485,33212 × ${fmt(E, 2)} =
+     <b>${fmt(dG / 1000, 1)} kJ mol⁻¹</b>. Esse é o trabalho de <i>não-expansão</i> máximo — energia
+     que a pilha pode entregar como corrente. Como não há gás produzido (ΔV ≈ 0), o trabalho de expansão
+     é desprezível e o total máximo A coincide com G.`;
+}
+$("#nc").addEventListener("input", atualiza2a);
+$("#E").addEventListener("input", atualiza2a);
+$("#calc2a").addEventListener("click", atualiza2a);
+$("#presetCell").addEventListener("click", () => { $("#nc").value = 2; $("#E").value = 1.1; atualiza2a(); });
+document.querySelectorAll("#pred2 button").forEach(b => b.addEventListener("click", () => {
+  const ok = (b.dataset.r === "neg");
+  $("#fbp2").innerHTML = ok
+    ? `<div class="fb ok">Correto. Numa pilha em funcionamento a reação é espontânea e ΔG = −nFE° &lt; 0:
+       o sistema realiza trabalho elétrico sobre a vizinhança.</div>`
+    : `<div class="fb err">Pense no sentido: a pilha entrega corrente, então ela FAZ trabalho — energia
+       sai do sistema, e isso corresponde a ΔG &lt; 0 (ΔG = −nFE° &lt; 0).</div>`;
+}));
+
+/* ================= MÓDULO 2b: gás perfeito ================= */
+function atualiza2b() {
+  const n = +$("#ng").value, T = +$("#Tg").value;
+  const p1 = +$("#p1").value, p2 = +$("#p2").value;
+  $("#vn").textContent = fmt(n, 3);
+  $("#vp1").textContent = fmt(p1, p1 < 100 ? 1 : 0);
+  $("#vp2").textContent = fmt(p2, p2 < 100 ? 1 : 0);
+  $("#vTg").textContent = T;
+  const nRT = n * R * T;                       // J
+  const lnr = Math.log(p2 / p1);
+  const dG = nRT * lnr;                         // J
+  const cls = dG > 0 ? "pos" : "neg";
+  $("#tab3").innerHTML =
+    `<tr><td>nRT</td><td>${fmt(nRT, 2)} J</td><td>escala de energia térmica</td></tr>
+     <tr><td>ln(p₂/p₁)</td><td>${fmt(lnr, 4)}</td><td>${p2 < p1 ? "expansão: negativo" : (p2 > p1 ? "compressão: positivo" : "sem mudança")}</td></tr>
+     <tr><td>ΔG = nRT ln(p₂/p₁)</td><td class="${cls}">${fmt(dG, 1)} J</td><td>${
+        dG < 0 ? "espontâneo (expansão)" : (dG > 0 ? "não espontâneo (compressão)" : "equilíbrio")}</td></tr>`;
+  const p1Pa = p1 * PSI, p2Pa = p2 * PSI;
+  $("#fb3").innerHTML =
+    `<b>ΔG = nRT ln(p₂/p₁).</b> p₁ = ${fmt(p1, 1)} psi = ${fmt(p1Pa, 0)} Pa, p₂ = ${fmt(p2, 1)} psi =
+     ${fmt(p2Pa, 0)} Pa ⇒ nRT = ${fmt(nRT, 2)} J e ln(p₂/p₁) = ${fmt(lnr, 3)} ⇒
+     ΔG = <b>${fmt(dG, 1)} J</b>. Para o gás perfeito isotérmico vale ΔA = ΔG, então este é também o
+     trabalho total máximo. Usando p° = 1 bar, G(p) = G° + nRT ln(p/p°).`;
+}
+["ng", "p1", "p2", "Tg"].forEach(id => $("#" + id).addEventListener("input", atualiza2b));
+$("#calc2b").addEventListener("click", atualiza2b);
+
+/* inicializa */
+atualiza1(); atualiza2a(); atualiza2b();
+</script>
+</body>
+</html>
