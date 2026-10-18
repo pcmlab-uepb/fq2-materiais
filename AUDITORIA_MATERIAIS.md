@@ -317,6 +317,8 @@ As outras 5 apostilas já tinham índice 1:1 e **não foram tocadas no menu** (a
 | aula1, aula5/apostila, 3 apostila-pratique | sim (inalteradas) | 43 | 43 |
 | **total** | — | **150** | **150** |
 
+> Nota de precisão (aula 1): são **21 entradas para 20 capítulos** (`#c0…#c19`) porque `#c0` aparece **duas vezes** — o atalho "▸ Ver a aula inteira" e a capa. O índice já era completo (era a aula sem página faltando) e **não foi tocado**. As demais: aula5/apostila 10/10, pratique 4/4, 5/5 e 3/3.
+
 ### F.2 D2 — menu lateral no celular → colapsável, fechado por padrão
 
 **Antes (390×844):** o menu era um bloco estático **antes do título** — 1401 px na aula 1, 829 px na aula 6, 674 px na aula 2, 501/465 px na aula 5, 319 px na aula 3, 283 px na aula 4, 210–283 px nas pratique — e o título da aula só aparecia a **914 px** (aula 6) / **1547 px** (aula 1) do topo do documento.
