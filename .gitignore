@@ -1,0 +1,6 @@
+# Este repositório publica (GitHub Pages) apenas material do aluno.
+# Relatórios internos de trabalho/auditoria NÃO entram aqui — ficam em ~/fq2-resgate/.
+AUDITORIA_MATERIAIS.md
+AUDITORIA_*.md
+RELATORIO_*.md
+*.tmp
