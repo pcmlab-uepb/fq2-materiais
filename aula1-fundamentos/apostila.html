@@ -8,7 +8,7 @@
   body{background:linear-gradient(160deg,#2f6e4f,#1f5540);color:var(--chalk);
        font-family:"DejaVu Sans","Verdana",system-ui,sans-serif;line-height:1.55;display:flex;
        min-height:100vh}
-  nav{width:290px;flex:0 0 290px;background:rgba(22,32,27,.42);border-right:2px solid rgba(245,242,232,.16);
+  body>nav{width:290px;flex:0 0 290px;background:rgba(22,32,27,.42);border-right:2px solid rgba(245,242,232,.16);
       padding:22px 16px;position:sticky;top:0;height:100vh;overflow:auto}
   nav h1{font-size:.95rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
   nav .sub{font-size:.78rem;color:rgba(245,242,232,.65);margin-bottom:18px}
@@ -43,7 +43,7 @@
   .ok{color:var(--green)}
   iframe{width:100%;height:calc(100vh - 190px);border:0;border-radius:14px;background:#1f5540}
   .view{display:none} .view.on{display:block}
-  @media(max-width:820px){body{display:block}nav{width:auto;flex:none;height:auto;position:static}}
+  @media(max-width:820px){body{display:block}body>nav{width:auto;flex:none;height:auto;position:static}}
 </style></head><body>
 <nav>
   <h1>Apostila navegável</h1>
@@ -194,6 +194,20 @@ const QB64 = "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InB0LUJSIj48aGVhZD48bWV0YSBjaG
 const dec = s => s ? decodeURIComponent(escape(atob(s))) : "";
 document.getElementById("fq").srcdoc = dec(QB64) || "<p style='padding:20px'>Quiz interativo não encontrado no pacote.</p>";
 document.getElementById("fs").srcdoc = dec(SB64) || "<p style='padding:20px'>Simulação não encontrada no pacote.</p>";
+// Os links do menu apontam para secoes da aba "Aula". Com outra aba ativa o
+// alvo fica dentro de um .view com display:none e o clique nao abre nada.
+// Aqui a aba do alvo e reativada antes de o navegador rolar ate ele.
+document.querySelectorAll("nav a[href^='#']").forEach(a => a.addEventListener("click", () => {
+  const alvo = document.querySelector(a.getAttribute("href"));
+  if (!alvo) return;
+  const vista = alvo.closest(".view");
+  if (vista && !vista.classList.contains("on")) {
+    const nome = vista.id.replace("v-", "");
+    document.querySelectorAll(".top button").forEach(x =>
+      x.setAttribute("aria-selected", String(x.dataset.v === nome)));
+    document.querySelectorAll(".view").forEach(x => x.classList.toggle("on", x.id === vista.id));
+  }
+}));
 document.querySelectorAll(".top button").forEach(b => b.addEventListener("click", () => {
   document.querySelectorAll(".top button").forEach(x => x.setAttribute("aria-selected", String(x===b)));
   document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "v-"+b.dataset.v));
