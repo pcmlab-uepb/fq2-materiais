@@ -28,11 +28,24 @@
   .top{margin-bottom:18px;font-size:.85rem;opacity:.75}
   kbd{background:rgba(242,240,230,.14);border-radius:5px;padding:1px 6px;font-size:.8rem}
   @media(max-width:900px){body{display:block}body>nav{width:auto;height:auto;position:static}}
+  /* (D2) menu lateral colapsavel no celular — desktop intacto */
+  .nav-toggle{display:none}
+  @media(max-width:900px){
+    .nav-toggle{display:flex;align-items:center;gap:10px;width:calc(100% - 24px);
+      margin:12px 12px 10px;background:rgba(242,240,230,.10);color:var(--chalk);
+      border:1px solid rgba(242,240,230,.30);border-radius:10px;padding:12px 14px;
+      font:inherit;font-size:.92rem;text-align:left;cursor:pointer}
+    .nav-toggle:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+    .nav-toggle .nt-ico{font-size:1.05rem;line-height:1}
+    body>nav.nav-recolhido{display:none}
+  }
+  .nav-toggle[hidden]{display:none}
+
 </style></head><body>
 <nav>
   <h1>Físico-Química II</h1>
   <div class="sub">Equilíbrio químico · 26 páginas</div>
-  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>O mínimo da função de Gibbs</span><em>2–3</em></a><a href="#p4"><span>Reações exergônicas e endergônicas</span><em>4</em></a><a href="#p5"><span>A descrição do equilíbrio</span><em>5</em></a><a href="#p6"><span>Mínimo de DrG</span><em>6</em></a><a href="#p7"><span>Uma reação geral</span><em>7</em></a><a href="#p8"><span>Constante de equilíbrio termodinâmica</span><em>8</em></a><a href="#p9"><span>Calculando a constante de equilíbrio</span><em>9–10</em></a><a href="#p11"><span>Grau de dissociação no equilíbrio</span><em>11–13</em></a><a href="#p14"><span>Relação entre “constantes de equilíbrio”</span><em>14</em></a><a href="#p15"><span>K e Kc para reações em fase gasosa</span><em>15</em></a><a href="#p16"><span>Como o equilíbrio responde às mudanças?</span><em>16</em></a><a href="#p17"><span>Compressão</span><em>17–19</em></a><a href="#p20"><span>Resposta do equilíbrio à temperatura</span><em>20</em></a><a href="#p21"><span>Página 21</span><em>21</em></a><a href="#p22"><span>O valor de K com T</span><em>22</em></a><a href="#p23"><span>PRATIQUE</span><em>23</em></a><a href="#p24"><span>Página 24</span><em>24</em></a><a href="#p25"><span>Página 25</span><em>25</em></a><a href="#p26"><span>Página 26</span><em>26</em></a>
+  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>O mínimo da função de Gibbs</span><em>2</em></a><a href="#p3"><span>O mínimo da função de Gibbs</span><em>3</em></a><a href="#p4"><span>Reações exergônicas e endergônicas</span><em>4</em></a><a href="#p5"><span>A descrição do equilíbrio</span><em>5</em></a><a href="#p6"><span>Mínimo de DrG</span><em>6</em></a><a href="#p7"><span>Uma reação geral</span><em>7</em></a><a href="#p8"><span>Constante de equilíbrio termodinâmica</span><em>8</em></a><a href="#p9"><span>Calculando a constante de equilíbrio</span><em>9</em></a><a href="#p10"><span>Calculando a constante de equilíbrio</span><em>10</em></a><a href="#p11"><span>Grau de dissociação no equilíbrio</span><em>11</em></a><a href="#p12"><span>Grau de dissociação no equilíbrio</span><em>12</em></a><a href="#p13"><span>Grau de dissociação no equilíbrio</span><em>13</em></a><a href="#p14"><span>Relação entre “constantes de equilíbrio”</span><em>14</em></a><a href="#p15"><span>K e Kc para reações em fase gasosa</span><em>15</em></a><a href="#p16"><span>Como o equilíbrio responde às mudanças?</span><em>16</em></a><a href="#p17"><span>Compressão</span><em>17</em></a><a href="#p18"><span>Compressão</span><em>18</em></a><a href="#p19"><span>Compressão</span><em>19</em></a><a href="#p20"><span>Resposta do equilíbrio à temperatura</span><em>20</em></a><a href="#p21"><span>Página 21</span><em>21</em></a><a href="#p22"><span>O valor de K com T</span><em>22</em></a><a href="#p23"><span>PRATIQUE</span><em>23</em></a><a href="#p24"><span>Página 24</span><em>24</em></a><a href="#p25"><span>Página 25</span><em>25</em></a><a href="#p26"><span>Página 26</span><em>26</em></a>
 </nav>
 <main>
   <div class="top">Navegue pelas seções à esquerda — ou use <kbd>←</kbd> <kbd>→</kbd>.
@@ -216,4 +229,56 @@ botoes.forEach(b => b.addEventListener('click', () => {
 for (let i = 1; i < botoes.length; i++) document.getElementById(botoes[i].dataset.alvo).hidden = true;
 </script>
 </main>
-</body></html>
+<script>
+/* (D2) menu colapsavel no celular. Sem JS o menu continua exatamente como antes. */
+(function(){
+  var nav = document.querySelector('body>nav');
+  if (!nav) return;
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'nav-toggle';
+  btn.setAttribute('aria-expanded', 'true');
+  btn.innerHTML = '<span class="nt-ico" aria-hidden="true">\u2630</span>' +
+                  '<span class="nt-txt">\u00cdndice da aula</span>';
+  nav.parentNode.insertBefore(btn, nav);
+  if (!nav.id) nav.id = 'nav-menu';
+  btn.setAttribute('aria-controls', nav.id);
+  var rotulo = btn.querySelector('.nt-txt');
+  var total = nav.querySelectorAll('a').length;
+  var mq = window.matchMedia('(max-width:900px)');
+  function aplicar(){
+    if (!mq.matches){
+      btn.hidden = true;
+      nav.hidden = false; nav.classList.remove('nav-recolhido');
+      btn.setAttribute('aria-expanded', 'true');
+      return;
+    }
+    btn.hidden = false;
+    var aberto = nav.dataset.aberto === '1';
+    nav.hidden = !aberto;
+    nav.classList.toggle('nav-recolhido', !aberto);
+    btn.setAttribute('aria-expanded', String(aberto));
+    rotulo.textContent = aberto ? 'Fechar \u00edndice' : '\u00cdndice da aula (' + total + ')';
+  }
+  btn.addEventListener('click', function(){
+    nav.dataset.aberto = nav.hidden ? '1' : '0';
+    aplicar();
+    if (!nav.hidden){ var p = nav.querySelector('a'); if (p) p.focus({preventScroll:true}); }
+    else btn.focus({preventScroll:true});
+  });
+  nav.addEventListener('click', function(e){
+    if (mq.matches && e.target && e.target.closest && e.target.closest('a')){
+      nav.dataset.aberto = '0'; aplicar();
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && mq.matches && !nav.hidden){
+      nav.dataset.aberto = '0'; aplicar(); btn.focus({preventScroll:true});
+    }
+  });
+  if (mq.addEventListener) mq.addEventListener('change', aplicar);
+  else if (mq.addListener) mq.addListener(aplicar);
+  aplicar();
+})();
+</script></body>
+</html>

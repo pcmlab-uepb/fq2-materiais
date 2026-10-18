@@ -28,6 +28,19 @@
   .top{margin-bottom:18px;font-size:.85rem;opacity:.75}
   kbd{background:rgba(242,240,230,.14);border-radius:5px;padding:1px 6px;font-size:.8rem}
   @media(max-width:900px){body{display:block}body>nav{width:auto;height:auto;position:static}}
+  /* (D2) menu lateral colapsavel no celular — desktop intacto */
+  .nav-toggle{display:none}
+  @media(max-width:900px){
+    .nav-toggle{display:flex;align-items:center;gap:10px;width:calc(100% - 24px);
+      margin:12px 12px 10px;background:rgba(242,240,230,.10);color:var(--chalk);
+      border:1px solid rgba(242,240,230,.30);border-radius:10px;padding:12px 14px;
+      font:inherit;font-size:.92rem;text-align:left;cursor:pointer}
+    .nav-toggle:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+    .nav-toggle .nt-ico{font-size:1.05rem;line-height:1}
+    body>nav.nav-recolhido{display:none}
+  }
+  .nav-toggle[hidden]{display:none}
+
 </style></head><body>
 <nav>
   <h1>Físico-Química II</h1>
@@ -136,4 +149,56 @@ botoes.forEach(b => b.addEventListener('click', () => {
 for (let i = 1; i < botoes.length; i++) document.getElementById(botoes[i].dataset.alvo).hidden = true;
 </script>
 </main>
-</body></html>
+<script>
+/* (D2) menu colapsavel no celular. Sem JS o menu continua exatamente como antes. */
+(function(){
+  var nav = document.querySelector('body>nav');
+  if (!nav) return;
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'nav-toggle';
+  btn.setAttribute('aria-expanded', 'true');
+  btn.innerHTML = '<span class="nt-ico" aria-hidden="true">\u2630</span>' +
+                  '<span class="nt-txt">\u00cdndice da aula</span>';
+  nav.parentNode.insertBefore(btn, nav);
+  if (!nav.id) nav.id = 'nav-menu';
+  btn.setAttribute('aria-controls', nav.id);
+  var rotulo = btn.querySelector('.nt-txt');
+  var total = nav.querySelectorAll('a').length;
+  var mq = window.matchMedia('(max-width:900px)');
+  function aplicar(){
+    if (!mq.matches){
+      btn.hidden = true;
+      nav.hidden = false; nav.classList.remove('nav-recolhido');
+      btn.setAttribute('aria-expanded', 'true');
+      return;
+    }
+    btn.hidden = false;
+    var aberto = nav.dataset.aberto === '1';
+    nav.hidden = !aberto;
+    nav.classList.toggle('nav-recolhido', !aberto);
+    btn.setAttribute('aria-expanded', String(aberto));
+    rotulo.textContent = aberto ? 'Fechar \u00edndice' : '\u00cdndice da aula (' + total + ')';
+  }
+  btn.addEventListener('click', function(){
+    nav.dataset.aberto = nav.hidden ? '1' : '0';
+    aplicar();
+    if (!nav.hidden){ var p = nav.querySelector('a'); if (p) p.focus({preventScroll:true}); }
+    else btn.focus({preventScroll:true});
+  });
+  nav.addEventListener('click', function(e){
+    if (mq.matches && e.target && e.target.closest && e.target.closest('a')){
+      nav.dataset.aberto = '0'; aplicar();
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && mq.matches && !nav.hidden){
+      nav.dataset.aberto = '0'; aplicar(); btn.focus({preventScroll:true});
+    }
+  });
+  if (mq.addEventListener) mq.addEventListener('change', aplicar);
+  else if (mq.addListener) mq.addListener(aplicar);
+  aplicar();
+})();
+</script></body>
+</html>
