@@ -54,6 +54,10 @@
   .go{background:var(--cyan);color:var(--ink);border:0;border-radius:10px;padding:12px 26px;
       font:inherit;font-weight:700;cursor:pointer}
   .go:disabled{opacity:.4;cursor:not-allowed}
+  /* (C1) foco de teclado visivel: o anel padrao do navegador (#101010) some no
+     fundo escuro (medido 1,07:1). Aqui o anel e ciano, ~9:1 sobre o fundo. */
+  a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,
+  textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:6px}
   .count{font-variant-numeric:tabular-nums;color:var(--yellow);font-weight:700}
   .done{text-align:center}
   .score{font-size:3.2rem;font-weight:700;color:var(--cyan);text-shadow:0 3px 0 rgba(22,32,27,.5)}

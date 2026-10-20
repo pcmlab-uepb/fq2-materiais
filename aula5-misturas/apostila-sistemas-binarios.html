@@ -9,7 +9,7 @@
        font-family:"DejaVu Sans","Verdana",system-ui,sans-serif;line-height:1.5}
   body>nav{width:300px;flex:0 0 300px;background:rgba(10,18,15,.55);padding:20px 14px;
       position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid rgba(242,240,230,.12)}
-  nav h1{font-size:.95rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.07em}
+  nav h1,nav .nav-tit{font-size:.95rem;color:var(--cyan);text-transform:uppercase;letter-spacing:.07em}
   nav .sub{font-size:.76rem;opacity:.7;margin:4px 0 16px}
   nav a{display:flex;justify-content:space-between;gap:8px;color:var(--chalk);text-decoration:none;
         font-size:.85rem;padding:8px 9px;border-radius:8px;border-left:3px solid transparent}
@@ -27,6 +27,11 @@
   section.pg img{width:100%;height:auto;display:block;border-radius:9px}
   .top{margin-bottom:18px;font-size:.85rem;opacity:.75}
   kbd{background:rgba(242,240,230,.14);border-radius:5px;padding:1px 6px;font-size:.8rem}
+  /* (C1) foco de teclado visivel: o anel padrao do navegador (#101010) some no
+     fundo escuro (medido 1,07:1). Aqui o anel e ciano, ~9:1 sobre o fundo. */
+  a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,
+  textarea:focus-visible,[tabindex]:focus-visible,iframe:focus-visible{
+    outline:3px solid var(--cyan);outline-offset:2px;border-radius:6px}
   @media(max-width:900px){body{display:block}body>nav{width:auto;height:auto;position:static}}
   /* (D2) menu lateral colapsavel no celular — desktop intacto */
   .nav-toggle{display:none}
@@ -62,8 +67,8 @@
   }
 
 </style></head><body>
-<nav>
-  <h1>Físico-Química II</h1>
+<nav aria-label="Índice da aula">
+  <p class="nav-tit">Físico-Química II</p>
   <div class="sub">Sistemas binários (5.2) · 12 páginas</div>
   <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Diagramas de pressão de vapor</span><em>2</em></a><a href="#p3"><span>Note que aumentando a</span><em>3</em></a><a href="#p4"><span>Interpretação dos diagramas</span><em>4</em></a><a href="#p5"><span>Interpretação dos diagramas</span><em>5</em></a><a href="#p6"><span>Regra da alavanca</span><em>6</em></a><a href="#p7"><span>O conceito de Atividade</span><em>7</em></a><a href="#p8"><span>Atividade do soluto</span><em>8</em></a><a href="#p9"><span>Página 9</span><em>9</em></a><a href="#p10"><span>Atividade de soluções regulares</span><em>10</em></a><a href="#p11"><span>PRATIQUE</span><em>11</em></a><a href="#p12"><span>Página 12</span><em>12</em></a>
 </nav>

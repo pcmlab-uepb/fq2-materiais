@@ -9,6 +9,8 @@ header.site p{margin:.35rem 0 0;opacity:.9;font-size:.9rem}
 main{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}
 h2{font-size:1.1rem;margin:2rem 0 .6rem}
 a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+@media(prefers-color-scheme:dark){a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline-color:var(--accent)}}
 .grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem;display:flex;flex-direction:column}
 .card h3{margin:0 0 .3rem;font-size:1.05rem;text-wrap:balance}
