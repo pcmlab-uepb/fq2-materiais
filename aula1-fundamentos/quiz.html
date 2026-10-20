@@ -17,13 +17,13 @@
   }
   .wrap{max-width:940px;margin:0 auto}
   header{margin-bottom:22px}
-  .disc{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+  .disc{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#b7e9f5}
   h1{font-size:1.5rem;margin:.25rem 0 .5rem;text-shadow:0 2px 0 rgba(22,32,27,.55)}
-  .meta{font-size:.9rem;color:rgba(245,242,232,.72)}
+  .meta{font-size:.9rem;color:rgba(245,242,232,.92)}
   .bar{height:8px;border-radius:6px;background:rgba(22,32,27,.45);margin-top:16px;overflow:hidden}
   .bar i{display:block;height:100%;width:0;background:var(--cyan);transition:width .35s ease}
   .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;
-       font-size:.86rem;color:rgba(245,242,232,.8);flex-wrap:wrap}
+       font-size:.86rem;color:rgba(245,242,232,.92);flex-wrap:wrap}
   .toggle{cursor:pointer;border:2px solid rgba(245,242,232,.5);background:transparent;color:var(--chalk);
           border-radius:999px;padding:6px 14px;font:inherit;font-size:.82rem}
   .toggle[aria-pressed="true"]{background:var(--yellow);color:var(--ink);border-color:var(--yellow);font-weight:700}
@@ -37,11 +37,11 @@
     border-radius:12px;padding:14px 16px;font:inherit;font-size:1rem;cursor:pointer;transition:.15s}
   button.opt:hover:not(:disabled){background:rgba(245,242,232,.14);border-color:var(--chalk)}
   button.opt:disabled{cursor:default}
-  button.opt .k{font-weight:700;color:var(--cyan);min-width:1.2em}
+  button.opt .k{font-weight:700;color:#b7e9f5;min-width:1.2em}
   button.opt.ok{background:rgba(165,214,167,.22);border-color:var(--green)}
-  button.opt.ok .k{color:var(--green)}
+  button.opt.ok .k{color:#c8e6c9}
   button.opt.bad{background:rgba(232,160,216,.18);border-color:var(--pink)}
-  button.opt.bad .k{color:var(--pink)}
+  button.opt.bad .k{color:#f2c8e8}
   button.opt.dim{opacity:.45}
   .fb{margin-top:18px;border-left:5px solid var(--cyan);border-radius:8px;padding:14px 16px;
       background:rgba(22,32,27,.42);font-size:.97rem}
@@ -67,7 +67,18 @@
   .rev .tag{font-weight:700}
   .rev .tag.ok{color:var(--green)}
   .rev .tag.no{color:var(--pink)}
-  .hint{font-size:.82rem;color:rgba(245,242,232,.6);margin-top:14px;text-align:center}
+  .hint{font-size:.82rem;color:rgba(245,242,232,.9);margin-top:14px;text-align:center}
+  /* (A3) impressao — fundo escuro vira branco com "graficos de plano de fundo" off. */
+  @media print{
+    @page{margin:14mm}
+    html,body{background:#fff!important;color:#111!important;padding:0}
+    .bar,.row,.hint,.toggle,.nav{display:none!important}
+    h1,.disc,.meta,.stem,.qnum,.verdict,.score{color:#111!important;text-shadow:none}
+    .card{background:#fff!important;border:1px solid #bbb;box-shadow:none}
+    button.opt{background:#fff!important;border:1px solid #666!important;color:#111!important;break-inside:avoid}
+    button.opt .k{color:#111!important}
+    .fb{background:#fff!important;border-left:5px solid #666!important;color:#111!important}
+  }
 </style></head><body>
 <div class="wrap">
   <header>
@@ -112,7 +123,9 @@ function revealByTimer(){
     const b = document.querySelector('button.opt[data-k="'+o.key+'"]');
     if(b){ b.disabled = true; if(o.correct) b.classList.add('ok'); else b.classList.add('dim'); }
   });
-  showFeedback(null, q.options.find(o => o.correct));
+  const right = q.options.find(o => o.correct);
+  log.push({stem: q.stem, picked: null, right: right.key, ok: false});
+  showFeedback(null, right);
 }
 
 function render(){
@@ -129,7 +142,7 @@ function render(){
       '<div class="opts">' + q.options.map(o =>
         '<button class="opt" data-k="' + o.key + '"><span class="k">' + o.key +
         '</span><span>' + esc(o.text) + '</span></button>').join('') + '</div>' +
-      '<div id="fb"></div>' +
+      '<div id="fb" role="status" aria-live="polite"></div>' +
       '<div class="nav"><button class="go" id="next" disabled>Próxima →</button></div>' +
     '</div>';
   document.querySelectorAll('button.opt').forEach(b =>
@@ -186,7 +199,7 @@ function finish(){
   $('#main').innerHTML =
     '<div class="card done">' +
       '<div class="score">' + hits + '<small>/' + QUIZ.questions.length + '</small></div>' +
-      '<div class="verdict">' + verdict + '</div>' +
+      '<div class="verdict" role="status">' + verdict + '</div>' +
       '<div class="rev"><h3>Revisão</h3><ul>' +
         log.map((l, n) => '<li><span class="tag ' + (l.ok ? 'ok' : 'no') + '">' +
           (l.ok ? '✔' : '✘') + '</span> <b>Q' + (n+1) + '.</b> ' + esc(l.stem) +
