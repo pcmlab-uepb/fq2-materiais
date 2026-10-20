@@ -75,11 +75,48 @@
   }
 
 </style>
+<style>
+/* (CORR) blocos de correcao e de conteudo textual — ver CORRECOES_CONTEUDO_APLICADAS.md */
+.corr{margin-top:14px;border-left:5px solid var(--yellow);background:rgba(255,233,122,.08);
+      border-radius:0 10px 10px 0;padding:12px 15px;font-size:.93rem}
+.corr .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--yellow);margin-bottom:7px}
+.corr p{margin:0 0 9px}
+.corr p:last-child{margin-bottom:0}
+.txt h3{font-size:.97rem;color:var(--yellow);margin:18px 0 7px}
+.txt h3:first-of-type{margin-top:2px}
+.txt p{margin:0 0 11px;font-size:.96rem;line-height:1.66}
+.txt ul,.txt ol{margin:0 0 11px 1.35rem;font-size:.96rem;line-height:1.6}
+.txt li{margin-bottom:6px}
+.eq{background:rgba(127,212,232,.09);border-left:4px solid var(--cyan);border-radius:0 8px 8px 0;
+    padding:10px 14px;margin:12px 0;font-family:"DejaVu Serif",Georgia,serif;font-size:1.04rem;
+    line-height:1.55}
+.eq .lbl{float:right;font-size:.76rem;color:var(--yellow);font-family:"DejaVu Sans",sans-serif}
+.ex{background:rgba(0,0,0,.25);border:1px solid rgba(242,240,230,.16);border-radius:10px;
+    padding:13px 15px;margin:14px 0}
+.ex .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:8px}
+.ex p{margin:0 0 8px;font-size:.94rem}
+.ex p:last-child{margin-bottom:0}
+.cite{font-size:.81rem;opacity:.8;font-style:italic}
+.txt table{width:100%;border-collapse:collapse;font-size:.89rem;margin:10px 0 14px}
+.txt th,.txt td{text-align:left;padding:7px 9px;border-bottom:1px solid rgba(242,240,230,.14);
+    vertical-align:top}
+.txt th{color:var(--cyan);font-size:.77rem;text-transform:uppercase;letter-spacing:.05em}
+.txt figure{margin:14px 0}
+.txt figure img{width:100%;height:auto;display:block;border-radius:9px}
+.txt figcaption{font-size:.82rem;opacity:.82;margin-top:7px}
+@media print{
+  .corr,.eq,.ex{background:#fff!important;border:1px solid #999!important;color:#111!important}
+  .corr .rot,.ex .rot,.txt h3,.eq .lbl,.cite,.txt figcaption{color:#111!important}
+  .txt table th{color:#111!important}
+}
+</style>
 </head><body>
 <nav aria-label="Índice da aula">
   <p class="nav-tit">Físico-Química II</p>
   <div class="sub">Equilíbrio químico · 26 páginas</div>
-  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>O mínimo da função de Gibbs</span><em>2</em></a><a href="#p3"><span>O mínimo da função de Gibbs</span><em>3</em></a><a href="#p4"><span>Reações exergônicas e endergônicas</span><em>4</em></a><a href="#p5"><span>A descrição do equilíbrio</span><em>5</em></a><a href="#p6"><span>Mínimo de DrG</span><em>6</em></a><a href="#p7"><span>Uma reação geral</span><em>7</em></a><a href="#p8"><span>Constante de equilíbrio termodinâmica</span><em>8</em></a><a href="#p9"><span>Calculando a constante de equilíbrio</span><em>9</em></a><a href="#p10"><span>Calculando a constante de equilíbrio</span><em>10</em></a><a href="#p11"><span>Grau de dissociação no equilíbrio</span><em>11</em></a><a href="#p12"><span>Grau de dissociação no equilíbrio</span><em>12</em></a><a href="#p13"><span>Grau de dissociação no equilíbrio</span><em>13</em></a><a href="#p14"><span>Relação entre “constantes de equilíbrio”</span><em>14</em></a><a href="#p15"><span>K e Kc para reações em fase gasosa</span><em>15</em></a><a href="#p16"><span>Como o equilíbrio responde às mudanças?</span><em>16</em></a><a href="#p17"><span>Compressão</span><em>17</em></a><a href="#p18"><span>Compressão</span><em>18</em></a><a href="#p19"><span>Compressão</span><em>19</em></a><a href="#p20"><span>Resposta do equilíbrio à temperatura</span><em>20</em></a><a href="#p21"><span>Página 21</span><em>21</em></a><a href="#p22"><span>O valor de K com T</span><em>22</em></a><a href="#p23"><span>PRATIQUE</span><em>23</em></a><a href="#p24"><span>Página 24</span><em>24</em></a><a href="#p25"><span>Página 25</span><em>25</em></a><a href="#p26"><span>Página 26</span><em>26</em></a>
+  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>O mínimo da função de Gibbs</span><em>2</em></a><a href="#p3"><span>O mínimo da função de Gibbs</span><em>3</em></a><a href="#p4"><span>Reações exergônicas e endergônicas</span><em>4</em></a><a href="#p5"><span>A descrição do equilíbrio</span><em>5</em></a><a href="#p6"><span>Mínimo de DrG</span><em>6</em></a><a href="#p7"><span>Uma reação geral</span><em>7</em></a><a href="#p8"><span>Constante de equilíbrio termodinâmica</span><em>8</em></a><a href="#p9"><span>Calculando a constante de equilíbrio</span><em>9</em></a><a href="#p10"><span>Calculando a constante de equilíbrio</span><em>10</em></a><a href="#p11"><span>Grau de dissociação no equilíbrio</span><em>11</em></a><a href="#p12"><span>Grau de dissociação no equilíbrio</span><em>12</em></a><a href="#p13"><span>Grau de dissociação no equilíbrio</span><em>13</em></a><a href="#p14"><span>Relação entre “constantes de equilíbrio”</span><em>14</em></a><a href="#p15"><span>K e Kc para reações em fase gasosa</span><em>15</em></a><a href="#p16"><span>Como o equilíbrio responde às mudanças?</span><em>16</em></a><a href="#p17"><span>Compressão</span><em>17</em></a><a href="#p18"><span>Compressão</span><em>18</em></a><a href="#p19"><span>Compressão</span><em>19</em></a><a href="#p20"><span>Resposta do equilíbrio à temperatura</span><em>20</em></a><a href="#p21"><span>Van’t Hoff: entalpia de reação a partir de K(T) — exemplo resolvido</span><em>21</em></a><a href="#p22"><span>O valor de K com T</span><em>22</em></a><a href="#p23"><span>PRATIQUE</span><em>23</em></a><a href="#p24"><span>Exercícios 6.5–6.8</span><em>24</em></a><a href="#p25"><span>Exercícios 6.9–6.12</span><em>25</em></a><a href="#p26"><span>Exercícios 6.13–6.16</span><em>26</em></a>
 </nav>
 <main>
   <div class="top">Navegue pelas seções à esquerda — ou use <kbd>←</kbd> <kbd>→</kbd>.
@@ -122,6 +159,24 @@
       <header><span class="num">página 7</span><h2>Uma reação geral</h2>
       <p class="sub">Uma equação química pode ser representada por:</p></header>
       <img src="figuras/apostila-p07.jpg" alt="página 7: Uma reação geral" width="1467" height="825" loading="lazy" decoding="async">
+      <div class="corr">
+        <span class="rot">Correção do slide desta página</span>
+        <p>O slide diz: “ν<sub>J</sub> é o número estequiométrico, que é positivo para reagentes e
+        negativo para produtos”. A convenção é a inversa: <strong>ν<sub>J</sub> é positivo para
+        produtos e negativo para reagentes</strong> — e é essa a convenção que o próprio exemplo da
+        página usa (ν<sub>A</sub> = −2 e ν<sub>B</sub> = −1 para os reagentes;
+        ν<sub>C</sub> = +3 e ν<sub>D</sub> = +1 para os produtos). Com a convenção correta, tudo o
+        que vem a seguir fecha: a extensão da reação entra como
+        n<sub>J</sub> = n<sub>J</sub>(0) + ν<sub>J</sub>ξ, a energia de Gibbs de reação é
+        Δ<sub>r</sub>G = Σ<sub>J</sub> ν<sub>J</sub>μ<sub>J</sub> e o quociente é
+        Q = Π<sub>J</sub> a<sub>J</sub><sup>ν<sub>J</sub></sup> — com expoente negativo nos
+        reagentes, eles vão para o denominador, como no exemplo “breve ilustração” do mesmo slide.</p>
+        <p class="cite">Fonte: Atkins, <em>Physical Chemistry</em>, 9ª ed., §6.2, p. 215:
+        “A stoichiometric number is positive for products and negative for reactants”; mesma
+        convenção em Levine, 6ª ed., §5.2, e no IUPAC Gold Book (verbete
+        <em>stoichiometric number</em>).</p>
+      </div>
+
     </section>
     <section class="pg" id="p8">
       <header><span class="num">página 8</span><h2>Constante de equilíbrio termodinâmica</h2>
@@ -167,6 +222,23 @@
       <header><span class="num">página 16</span><h2>Como o equilíbrio responde às mudanças?</h2>
       <p class="sub">Variação de pressão</p></header>
       <img src="figuras/apostila-p16.jpg" alt="página 16: Como o equilíbrio responde às mudanças?" width="1467" height="825" loading="lazy" decoding="async">
+      <div class="corr">
+        <span class="rot">Correção: falta a condição em que a frase vale</span>
+        <p>O slide afirma que a adição de gás inerte “não altera a pressão parcial de cada
+        componente” e que, por isso, “pressurização através de adição de gás ideal não afeta a
+        composição de equilíbrio”. Isso vale apenas <strong>a volume e temperatura constantes</strong>
+        (gás inerte injetado em um vaso de volume fixo): as pressões parciais ficam iguais e o
+        equilíbrio não se desloca.</p>
+        <p><strong>A pressão total constante</strong>, o gás inerte dilui a mistura reacional, as
+        pressões parciais dos reagentes e produtos caem e o equilíbrio se desloca no sentido do lado
+        com <strong>mais</strong> mols gasosos — o mesmo sentido de uma descompressão. Em
+        Q = Π<sub>J</sub>(p<sub>J</sub>/p°)<sup>ν<sub>J</sub></sup> todas as pressões parciais do
+        numerador diminuem, e o efeito líquido é governado por Δν<sub>gás</sub> = Σν<sub>J</sub>(g).</p>
+        <p class="cite">Fonte: Atkins, 9ª ed., §6.3, p. 221 — o argumento aparece para o aumento de
+        pressão “by injecting an inert gas into” um vaso reacional, e a conclusão é explicitamente
+        restrita a gases perfeitos.</p>
+      </div>
+
     </section>
     <section class="pg" id="p17">
       <header><span class="num">página 17</span><h2>Compressão</h2>
@@ -189,9 +261,9 @@
       <img src="figuras/apostila-p20.jpg" alt="página 20: Resposta do equilíbrio à temperatura" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p21">
-      <header><span class="num">página 21</span><h2>Página 21</h2>
+      <header><span class="num">página 21</span><h2>Van’t Hoff: entalpia de reação a partir de K(T) — exemplo resolvido</h2>
       </header>
-      <img src="figuras/apostila-p21.jpg" alt="página 21" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p21.jpg" alt="página 21: exemplo resolvido de van’t Hoff — gráfico de −ln K contra 1/T para obter ΔrH° da decomposição do Ag₂CO₃" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p22">
       <header><span class="num">página 22</span><h2>O valor de K com T</h2>
@@ -204,19 +276,19 @@
       <img src="figuras/apostila-p23.jpg" alt="página 23: PRATIQUE" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p24">
-      <header><span class="num">página 24</span><h2>Página 24</h2>
+      <header><span class="num">página 24</span><h2>Exercícios 6.5–6.8</h2>
       </header>
-      <img src="figuras/apostila-p24.jpg" alt="página 24" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p24.jpg" alt="página 24: exercícios 6.5 a 6.8 do Atkins, cap. 6" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p25">
-      <header><span class="num">página 25</span><h2>Página 25</h2>
+      <header><span class="num">página 25</span><h2>Exercícios 6.9–6.12</h2>
       </header>
-      <img src="figuras/apostila-p25.jpg" alt="página 25" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p25.jpg" alt="página 25: exercícios 6.9 a 6.12 do Atkins, cap. 6" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p26">
-      <header><span class="num">página 26</span><h2>Página 26</h2>
+      <header><span class="num">página 26</span><h2>Exercícios 6.13–6.16</h2>
       </header>
-      <img src="figuras/apostila-p26.jpg" alt="página 26" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p26.jpg" alt="página 26: exercícios 6.13 a 6.16 do Atkins, cap. 6" width="1467" height="825" loading="lazy" decoding="async">
     </section>
 <script>
 document.addEventListener("keydown", e => {

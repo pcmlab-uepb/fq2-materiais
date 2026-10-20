@@ -75,11 +75,48 @@
   }
 
 </style>
+<style>
+/* (CORR) blocos de correcao e de conteudo textual — ver CORRECOES_CONTEUDO_APLICADAS.md */
+.corr{margin-top:14px;border-left:5px solid var(--yellow);background:rgba(255,233,122,.08);
+      border-radius:0 10px 10px 0;padding:12px 15px;font-size:.93rem}
+.corr .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--yellow);margin-bottom:7px}
+.corr p{margin:0 0 9px}
+.corr p:last-child{margin-bottom:0}
+.txt h3{font-size:.97rem;color:var(--yellow);margin:18px 0 7px}
+.txt h3:first-of-type{margin-top:2px}
+.txt p{margin:0 0 11px;font-size:.96rem;line-height:1.66}
+.txt ul,.txt ol{margin:0 0 11px 1.35rem;font-size:.96rem;line-height:1.6}
+.txt li{margin-bottom:6px}
+.eq{background:rgba(127,212,232,.09);border-left:4px solid var(--cyan);border-radius:0 8px 8px 0;
+    padding:10px 14px;margin:12px 0;font-family:"DejaVu Serif",Georgia,serif;font-size:1.04rem;
+    line-height:1.55}
+.eq .lbl{float:right;font-size:.76rem;color:var(--yellow);font-family:"DejaVu Sans",sans-serif}
+.ex{background:rgba(0,0,0,.25);border:1px solid rgba(242,240,230,.16);border-radius:10px;
+    padding:13px 15px;margin:14px 0}
+.ex .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:8px}
+.ex p{margin:0 0 8px;font-size:.94rem}
+.ex p:last-child{margin-bottom:0}
+.cite{font-size:.81rem;opacity:.8;font-style:italic}
+.txt table{width:100%;border-collapse:collapse;font-size:.89rem;margin:10px 0 14px}
+.txt th,.txt td{text-align:left;padding:7px 9px;border-bottom:1px solid rgba(242,240,230,.14);
+    vertical-align:top}
+.txt th{color:var(--cyan);font-size:.77rem;text-transform:uppercase;letter-spacing:.05em}
+.txt figure{margin:14px 0}
+.txt figure img{width:100%;height:auto;display:block;border-radius:9px}
+.txt figcaption{font-size:.82rem;opacity:.82;margin-top:7px}
+@media print{
+  .corr,.eq,.ex{background:#fff!important;border:1px solid #999!important;color:#111!important}
+  .corr .rot,.ex .rot,.txt h3,.eq .lbl,.cite,.txt figcaption{color:#111!important}
+  .txt table th{color:#111!important}
+}
+</style>
 </head><body>
 <nav aria-label="Índice da aula">
   <p class="nav-tit">Físico-Química II</p>
   <div class="sub">Termodinâmica das transições de fase · 14 páginas</div>
-  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Aspectos termodinâmicos das transições de</span><em>2</em></a><a href="#p3"><span>Aspectos termodinâmicos das</span><em>3</em></a><a href="#p4"><span>Aspectos</span><em>4</em></a><a href="#p5"><span>Aspectos termodinâmicos das transições de</span><em>5</em></a><a href="#p6"><span>Aspectos termodinâmicos das transições de</span><em>6</em></a><a href="#p7"><span>Aspectos termodinâmicos das transições de</span><em>7</em></a><a href="#p8"><span>Aspectos termodinâmicos das transições de</span><em>8</em></a><a href="#p9"><span>Aspectos termodinâmicos das transições de</span><em>9</em></a><a href="#p10"><span>Aspectos termodinâmicos das transições de</span><em>10</em></a><a href="#p11"><span>Aspectos termodinâmicos das transições de</span><em>11</em></a><a href="#p12"><span>Aspectos termodinâmicos das transições de</span><em>12</em></a><a href="#p13"><span>Aspectos termodinâmicos das transições de</span><em>13</em></a><a href="#p14"><span>Aspectos termodinâmicos das transições de</span><em>14</em></a>
+  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Relação entre a estabilidade de uma fase e a temperatura</span><em>2</em></a><a href="#p3"><span>Dependência de m com a pressão. Ponto de fusão.</span><em>3</em></a><a href="#p4"><span>Aspectos termodinâmicos das transições de fase</span><em>4</em></a><a href="#p5"><span>Qual o efeito da pressão na pressão de vapor?</span><em>5</em></a><a href="#p6"><span>Qual o efeito da pressão na pressão de vapor?</span><em>6</em></a><a href="#p7"><span>Termodinâmica das curvas de equilíbrio</span><em>7</em></a><a href="#p8"><span>Equação de Clapeyron</span><em>8</em></a><a href="#p9"><span>Equação de Clapeyron</span><em>9</em></a><a href="#p10"><span>Curva de equilíbrio com fase gasosa – Eq Clausius-Clapeyron</span><em>10</em></a><a href="#p11"><span>Curva de equilíbrio com fase gasosa – Eq Clausius-Clapeyron</span><em>11</em></a><a href="#p12"><span>A classificação de Ehrenfest para as transições de fase</span><em>12</em></a><a href="#p13"><span>A classificação de Ehrenfest para as transições de fase</span><em>13</em></a><a href="#p14"><span>Interpretação molecular</span><em>14</em></a>
 </nav>
 <main>
   <div class="top">Navegue pelas seções à esquerda — ou use <kbd>←</kbd> <kbd>→</kbd>.
@@ -94,69 +131,109 @@
       <img src="figuras/apostila-p01.jpg" alt="página 1: Capa" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p2">
-      <header><span class="num">página 2</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 2</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Relação entre a estabilidade de uma fase e a temperatura</p></header>
-      <img src="figuras/apostila-p02.jpg" alt="página 2: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p02.jpg" alt="página 2: Relação entre a estabilidade de uma fase e a temperatura" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p3">
-      <header><span class="num">página 3</span><h2>Aspectos termodinâmicos das</h2>
+      <header><span class="num">página 3</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Dependência de m com a pressão. Ponto de fusão.</p></header>
-      <img src="figuras/apostila-p03.jpg" alt="página 3: Aspectos termodinâmicos das" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p03.jpg" alt="página 3: Dependência de m com a pressão. Ponto de fusão." width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p4">
-      <header><span class="num">página 4</span><h2>Aspectos</h2>
+      <header><span class="num">página 4</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       </header>
-      <img src="figuras/apostila-p04.jpg" alt="página 4: Aspectos" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p04.jpg" alt="página 4: Aspectos termodinâmicos das transições de fase" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p5">
-      <header><span class="num">página 5</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 5</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Qual o efeito da pressão na pressão de vapor?</p></header>
-      <img src="figuras/apostila-p05.jpg" alt="página 5: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p05.jpg" alt="página 5: Qual o efeito da pressão na pressão de vapor?" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p6">
-      <header><span class="num">página 6</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 6</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Qual o efeito da pressão na pressão de vapor?</p></header>
-      <img src="figuras/apostila-p06.jpg" alt="página 6: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p06.jpg" alt="página 6: Qual o efeito da pressão na pressão de vapor?" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p7">
-      <header><span class="num">página 7</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 7</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Termodinâmica das curvas de equilíbrio</p></header>
-      <img src="figuras/apostila-p07.jpg" alt="página 7: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p07.jpg" alt="página 7: Termodinâmica das curvas de equilíbrio" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p8">
-      <header><span class="num">página 8</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 8</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Equação de Clapeyron</p></header>
-      <img src="figuras/apostila-p08.jpg" alt="página 8: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p08.jpg" alt="página 8: Equação de Clapeyron" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p9">
-      <header><span class="num">página 9</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 9</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Equação de Clapeyron</p></header>
-      <img src="figuras/apostila-p09.jpg" alt="página 9: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p09.jpg" alt="página 9: Equação de Clapeyron" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p10">
-      <header><span class="num">página 10</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 10</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Curva de equilíbrio com fase gasosa – Eq Clausius-Clapeyron</p></header>
-      <img src="figuras/apostila-p10.jpg" alt="página 10: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p10.jpg" alt="página 10: Curva de equilíbrio com fase gasosa – Eq Clausius-Clapeyron" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p11">
-      <header><span class="num">página 11</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 11</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Curva de equilíbrio com fase gasosa – Eq Clausius-Clapeyron</p></header>
-      <img src="figuras/apostila-p11.jpg" alt="página 11: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p11.jpg" alt="página 11: Curva de equilíbrio com fase gasosa – Eq Clausius-Clapeyron" width="1467" height="825" loading="lazy" decoding="async">
     </section>
     <section class="pg" id="p12">
-      <header><span class="num">página 12</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 12</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">A classificação de Ehrenfest para as transições de fase</p></header>
-      <img src="figuras/apostila-p12.jpg" alt="página 12: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p12.jpg" alt="página 12: A classificação de Ehrenfest para as transições de fase" width="1467" height="825" loading="lazy" decoding="async">
+      <div class="corr">
+        <span class="rot">Correção do slide desta página</span>
+        <p>A definição que aparece entre vírgulas está errada. A capacidade calorífica a pressão
+        constante é <strong>C<sub>p</sub> = (∂H/∂T)<sub>p</sub></strong> — a <em>inclinação</em> da
+        curva de H contra T, não uma razão entre entalpia e temperatura. A razão
+        Δ<sub>trs</sub>H/T<sub>trs</sub> é a <strong>entropia</strong> de transição,
+        Δ<sub>trs</sub>S, que é outra grandeza.</p>
+        <p>Com a definição correta a conclusão do slide continua de pé: numa transição de primeira
+        ordem H varia de uma quantidade finita (Δ<sub>trs</sub>H) para uma variação infinitesimal de
+        temperatura, de modo que a inclinação (∂H/∂T)<sub>p</sub> diverge —
+        C<sub>p</sub> → ∞ na temperatura de transição.</p>
+        <p>Na frase anterior, leia “<strong>e</strong>” onde está “ou”: na transição de primeira
+        ordem há salto em V<sub>m</sub> <em>e</em> em H<sub>m</sub> (e também em
+        S<sub>m</sub>), como mostram os cinco gráficos da página (V, H, μ, S e C<sub>p</sub>).</p>
+        <p class="cite">Fonte: Atkins, <em>Physical Chemistry</em>, 9ª ed., §4.6, p. 150 — “The
+        constant-pressure heat capacity, Cp, of a substance is the slope of a plot of the enthalpy
+        with respect to temperature. At a first-order phase transition, H changes by a finite amount
+        for an infinitesimal change of temperature. Therefore, at the transition the heat capacity is
+        infinite.” A definição formal C<sub>p</sub> = (∂H/∂T)<sub>p</sub> está no
+        <em>Checklist of key equations</em> do Cap. 2 da mesma edição.</p>
+      </div>
+
     </section>
     <section class="pg" id="p13">
-      <header><span class="num">página 13</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 13</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">A classificação de Ehrenfest para as transições de fase</p></header>
-      <img src="figuras/apostila-p13.jpg" alt="página 13: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p13.jpg" alt="página 13: A classificação de Ehrenfest para as transições de fase" width="1467" height="825" loading="lazy" decoding="async">
+      <div class="corr">
+        <span class="rot">Correção do slide desta página</span>
+        <p>Falta a palavra que sustenta o argumento. O que caracteriza a transição de segunda ordem
+        <strong>não</strong> é a continuidade de μ — μ também é contínuo na fusão e na vaporização,
+        que são de primeira ordem — e sim a <strong>continuidade da inclinação</strong> de μ em
+        relação a T e a p.</p>
+        <p>Como (∂μ/∂T)<sub>p</sub> = −S<sub>m</sub> e (∂μ/∂p)<sub>T</sub> = V<sub>m</sub>,
+        inclinação contínua significa V<sub>m</sub> e S<sub>m</sub> contínuos (e, por consequência,
+        H<sub>m</sub> contínua): essas grandezas não variam na transição. O que se descontinua são as
+        <strong>segundas</strong> derivadas — C<sub>p</sub>, α e κ<sub>T</sub> —, que dão um salto
+        finito, sem ir a infinito (como o próprio slide registra e o exemplo
+        condutor–supercondutor ilustra).</p>
+        <p class="cite">Fonte: Atkins, 9ª ed., §4.6, p. 150–151 — “A second-order phase transition in
+        the Ehrenfest sense is one in which the first derivative of μ with respect to temperature is
+        continuous but its second derivative is discontinuous. A continuous slope of μ […] implies
+        that the volume and entropy (and hence the enthalpy) do not change at the transition.”</p>
+      </div>
+
     </section>
     <section class="pg" id="p14">
-      <header><span class="num">página 14</span><h2>Aspectos termodinâmicos das transições de</h2>
+      <header><span class="num">página 14</span><h2>Aspectos termodinâmicos das transições de fase</h2>
       <p class="sub">Interpretação molecular</p></header>
-      <img src="figuras/apostila-p14.jpg" alt="página 14: Aspectos termodinâmicos das transições de" width="1467" height="825" loading="lazy" decoding="async">
+      <img src="figuras/apostila-p14.jpg" alt="página 14: Interpretação molecular" width="1467" height="825" loading="lazy" decoding="async">
     </section>
 <script>
 document.addEventListener("keydown", e => {

@@ -66,18 +66,55 @@
     img{max-width:100%!important;height:auto!important}
   }
 
-</style></head><body>
+</style><style>
+/* (CORR) blocos de correcao e de conteudo textual — ver CORRECOES_CONTEUDO_APLICADAS.md */
+.corr{margin-top:14px;border-left:5px solid var(--yellow);background:rgba(255,233,122,.08);
+      border-radius:0 10px 10px 0;padding:12px 15px;font-size:.93rem}
+.corr .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--yellow);margin-bottom:7px}
+.corr p{margin:0 0 9px}
+.corr p:last-child{margin-bottom:0}
+.txt h3{font-size:.97rem;color:var(--yellow);margin:18px 0 7px}
+.txt h3:first-of-type{margin-top:2px}
+.txt p{margin:0 0 11px;font-size:.96rem;line-height:1.66}
+.txt ul,.txt ol{margin:0 0 11px 1.35rem;font-size:.96rem;line-height:1.6}
+.txt li{margin-bottom:6px}
+.eq{background:rgba(127,212,232,.09);border-left:4px solid var(--cyan);border-radius:0 8px 8px 0;
+    padding:10px 14px;margin:12px 0;font-family:"DejaVu Serif",Georgia,serif;font-size:1.04rem;
+    line-height:1.55}
+.eq .lbl{float:right;font-size:.76rem;color:var(--yellow);font-family:"DejaVu Sans",sans-serif}
+.ex{background:rgba(0,0,0,.25);border:1px solid rgba(242,240,230,.16);border-radius:10px;
+    padding:13px 15px;margin:14px 0}
+.ex .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:8px}
+.ex p{margin:0 0 8px;font-size:.94rem}
+.ex p:last-child{margin-bottom:0}
+.cite{font-size:.81rem;opacity:.8;font-style:italic}
+.txt table{width:100%;border-collapse:collapse;font-size:.89rem;margin:10px 0 14px}
+.txt th,.txt td{text-align:left;padding:7px 9px;border-bottom:1px solid rgba(242,240,230,.14);
+    vertical-align:top}
+.txt th{color:var(--cyan);font-size:.77rem;text-transform:uppercase;letter-spacing:.05em}
+.txt figure{margin:14px 0}
+.txt figure img{width:100%;height:auto;display:block;border-radius:9px}
+.txt figcaption{font-size:.82rem;opacity:.82;margin-top:7px}
+@media print{
+  .corr,.eq,.ex{background:#fff!important;border:1px solid #999!important;color:#111!important}
+  .corr .rot,.ex .rot,.txt h3,.eq .lbl,.cite,.txt figcaption{color:#111!important}
+  .txt table th{color:#111!important}
+}
+</style>
+</head><body>
 <nav aria-label="Índice da aula">
   <p class="nav-tit">Físico-Química II</p>
-  <div class="sub">Sistemas binários (5.2) · 12 páginas</div>
-  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Diagramas de pressão de vapor</span><em>2</em></a><a href="#p3"><span>Note que aumentando a</span><em>3</em></a><a href="#p4"><span>Interpretação dos diagramas</span><em>4</em></a><a href="#p5"><span>Interpretação dos diagramas</span><em>5</em></a><a href="#p6"><span>Regra da alavanca</span><em>6</em></a><a href="#p7"><span>O conceito de Atividade</span><em>7</em></a><a href="#p8"><span>Atividade do soluto</span><em>8</em></a><a href="#p9"><span>Página 9</span><em>9</em></a><a href="#p10"><span>Atividade de soluções regulares</span><em>10</em></a><a href="#p11"><span>PRATIQUE</span><em>11</em></a><a href="#p12"><span>Página 12</span><em>12</em></a>
+  <div class="sub">Sistemas binários (5.2) · 14 páginas</div>
+  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Diagramas de pressão de vapor</span><em>2</em></a><a href="#p3"><span>Note que aumentando a</span><em>3</em></a><a href="#p4"><span>Interpretação dos diagramas</span><em>4</em></a><a href="#p5"><span>Interpretação dos diagramas</span><em>5</em></a><a href="#p6"><span>Regra da alavanca</span><em>6</em></a><a href="#p7"><span>O conceito de Atividade</span><em>7</em></a><a href="#p8"><span>Atividade do soluto</span><em>8</em></a><a href="#p9"><span>Página 9</span><em>9</em></a><a href="#p10"><span>Atividade de soluções regulares</span><em>10</em></a><a href="#p11"><span>PRATIQUE</span><em>11</em></a><a href="#p12"><span>Página 12</span><em>12</em></a><a href="#p13"><span>Do diagrama p–x ao diagrama T–x</span><em>13</em></a><a href="#p14"><span>Azeótropos</span><em>14</em></a>
 </nav>
 <main>
   <div class="top">Navegue pelas seções à esquerda — ou use <kbd>←</kbd> <kbd>→</kbd>.
     Material de estudo; os slides são os da aula.</div>
   <h1 class="tit">Sistemas binários (5.2)</h1>
   <div class="meta">Físico-Química II · Prof. Dr. Rodrigo José de Oliveira (UEPB/PCM Lab)
-    · 12 páginas · arquivo único, funciona offline</div>
+    · 14 páginas (12 dos slides + 2 de texto) · arquivo único, funciona offline</div>
   
     <section class="pg" id="p1">
       <header><span class="num">página 1</span><h2>Capa</h2>
@@ -138,6 +175,132 @@
       <header><span class="num">página 12</span><h2>Página 12</h2>
       </header>
       <img src="figuras/apostila-sistemas-binarios-p12.jpg" alt="página 12" width="1467" height="825" loading="lazy" decoding="async">
+    </section>
+    <section class="pg txt" id="p13">
+      <header><span class="num">página 13</span><h2>Do diagrama p–x ao diagrama T–x</h2>
+        <p class="sub">Curvas de bolha e de orvalho, linha de amarração e regra da alavanca na
+        temperatura</p></header>
+
+      <h3>Duas vistas do mesmo equilíbrio</h3>
+      <p>As páginas anteriores leram o equilíbrio a temperatura fixa: pressão de vapor contra
+      composição (diagrama <strong>p–x</strong>). Para destilar, o eixo útil é outro — fixa-se a
+      pressão (1 atm) e mede-se a temperatura de ebulição em função da composição: é o diagrama
+      <strong>T–x</strong>. São duas vistas do mesmo equilíbrio, e elas se correspondem: um
+      <strong>máximo</strong> no p–x aparece como <strong>mínimo</strong> no T–x, e vice-versa
+      (Levine, §12.6, p. 368).</p>
+
+      <h3>Curva de bolha, curva de orvalho, linha de amarração</h3>
+      <ul>
+        <li><strong>Curva de bolha</strong> (a inferior): temperatura em que aparece a primeira bolha
+        de vapor — é a composição do <em>líquido</em>.</li>
+        <li><strong>Curva de orvalho</strong> (a superior): temperatura em que aparece a primeira gota
+        de líquido — é a composição do <em>vapor</em>.</li>
+        <li>Entre as duas curvas há <strong>duas fases em equilíbrio</strong>. A linha horizontal que
+        une as duas composições em equilíbrio é a <strong>linha de amarração</strong>
+        (<em>tie line</em>); ela também dá a temperatura de ebulição da mistura, lida no eixo vertical
+        (Atkins, §5.6, p. 179, Fig. 5.36).</li>
+        <li>Abaixo da curva de bolha há só líquido; acima da curva de orvalho há só vapor.</li>
+      </ul>
+
+      <h3>Regra da alavanca no T–x</h3>
+      <p>As proporções das duas fases saem da regra da alavanca: n<sub>α</sub>l<sub>α</sub> =
+      n<sub>β</sub>l<sub>β</sub>, em que l<sub>α</sub> e l<sub>β</sub> são as distâncias, sobre a
+      linha de amarração, da composição global até cada extremo (Atkins, eq. 5.46, p. 178; Levine,
+      eq. 12.40, p. 366). Em frações molares das fases:</p>
+      <div class="eq">f<sub>liq</sub> = (y − z)/(y − x) &nbsp;&nbsp;e&nbsp;&nbsp;
+        f<sub>vap</sub> = (z − x)/(y − x)</div>
+      <p>com x = composição do líquido, y = composição do vapor na mesma linha de amarração e
+      z = composição global da mistura.</p>
+
+      <div class="ex">
+        <span class="rot">Exemplo resolvido (o mesmo da questão 5 do quiz)</span>
+        <p>Linha de amarração unindo líquido x = 0,20 a vapor y = 0,60; composição global z = 0,30.</p>
+        <p>f<sub>liq</sub> = (0,60 − 0,30)/(0,60 − 0,20) = 0,30/0,40 = <strong>0,75</strong></p>
+        <p>f<sub>vap</sub> = (0,30 − 0,20)/(0,60 − 0,20) = 0,10/0,40 = <strong>0,25</strong></p>
+        <p>Conferências: as duas frações somam 1; e z = 0,30 está mais perto de x = 0,20 do que de
+        y = 0,60, então a maior parte da matéria está no líquido — a alavanca pende para o lado do
+        líquido.</p>
+      </div>
+
+      <h3>O que a destilação faz com esse diagrama</h3>
+      <p>Quando a mistura ferve, o vapor é sempre mais rico no componente <strong>mais volátil</strong>
+      — o de menor temperatura de ebulição (Atkins, p. 179; Levine, p. 369). Condensando esse vapor e
+      fervendo-o de novo (destilação fracionada), o condensado fica a cada ciclo mais rico nesse
+      componente; o número de ciclos necessários é o número de pratos teóricos da coluna (Atkins,
+      p. 180).</p>
+      <p>Essa escada tem um fim: no ponto em que as curvas de bolha e de orvalho se tocam, o vapor
+      passa a ter a mesma composição do líquido e a destilação deixa de enriquecer. É o azeótropo —
+      próxima página.</p>
+    </section>
+    <section class="pg txt" id="p14">
+      <header><span class="num">página 14</span><h2>Azeótropos</h2>
+        <p class="sub">Ebulição mínima e máxima, e o caso etanol–água</p></header>
+
+      <p>No ponto em que as curvas de bolha e de orvalho se tocam, y = x: o vapor tem a mesma
+      composição do líquido. Ferver, então, não muda mais nada — a mistura passa a se comportar como
+      uma substância pura, com ponto de ebulição constante. Essa composição é o
+      <strong>azeótropo</strong> (Levine, §12.6, p. 369; Atkins, §5.6(b), p. 180).</p>
+
+      <h3>Não é um composto</h3>
+      <p>A composição azeotrópica depende da pressão: o que é azeótropo a 1 atm ferve numa faixa de
+      temperatura a outra pressão. É assim que se distingue um azeótropo de um composto definido
+      (Levine, p. 369).</p>
+
+      <h3>Os dois tipos, e o que os causa</h3>
+      <table>
+        <tr><th>Tipo</th><th>Desvio de Raoult</th><th>p–x</th><th>T–x</th><th>Exemplos</th></tr>
+        <tr>
+          <td><strong>Ebulição mínima</strong></td>
+          <td>positivo: A–B menos favoráveis que A–A e B–B ⇒ pressão de vapor maior que a ideal;
+          G<sup>E</sup> &gt; 0</td>
+          <td>máximo</td><td>mínimo</td>
+          <td>etanol–água; dioxano–água</td>
+        </tr>
+        <tr>
+          <td><strong>Ebulição máxima</strong></td>
+          <td>negativo: A–B mais favoráveis ⇒ pressão de vapor menor que a ideal;
+          G<sup>E</sup> &lt; 0</td>
+          <td>mínimo</td><td>máximo</td>
+          <td>triclorometano–propanona; ácido nítrico–água</td>
+        </tr>
+      </table>
+      <p>Um teste rápido de coerência com o que já foi visto: no azeótropo de ebulição mínima a
+      pressão de vapor da mistura é <em>maior</em> que a prevista por Raoult — é por isso que ela
+      ferve abaixo dos dois componentes puros. No de ebulição máxima ocorre o contrário.</p>
+      <p class="cite">Fonte: Atkins, 9ª ed., §5.6(b), p. 180 (Figs. 5.38 e 5.39): máximo no diagrama
+      temperatura–composição quando as interações A–B estabilizam o líquido (G<sup>E</sup> negativo);
+      mínimo quando o desestabilizam (G<sup>E</sup> positivo), como em etanol–água e dioxano–água.</p>
+
+      <h3>Etanol–água</h3>
+      <ul>
+        <li>Composição azeotrópica: <strong>95,6 % (m/m) de etanol</strong>. Levine registra “96
+        percent C₂H₅OH by weight (192 proof)”; Atkins, “4 per cent by mass” de água (Levine, p. 369;
+        Atkins, p. 180).</li>
+        <li>Em <strong>fração molar</strong> — que é o que o eixo do T–x mostra: 95,6 g ÷
+        46,07 g mol⁻¹ = 2,075 mol de etanol e 4,4 g ÷ 18,015 g mol⁻¹ = 0,244 mol de água ⇒
+        x(C₂H₅OH) = 2,075/(2,075 + 0,244) ≈ <strong>0,90</strong>. (Cuidado com a troca: 95,6 é
+        fração <em>em massa</em>; no diagrama T–x, o azeótropo fica em x ≈ 0,90.)</li>
+        <li>Temperatura de ebulição: <strong>78,2 °C = 351,4 K</strong> (Levine, p. 369) — abaixo da
+        água (373,15 K) e um pouco abaixo do etanol puro (78,3 °C = 351,5 K; Levine, Ex. 7.4,
+        p. 217). É o que a torna um azeótropo de ebulição <em>mínima</em>.</li>
+        <li>Consequência prática: de uma solução aquosa diluída de etanol <strong>não se obtém
+        etanol 100 %</strong> por destilação a 1 atm — a composição para no azeótropo. Partindo do
+        outro lado (mistura mais rica em etanol que o azeótropo), o resíduo é etanol puro e o vapor é
+        o azeótropo (Levine, p. 369).</li>
+      </ul>
+
+      <figure>
+        <img src="figuras/azeotropo-etanol-agua-tx.png"
+             alt="Diagrama T–x esquemático do etanol–água a 1 atm, com curvas de bolha e de
+                  orvalho que se tocam no azeótropo de ebulição mínima em x ≈ 0,90 e 351,4 K;
+                  linha de amarração ligando x = 0,20 a y = 0,60 com composição global z = 0,30."
+             width="1920" height="1080" loading="lazy" decoding="async">
+        <figcaption>Esquema do diagrama T–x do etanol–água a 1 atm. As curvas são uma interpolação
+        suave (não um ajuste a dados experimentais); os pontos marcados são os valores tabelados:
+        373,15 K (Levine, Tab. 7.1), 351,5 K (Levine, Ex. 7.4, p. 217) e o azeótropo em
+        x ≈ 0,90 e 351,4 K (Levine, §12.6, p. 369). A linha amarela é a linha de amarração do
+        exemplo da página 13.</figcaption>
+      </figure>
     </section>
 </main>
 <script>

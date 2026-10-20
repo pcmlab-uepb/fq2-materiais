@@ -62,6 +62,23 @@
   }
   .nav-toggle[hidden]{display:none}
 
+
+  /* (T1) apostila escrita: subtitulos internos, formulas e notas de fonte */
+  .fala h3{font-size:.97rem;color:var(--cyan);letter-spacing:.02em;
+        margin:18px 0 8px;padding-bottom:5px;border-bottom:1px solid rgba(245,242,232,.14)}
+  .fala h3:first-child{margin-top:0}
+  .fala ul{margin:0 0 10px 20px}
+  .fala li{font-size:.95rem;margin-bottom:6px;color:rgba(245,242,232,.95)}
+  .fala strong{color:var(--chalk)}
+  .eq,.eqb{font-family:"DejaVu Serif","Georgia","Times New Roman",serif}
+  .eq em,.eqb em{font-style:italic}
+  .fala .eqb{display:block;text-align:center;font-size:1.05rem;line-height:1.7;
+        background:rgba(22,32,27,.45);border-left:4px solid var(--cyan);border-radius:8px;
+        padding:12px 16px;margin:12px 0;color:var(--chalk)}
+  .fala .fonte{font-size:.8rem;color:rgba(245,242,232,.62);margin:6px 0 14px;
+        border-left:2px solid rgba(245,242,232,.22);padding-left:9px}
+  sup,sub{font-size:.72em;line-height:0}
+
   /* (A3) impressao — sem isso o texto claro sai branco sobre branco quando o
      navegador imprime com "graficos de plano de fundo" desligado. */
   @media print{
@@ -78,6 +95,9 @@
     figcaption{color:#333!important}
     .tag{background:#eee!important;color:#111!important}
     .fala p{color:#111!important}
+    .fala h3{color:#111!important}
+    .fala .eqb{background:#fff!important;color:#111!important;border-left:4px solid #555}
+    .fala .fonte{color:#333!important}
     a{color:#111!important;text-decoration:none}
     img{max-width:100%!important;height:auto!important}
   }
@@ -97,130 +117,403 @@
   </div>
 
   <div class="view on" id="v-aula" role="tabpanel" aria-labelledby="tab-aula" tabindex="0">
+
     <h1 class="tit">Fundamentos da Termodinâmica — Aula 1 (Unidade 1)</h1>
-    <div class="meta">Físico-Química II · 24 min
-      47 s · 20 cenas ·
-      389 ações · narração do vídeo</div>
-    
+    <div class="meta">Físico-Química II · 20 seções · vídeo de 24 min 47 s — os tempos do índice marcam os capítulos do vídeo</div>
     <section id="c0" class="cena">
       <header><h2>Capa — Fundamentos da Termodinâmica (Aula 1, Unidade 1)</h2>
-        <span class="t">0:00 · 10s ·
-        5 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p01.png" alt="slide 1 do deck: Capa — Fundamentos da Termodinâmica (Aula 1, Unidade 1)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 1 do deck</figcaption></figure></div><div class="fala"><p>Olhe para este cristal.</p><p>Ele é um sólido organizado, rígido, brilhante.</p><p>Agora olhe este, líquido, fluido, sem forma própria.</p></div>
+        <span class="t">0:00 · 10 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p01.png" alt="slide 1 do deck: Capa — Fundamentos da Termodinâmica (Aula 1, Unidade 1)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 1 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Esta é a primeira aula da Físico-Química II e faz o que toda primeira aula de termodinâmica precisa fazer: montar o vocabulário e as equações com que o resto do curso vai trabalhar. Nada aqui é fórmula decorada — tudo sai de duas ideias: energia se conserva, e energia atravessa a fronteira de duas maneiras.</p>
+        <p>A pergunta que abre o curso é concreta e vem de um problema de pesquisa: por que um material funde e outro se decompõe quando aquecido? A resposta não está na força das ligações vista isoladamente. Está em como a energia flui e em quanto a desordem do sistema muda quando ele muda de estado.</p>
+        <p>Este texto acompanha o vídeo seção por seção. Cada página traz o slide correspondente e o texto escrito — não a transcrição da fala: as equações estão em notação, os valores estão conferidos nas tabelas de Atkins e Levine e as contas aparecem resolvidas. Os tempos ao lado de cada título são os capítulos do vídeo, para quem quiser voltar à explicação falada.</p>
+      </div>
     </section>
     <section id="c1" class="cena">
       <header><h2>Abertura — polímeros de coordenação (CPs)</h2>
-        <span class="t">0:10 · 206s ·
-        53 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p02.png" alt="slide 2 do deck: Abertura — polímeros de coordenação (CPs)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 2 do deck</figcaption></figure></div><div class="fala"><p>São o mesmo material pesquisadores descobriram que alguns polímeros de coordenação passam</p><p>por uma transição de fase reversível entre sólido e líquido, só com a mudança de temperatura.</p><p>No aquecimento, o caminho é este, sólido cristalino, líquido fundido, e por fim vítreo, super-resfriado.</p><p>Durante a fusão, ligações são quebradas e refeitas.</p><p>E aqui está o detalhe surpreendente.</p><p>A maioria desses polímeros não funde.</p><p>Aquecidos, ele simplesmente se decompõe, de modo irreversível.</p><p>A estrutura morre antes de fluir.</p><p>Os que fundem valem ouro.</p><p>Esses materiais servem como corantes, em iluminação, em armazenamento de gás e em catálise.</p><p>As propriedades dependem da geometria do material, filmes, fibras, monólitos.</p><p>E o estado líquido facilita justamente o processamento nessas formas.</p><p>Melhor ainda, o fundido pode recristalizar devagar, formando um cristal sem trincas.</p><p>Então fica a pergunta que guia esta aula.</p><p>Por que um material funde e outro decompõe?</p><p>O que decide?</p><p>Esta mora num único lugar, a forma como a energia flui.</p><p>Bem-vindo à Físico Química II.</p><p>Antes de qualquer equação, três palavras.</p><p>Sistema, calor e trabalho.</p><p>O sistema é a porção do universo que escolhemos estudar.</p><p>Uma xícara de café.</p><p>Um gás num cilindro.</p><p>Tudo mais é vizinhança.</p><p>A energia atravessa a fronteira de duas maneiras, e a diferença entre elas é o padrão do movimento.</p><p>Calor é a energia transferida pelo movimento desordenado das moléculas da vizinhança.</p><p>Quando o café esfria, as moléculas do ar bate em bate desorganizadas nas moléculas do café,</p><p>e a energia passa de mão em mão, sem direção preferencial.</p><p>Trabalho é energia transferida pelo movimento ordenado.</p><p>O gás em puro estão num único sentido, macroscópico, organizado.</p><p>A vizinhança sobe um peso, gira um eixo.</p><p>Tudo coordenado.</p><p>Desordenado, calor ordenado, trabalho.</p><p>Guarde a suposição, ela volta sempre.</p><p>Agora, a fronteira importa.</p><p>Uma parede a diabática bloqueia a passagem de calor.</p><p>Um sistema isolado não troca calor, nem trabalho, nem matéria com a vizinhança.</p><p>Nele, todo processo interno é adiabático.</p><p>Um detalhe de convenção, adotado no A15 neste curso.</p><p>Do ponto de vista do sistema, calor que entra é positivo.</p><p>Trabalho feito sobre o sistema é positivo.</p><p>Um gás que expande faz trabalho contra a vizinhança, então o trabalho dele é negativo.</p><p>E tudo, absolutamente tudo, é medido tendo o sistema como referencial.</p><p>Quando eu disser que o sistema ganhou energia, você já sabe, algo atravessou a fronteira para dentro.</p><p><span class="tag">PAUSE E PENSE</span> Pausa rápida, antes de seguir.</p><p>Você consegue dar um exemplo de transferência por movimento ordenado no seu dia a dia?</p><p><span class="tag">PAUSE E PENSE</span> Pense nisso por 10 segundos.</p><p>Um freio de carro, um êmbolo de seringa, uma massa que sobe.</p><p>Todo movimento organizado que entrega energia é trabalho.</p><p>Com o vocabulário pronto, a primeira pergunta grande.</p></div>
+        <span class="t">0:10 · 206 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p02.png" alt="slide 2 do deck: Abertura — polímeros de coordenação (CPs)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 2 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>O objeto de partida são os <strong>polímeros de coordenação</strong> (CPs, de <em>coordination polymers</em>): redes de íons metálicos ligados por ligantes orgânicos, que formam sólidos cristalinos. Alguns deles apresentam uma transição de fase reversível entre sólido e líquido disparada apenas pela temperatura. No aquecimento, o caminho é este: sólido cristalino, líquido fundido e, no resfriamento rápido, um estado vítreo, super-resfriado.</p>
+        <p>Durante a fusão, ligações são quebradas e refeitas. Aqui está o detalhe surpreendente: a maioria desses polímeros não funde. Aquecidos, eles simplesmente se decompõem, de modo irreversível — a estrutura morre antes de o material fluir. Os que fundem valem ouro justamente por isso.</p>
+        <p>Esses materiais servem como corantes, em iluminação, em armazenamento de gás e em catálise; suas propriedades dependem da geometria em que são processados — filmes, fibras, monólitos. E é o estado líquido que facilita o processamento nessas formas. Melhor ainda: o fundido pode recristalizar devagar, produzindo um cristal sem trincas.</p>
+        <p>Fica então a pergunta que guia a aula: <strong>por que um material funde e outro se decompõe? O que decide?</strong> A resposta mora num único lugar — a forma como a energia atravessa a fronteira do sistema. Antes de qualquer equação, portanto, três palavras: sistema, calor e trabalho.</p>
+      </div>
     </section>
     <section id="c2" class="cena">
       <header><h2>Vocabulário — sistema, vizinhança e os dois trânsitos de energia</h2>
-        <span class="t">3:37 · 25s ·
-        9 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p03.png" alt="slide 3 do deck: Vocabulário — sistema, vizinhança e os dois trânsitos de energia" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 3 do deck</figcaption></figure></div><div class="fala"><p>Para onde vai a energia que entra?</p><p>Imagine uma montanha.</p><p>O topo está a 1200 metros.</p><p>A base, a 200.</p><p>Não importa se você sobe pela trilha direta ou por uns zig-zag longo, a diferença de altitude é sempre mil metros.</p><p>Altitude é uma função de estado.</p><p>Depende só de onde você está, não do caminho que percorreu.</p></div>
+        <span class="t">3:37 · 25 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p03.png" alt="slide 3 do deck: Vocabulário — sistema, vizinhança e os dois trânsitos de energia" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 3 do deck</figcaption></figure></div>
+      <div class="fala">
+        <h3>Sistema, vizinhança e fronteira</h3>
+        <p><strong>Sistema</strong> é a porção do universo que escolhemos estudar: uma xícara de café, um gás num cilindro. <strong>Vizinhança</strong> é todo o resto. O que separa os dois é a <strong>fronteira</strong>, e é sempre ela que responde à pergunta prática — o que atravessa, e em que forma?</p>
+        <p>A classificação dos sistemas decorre disso. No sistema <strong>aberto</strong>, matéria e energia atravessam a fronteira. No <strong>fechado</strong>, a matéria não flui para fora, mas a energia sim. No <strong>isolado</strong>, nem matéria nem energia. Vale registrar desde já: o sistema isolado é hipotético, não existe na natureza. É um limite que usamos para pensar — e é justamente por ser um limite que ele é tão útil.</p>
+        <p>A fronteira também tem nome próprio. <strong>Diatérmica</strong> é a que deixa o calor atravessar; <strong>adiabática</strong> é a que o bloqueia. A garrafa térmica é o exemplo de sala de aula, e o exemplo engana: nenhuma garrafa é adiabática de verdade, ela apenas desacelera a perda de calor — o café esfria, mais devagar. E há um detalhe que costuma passar batido: uma fronteira adiabática bloqueia <em>calor</em>, não trabalho. Como no sistema isolado não há troca de energia de forma alguma, todo processo que ocorre nele é adiabático.</p>
+
+        <h3>Calor e trabalho: dois modos de transferir energia</h3>
+        <p><strong>Calor</strong> é a energia transferida por movimento <em>desordenado</em> dos componentes da vizinhança. Quando o café esfria, as moléculas do ar batem desorganizadas nas moléculas do café e a energia passa de mão em mão, sem direção preferencial. <strong>Trabalho</strong> é a energia transferida por movimento <em>ordenado</em>: o gás empurra o pistão num único sentido, macroscópico, organizado; a vizinhança sobe um peso, gira um eixo. A distinção entre os dois é o padrão do movimento, não a intensidade. Por isso o trabalho é a forma de energia que se consegue aproveitar para executar algo útil.</p>
+        <p>Como são transferências e não estoques, calor e trabalho existem apenas enquanto o processo acontece: são <strong>variáveis de processo</strong>, não funções de estado. Dizer “o sistema contém calor” está errado — o sistema contém energia; calor é o nome do trânsito. Perguntar quanto de calor há num copo de água é como perguntar quanto de depósito há numa conta bancária: o que existe é saldo; depósito é o movimento.</p>
+      </div>
     </section>
     <section id="c3" class="cena">
       <header><h2>Convenção de sinais — a contabilidade tem regras</h2>
-        <span class="t">4:02 · 63s ·
-        18 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p04.png" alt="slide 4 do deck: Convenção de sinais — a contabilidade tem regras" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 4 do deck</figcaption></figure></div><div class="fala"><p>A energia interna, U, é a função de estado da termodinâmica.</p><p>É a soma de todas as energias das partículas do sistema, translação, rotação, vibração, interações.</p><p>Não conseguimos medir o valor absoluto, mas isso não importa.</p><p>O que usamos é a variação, delta U.</p><p>E aqui vem a armadilha clássica.</p><p>O que é a função de estado, o calor ou a energia interna?</p><p>Muita gente diz, o sistema contém calor.</p><p>Errado.</p><p>O sistema contém energia.</p><p>Calor é o nome da transferência enquanto ela acontece.</p><p>Quando o calor para de fluir, o nome some.</p><p>Perguntar quanto de calor tem neste copo de água é como perguntar quanto de depósito tem nesta conta.</p><p>O que existe é saldo, depósito é o movimento.</p><p>Calor e trabalho não são funções de estado.</p><p>São trânsito.</p><p>Por isso a termodinâmica escreve que W minúsculos e o maiúsculo.</p></div>
+        <span class="t">4:02 · 63 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p04.png" alt="slide 4 do deck: Convenção de sinais — a contabilidade tem regras" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 4 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>A convenção de sinais não é uma escolha arbitrária: é uma tomada de posição. Você sempre se coloca do lado do sistema. Energia que <em>entra</em> no sistema tem sinal positivo; energia que <em>sai</em> tem sinal negativo. Com o trabalho, o mesmo: trabalho feito <em>sobre</em> o sistema é positivo; trabalho realizado <em>pelo</em> sistema é negativo.</p>
+        <p>A consequência é imediata e explica metade dos erros de sinal do curso: um gás que expande empurra a vizinhança, entrega energia, e portanto realiza trabalho negativo. O que o sistema perde, a vizinhança ganha — mas a seta é sempre desenhada do ponto de vista do sistema, nunca do lado da vizinhança.</p>
+        <p>Outro cuidado que troca sinal: ao calcular o trabalho de expansão, a pressão que entra na conta é a <strong>externa</strong>, não a pressão interna do gás. É a pressão externa que o gás empurra.</p>
+        <p>Um último detalhe de notação, que não é enfeite. A variação da energia interna se escreve <span class="eq">Δ<em>U</em></span> (ou <span class="eq">d<em>U</em></span>, no caso infinitesimal) porque <em>U</em> é função de estado e sua diferencial é exata. Calor e trabalho aparecem com δ — <span class="eq">δ<em>q</em></span> e <span class="eq">δ<em>w</em></span> — justamente porque <em>não</em> são funções de estado: dependem do caminho. Assim, a primeira lei na forma diferencial é <span class="eq">d<em>U</em> = δ<em>q</em> + δ<em>w</em></span>, e a diferença entre os dois símbolos é a diferença entre um saldo e um movimento.</p>
+      </div>
     </section>
     <section id="c4" class="cena">
       <header><h2>Primeira Lei — energia interna U, o estoque do sistema</h2>
-        <span class="t">5:05 · 63s ·
-        19 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p04.png" alt="slide 4 do deck: Primeira Lei — energia interna U, o estoque do sistema" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 4 do deck</figcaption></figure></div><div class="fala"><p>Como então guardar a conta?</p><p>A primeira lei da termodinâmica.</p><p>A energia interna de um sistema isolado é constante.</p><p>Se nada entre nada sai, o saldo não muda.</p><p>Num sistema isolado, calor zero, trabalho zero e, portanto, delta U igual a zero.</p><p>Para um sistema que troca energia, o saldo se escreve assim.</p><p>A variação da energia interna é o calor mais o trabalho.</p><p>Delta U igual a que mais W.</p><p>Com a convenção que já vimos, calor que entra a soma, trabalho feito sobre o sistema soma.</p><p>Observe o que essa equação diz de verdade.</p><p>Energia não é criada nem destruída, só transferida e transformada.</p><p>E o delta ou do lado esquerdo, função de estado,</p><p>pode ser calculado por qualquer caminho que ligue o mesmo estado inicial ao mesmo final.</p><p>Que W variam com o caminho?</p><p>A soma, não.</p><p>Guarde essa imagem, dois caminhos, uma altitude.</p><p>Ela é o coração de tudo o que vem.</p></div>
+        <span class="t">5:05 · 63 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p04.png" alt="slide 4 do deck: Primeira Lei — energia interna U, o estoque do sistema" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 4 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>A <strong>energia interna</strong> <em>U</em> é a energia total do sistema: a soma de todas as energias das partículas — translação, rotação, vibração, interações. Não conseguimos medir seu valor absoluto, mas isso não importa: o que usamos é a variação, <span class="eq">Δ<em>U</em></span>.</p>
+
+        <h3>Função de estado: a analogia da altitude</h3>
+        <p>Imagine uma montanha cujo topo está a 1 200 m e cuja base está a 200 m. Não importa se você sobe pela trilha direta ou por um zigue-zague longo: a diferença de altitude é sempre 1 000 m. <strong>Altitude é função de estado</strong> — depende de onde você está, não do caminho que percorreu. Já a distância percorrida depende do caminho: é menor pela trilha direta. Distância não é função de estado. Energia interna é do primeiro tipo: função de estado, cuja variação depende só do estado final e do inicial.</p>
+
+        <h3>A primeira lei</h3>
+        <p>Para um sistema isolado não há troca: calor zero, trabalho zero, e portanto <span class="eq">Δ<em>U</em> = 0</span>. A energia interna de um sistema isolado é constante.</p>
+        <p>Para um sistema que troca energia, o saldo se escreve assim:</p>
+        <p class="eqb">Δ<em>U</em> = <em>q</em> + <em>w</em></p>
+        <p>A variação da energia interna é o calor somado ao trabalho, ambos com a convenção da seção anterior: calor que entra soma, trabalho feito sobre o sistema soma. Não há terceira via de transferência.</p>
+        <p>O que a equação diz de verdade é que energia não é criada nem destruída, apenas transferida e transformada. E o <span class="eq">Δ<em>U</em></span> do lado esquerdo, sendo função de estado, pode ser calculado por <em>qualquer</em> caminho que ligue o mesmo estado inicial ao mesmo estado final. Quem varia com o caminho são <em>q</em> e <em>w</em> — a soma, não. Guarde essa imagem: dois caminhos, uma única altitude. Ela é o coração de tudo o que vem.</p>
+      </div>
     </section>
     <section id="c5" class="cena">
       <header><h2>Primeira Lei — a equação da contabilidade (ΔU = q + w)</h2>
-        <span class="t">6:08 · 71s ·
-        25 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p04.png" alt="slide 4 do deck: Primeira Lei — a equação da contabilidade (ΔU = q + w)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 4 do deck</figcaption></figure></div><div class="fala"><p>Vamos fazer o sistema trabalhar.</p><p>Literalmente.</p><p>Um gás confinado num cilindro, com um pistão em cima.</p><p>O gás expande, empurra o pistão.</p><p>Quanto trabalho ele realiza?</p><p>Depende.</p><p>Contra o que ele empurra?</p><p>Três cenários clássicos.</p><p>Primeiro, expansão livre.</p><p>O pistão não encontra nada.</p><p>Do outro lado, vácuo.</p><p>Nada resiste ao movimento.</p><p>A pressão externa é zero e, portanto, o trabalho é zero.</p><p>Repare, houve movimento, houve expansão, mas nenhum peso subiu, nenhum eixo girou.</p><p>Trabalho zero.</p><p>Expansão livre é de graça, energeticamente falando.</p><p>Segundo, expansão contra pressão constante.</p><p>Sobre o pistão, um peso fixo.</p><p>O gás empurra contra uma pressão externa que não muda.</p><p>O trabalho fica simples, menos P externo vezes delta V.</p><p>Se o gás expande, delta V positivo, trabalho negativo, coerente com a convenção,</p><p>o sistema fez trabalho, entregou energia.</p></div>
+        <span class="t">6:08 · 71 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p04.png" alt="slide 4 do deck: Primeira Lei — a equação da contabilidade (ΔU = q + w)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 4 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>A equação da primeira lei é uma contabilidade de duas entradas: tudo o que entra como calor, tudo o que entra ou sai como trabalho. O que se conserva é o saldo, <span class="eq">Δ<em>U</em></span>; o que se gasta é o caminho.</p>
+        <p>Uma verificação rápida de coerência: se o sistema recebe 50 J de calor e realiza 20 J de trabalho, então <span class="eq">Δ<em>U</em> = 50 − 20 = +30 J</span> — a energia interna subiu 30 J. Se ele recebe 50 J de calor e <em>sobre ele</em> se realiza 20 J de trabalho, <span class="eq">Δ<em>U</em> = 50 + 20 = +70 J</span>. O sinal do trabalho é a única coisa que muda entre os dois casos, e é aí que a convenção da seção anterior trabalha.</p>
+        <p>O ponto conceitual é mais interessante que a aritmética. Tome dois estados, A e B, do mesmo gás. Leve o sistema de A a B por dois caminhos diferentes. O <span class="eq">Δ<em>U</em></span> será idêntico nos dois, porque <em>U</em> é função de estado. Mas <em>q</em> e <em>w</em> não serão: um caminho pode trocar mais calor e menos trabalho, o outro o contrário. A soma fecha igual — é o que se chama de diferencial exata para <span class="eq">d<em>U</em></span> e de diferenciais inexatas para <span class="eq">δ<em>q</em></span> e <span class="eq">δ<em>w</em></span>.</p>
+        <p>Para sentir a diferença em números, considere 1 mol de gás perfeito a 300 K expandindo de 1 L para 2 L. Dependendo de <em>como</em> a expansão é feita, o trabalho vai de 0 a cerca de 1,7 kJ — e o calor compensa exatamente, porque a temperatura não muda. As duas seções seguintes fazem essa conta em cada cenário.</p>
+      </div>
     </section>
     <section id="c6" class="cena">
       <header><h2>Trabalho de expansão — três cenários, três respostas</h2>
-        <span class="t">7:19 · 149s ·
-        36 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p07.png" alt="slide 5 do deck: Trabalho de expansão — três cenários, três respostas" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 5 do deck</figcaption></figure></div><div class="fala"><p>Terceiro, o mais sutil, expansão reversível.</p><p>Aqui a pressão externa é ajustada para diferir da pressão do gás por uma quantidade infinitesimal, a cada instante.</p><p>A definição formal, uma mudança reversível é aquela que pode ser revertida por uma modificação infinitesimal de uma única variável.</p><p>Na prática, imagine a pressão externa como uma pilha de grãos de areia sobre o pistão.</p><p>Remova um grão, o gás expande um pouquinho.</p><p>Remova outro, expande de novo.</p><p>A cada passo, o gás está sempre a um grão de distância de inverter o processo.</p><p>Um grão de volta, e ele comprime.</p><p>Esse detalhe infinitesimal não é preciosismo.</p><p>É o cenário que produz o máximo de trabalho possível, e é o único que conseguimos tratar com exatidão usando equações.</p><p>A próxima conta mostra por quê.</p><p>Gás perfeito, temperatura constante.</p><p>Expansão reversível do volume V1 até o volume V2.</p><p>A cada instante, a pressão externa igual a pressão do gás, P igual a nRT sobre V.</p><p>O trabalho é integral de menos PDV ao longo do caminho.</p><p>O resultado é uma das fórmulas mais úteis do curso, menos nRT, vezes o logaritmo natural de V2 sobre V1.</p><p>A área sobre a curva da isoterma é, em módulo, esse trabalho.</p><p>Agora percebo o significado da reversibilidade.</p><p>Na expansão reversível, o gás empurra contra a maior pressão possível a cada instante.</p><p>Nem outra expansão, entre os mesmos volumes, extrai mais trabalho.</p><p>Livre dá zero.</p><p>Pressão constante dá pouco.</p><p>Reversível dá o máximo.</p><p>Mas atenção, temperatura constante, gás perfeito.</p><p>A energia interna de um gás perfeito depende só da temperatura.</p><p>Se T não muda, o não muda.</p><p>E pela primeira lei, delta igual a que mais W, se delta U é zero, o calor que entra exatamente compensa o trabalho que sai.</p><p>O gás converte calor em trabalho, sem alterar seu estoque.</p><p>Agora, o outro lado da moeda.</p><p>Suponha que eu queira esquentar o sistema.</p><p>Quanto calor é preciso para subir a temperatura?</p><p>A volume constante, sem trabalho de expansão, todo calor vai para dentro da energia interna.</p><p>Calor a volume constante é igual a delta U.</p></div>
+        <span class="t">7:19 · 149 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p07.png" alt="slide 5 do deck: Trabalho de expansão — três cenários, três respostas" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 5 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Ponha um gás confinado num cilindro com um pistão em cima. O gás expande e empurra o pistão. Quanto trabalho ele realiza? Depende: depende de contra o que ele empurra. A expressão geral é</p>
+        <p class="eqb"><em>w</em> = −∫ <em>p</em><sub>ext</sub> d<em>V</em></p>
+        <p>e o detalhe que derruba muita conta é o índice: aparece a pressão <strong>externa</strong>. Você não está olhando a pressão interna do sistema, e sim a pressão que o gás tem de vencer. Só é legítimo usar a pressão externa porque consideramos processos em equilíbrio — é isso que autoriza analisar o sistema pela fronteira.</p>
+
+        <h3>1. Expansão livre: <em>w</em> = 0</h3>
+        <p>O pistão não encontra nada do outro lado: vácuo. A pressão externa é zero e, portanto, o trabalho é zero. Repare: houve movimento, houve expansão, mas nenhum peso subiu e nenhum eixo girou. Expansão livre é de graça, energeticamente falando.</p>
+
+        <h3>2. Expansão contra pressão constante: <em>w</em> = −<em>p</em><sub>ext</sub>Δ<em>V</em></h3>
+        <p>Sobre o pistão há um peso fixo. Como <em>p</em><sub>ext</sub> não muda, ela sai da integral e o trabalho fica <span class="eq"><em>w</em> = −<em>p</em><sub>ext</sub>(<em>V</em><sub>2</sub> − <em>V</em><sub>1</sub>)</span>. Numa expansão, Δ<em>V</em> &gt; 0 e <em>w</em> &lt; 0: o sistema fez trabalho, entregou energia — coerente com a convenção.</p>
+
+        <h3>3. Expansão reversível: o máximo</h3>
+        <p>O terceiro cenário é o mais sutil e o mais importante do capítulo. A pressão externa é ajustada, a cada instante, para diferir da pressão do gás por uma quantidade infinitesimal. Uma mudança <strong>reversível</strong> é, por definição, aquela que pode ser revertida por uma modificação infinitesimal de uma única variável; na prática, é o processo que ocorre dentro do equilíbrio. A seção seguinte mostra a imagem da pilha de areia e faz a integral.</p>
+
+        <h3>Os três cenários na mesma expansão</h3>
+        <p>1 mol de gás perfeito a 300 K, expandindo de 1 L para 2 L:</p>
+        <ul>
+          <li><strong>livre</strong> (contra vácuo): <span class="eq"><em>w</em> = 0</span>;</li>
+          <li><strong>contra <em>p</em><sub>ext</sub> = 100 kPa</strong>: <span class="eq"><em>w</em> = −100 kPa × 1 L = −0,10 kJ</span>;</li>
+          <li><strong>reversível, isotérmica</strong>: <span class="eq"><em>w</em> = −<em>nRT</em> ln(<em>V</em><sub>2</sub>/<em>V</em><sub>1</sub>) = −1,73 kJ</span>.</li>
+        </ul>
+        <p>Mesmos estados inicial e final, trabalhos que diferem por um fator de dezessete. É a demonstração mais direta de que o trabalho é variável de processo.</p>
+      </div>
     </section>
     <section id="c7" class="cena">
       <header><h2>Expansão reversível — a pilha de areia e o caminho do máximo</h2>
-        <span class="t">9:48 · 34s ·
-        8 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p08.png" alt="slide 6 do deck: Expansão reversível — a pilha de areia e o caminho do máximo" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 6 do deck</figcaption></figure></div><div class="fala"><p>Definimos então a capacidade calorífica volume constante, Cv, a derivada parcial da energia interna em relação à temperatura, a V fixo.</p><p>Quanto maior Cv, mais calor o sistema pede para aquecer um grau.</p><p>Duas medidas da mesma fome de energia, o trabalho máximo na expansão e o calor necessário no aquecimento.</p><p>A próxima sessão junta as duas.</p><p>Na bancada, ninguém entrava volume.</p><p>Béqueres, reatores, células fotossabertas, tudo opera sob a pressão atmosférica, constante.</p></div>
+        <span class="t">9:48 · 34 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p08.png" alt="slide 6 do deck: Expansão reversível — a pilha de areia e o caminho do máximo" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 6 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Na prática, imagine a pressão externa como uma pilha de grãos de areia sobre o pistão. Remova um grão: o gás expande um pouquinho. Remova outro: expande de novo. A cada passo, o gás está sempre a um grão de distância de inverter o processo — ponha o grão de volta e ele comprime. Esse detalhe infinitesimal não é preciosismo: é o cenário que produz o máximo de trabalho possível entre dois volumes.</p>
+
+        <h3>A integral que dá a fórmula</h3>
+        <p>Gás perfeito, temperatura constante, expansão reversível de <em>V</em><sub>1</sub> até <em>V</em><sub>2</sub>. Como a pressão externa acompanha a do gás, podemos usar a equação de estado:</p>
+        <p class="eqb"><em>p</em><sub>ext</sub> = <em>p</em> = <em>nRT</em> / <em>V</em></p>
+        <p>Substituindo na integral do trabalho:</p>
+        <p class="eqb"><em>w</em> = −∫ <em>p</em><sub>ext</sub> d<em>V</em> = −<em>nRT</em> ∫ (d<em>V</em>/<em>V</em>) = −<em>nRT</em> ln(<em>V</em><sub>2</sub>/<em>V</em><sub>1</sub>)</p>
+        <p>Saem da integral tudo o que é constante: <em>n</em>, porque o sistema é fechado; <em>R</em>; e <em>T</em>, porque o processo é isotérmico. Sobra ∫d<em>V</em>/<em>V</em>, que é o logaritmo natural. Essa é uma das fórmulas mais úteis do curso: vale a pena tê-la em mente <em>ou</em> saber refazê-la, porque a dedução é curta.</p>
+
+        <h3>Por que é o máximo — e o que isso não significa</h3>
+        <p>Na expansão reversível, o gás empurra, a cada instante, contra a maior pressão que ainda o deixa expandir. Nenhuma outra expansão entre os mesmos dois volumes extrai mais trabalho: livre dá zero, contra pressão constante dá pouco, reversível dá o máximo.</p>
+        <p>Uma precisão que vale para não decorar errado: o que é exclusivo da reversível não é “ter equação exata”. A pressão externa constante também dá uma expressão exata, <span class="eq"><em>w</em> = −<em>p</em><sub>ext</sub>Δ<em>V</em></span>. O que a integral faz na reversível é outra coisa: acompanhar uma pressão externa que muda a cada instante ao longo do caminho.</p>
+
+        <h3>E a energia interna? Δ<em>U</em> = 0</h3>
+        <p>Atenção às duas condições: gás perfeito e temperatura constante. A energia interna de um gás perfeito depende só da temperatura; se <em>T</em> não muda, <span class="eq">Δ<em>U</em> = 0</span>. Pela primeira lei,</p>
+        <p class="eqb">Δ<em>U</em> = <em>q</em> + <em>w</em> = 0 ⟹ <em>q</em> = −<em>w</em> = <em>nRT</em> ln(<em>V</em><sub>2</sub>/<em>V</em><sub>1</sub>)</p>
+        <p>ou seja: o calor que entra compensa exatamente o trabalho que sai. O gás converte calor em trabalho sem alterar seu estoque de energia. No exemplo numérico da seção anterior, <span class="eq"><em>w</em> = −1,73 kJ</span> e <span class="eq"><em>q</em> = +1,73 kJ</span>.</p>
+      </div>
     </section>
     <section id="c8" class="cena">
       <header><h2>Calor e capacidade — quanto calor para subir a temperatura?</h2>
-        <span class="t">10:22 · 29s ·
-        8 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p08.png" alt="slide 6 do deck: Calor e capacidade — quanto calor para subir a temperatura?" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 6 do deck</figcaption></figure></div><div class="fala"><p>A pergunta prática é sempre a mesma quanto o calor um processo troca a pressão constante.</p><p>Só que a pressão constante deixa o volume livre.</p><p>O sistema expande, faz trabalho, e o calor medido não é mais delta U, precisamos de uma função que contabiliza os dois efeitos juntos.</p><p>A solução é elegante.</p><p>Defina a entalpia, H, como a energia interna mais o produto pressão vezes volume.</p><p>H igual ao mais PV.</p></div>
+        <span class="t">10:22 · 29 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p08.png" alt="slide 6 do deck: Calor e capacidade — quanto calor para subir a temperatura?" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 6 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Do lado do calor, a pergunta é: quanto calor é preciso para subir a temperatura? A resposta depende de uma condição — e a mais simples é volume constante.</p>
+        <p>A volume constante não existe trabalho de expansão, e a primeira lei se reduz ao calor:</p>
+        <p class="eqb"><em>q</em><sub><em>V</em></sub> = Δ<em>U</em></p>
+        <p>Essa é uma das relações mais importantes do capítulo: a volume constante, todo calor que entra vai para dentro da energia interna. Define-se então a <strong>capacidade calorífica a volume constante</strong> como a derivada que mede essa “fome de energia”:</p>
+        <p class="eqb"><em>C</em><sub><em>V</em></sub> = (∂<em>U</em>/∂<em>T</em>)<sub><em>V</em></sub></p>
+        <p>Para intervalos em que <em>C</em><sub><em>V</em></sub> pode ser tomada constante, <span class="eq">Δ<em>U</em> = <em>C</em><sub><em>V</em></sub>Δ<em>T</em></span> e <span class="eq"><em>q</em><sub><em>V</em></sub> = <em>C</em><sub><em>V</em></sub>Δ<em>T</em></span>. Quanto maior <em>C</em><sub><em>V</em></sub>, mais calor o sistema pede para aquecer um grau.</p>
+        <p>Para um gás monoatômico perfeito, a teoria cinética dá <span class="eq"><em>C</em><sub><em>V</em>,m</sub> = (3/2)<em>R</em></span>; para um diatômico rígido, <span class="eq">(5/2)<em>R</em></span>. Com <em>R</em> = 8,314 J K<sup>−1</sup> mol<sup>−1</sup>, isso dá 12,47 J K<sup>−1</sup> mol<sup>−1</sup> para o argônio e 20,79 J K<sup>−1</sup> mol<sup>−1</sup> para o N<sub>2</sub> — os valores usados na simulação desta aula.</p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., eq. 2.15 e dados de capacidade calorífica do cap. 2.</p>
+        <p>Mas a bancada não trabalha a volume constante. Béqueres, reatores e células de combustível operam sob a pressão atmosférica, que é constante. A pressão constante, o volume fica livre: o sistema expande, faz trabalho, e o calor medido não é mais <span class="eq">Δ<em>U</em></span>. Precisamos de uma função que contabilize os dois efeitos juntos — e é isso que a entalpia faz.</p>
+      </div>
     </section>
     <section id="c9" class="cena">
       <header><h2>Entalpia — a moeda corrente da pressão constante (H = U + pV)</h2>
-        <span class="t">10:51 · 93s ·
-        21 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p10.png" alt="slide 7 do deck: Entalpia — a moeda corrente da pressão constante (H = U + pV)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 7 do deck</figcaption></figure></div><div class="fala"><p>Três observações, em ordem de importância.</p><p>Primeira, U, P e V são funções de estado.</p><p>Soma e produto de funções de estado são funções de estado.</p><p>Portanto, H é função de estado.</p><p>É o estoque certo para processos a pressão constante.</p><p>Segunda, o ganho prático.</p><p>Para um processo a pressão constante, sem trabalho não expansivo, a variação de entalpia é igual ao calor trocado.</p><p>delta H igual a q p e o calor deixa de ser caminho dependente na prática, porque a entalpia o absorve dentro de uma função de estado.</p><p>Terceira, para o gás perfeito, e PV dependem só da temperatura.</p><p>Logo H também.</p><p>E as capacidades caloríficas se ligam, Cp menos Cv igual a nR.</p><p>Uma linha de tabela resolve as duas.</p><p>Vale a analogia final.</p><p>Se U é o saldo da conta, H é o saldo mais o crédito rotativo disponível, o valor que o sistema pode mover só expandindo contra a pressão do ambiente.</p><p>A entalpia, e não a energia interna, é a moeda corrente da termoquímica e a base de toda tabela de calor de reação que você vai usar.</p><p><span class="tag">PAUSE E PENSE</span> Antes de seguir, o nosso ponto de parada no meio da aula.</p><p><span class="tag">PAUSE E PENSE</span> Pause o vídeo e tente responder em uma frase.</p><p>Por que a entalpia é função de estado, se o calor não é?</p><p>Se você conseguiu dizer por que H soma o com PV, que já eram funções de estado, está pronto para a termoquímica.</p></div>
+        <span class="t">10:51 · 93 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p10.png" alt="slide 7 do deck: Entalpia — a moeda corrente da pressão constante (H = U + pV)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 7 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>A solução para o problema da bancada é elegante: define-se uma nova função somando à energia interna o termo de expansão.</p>
+        <p class="eqb"><em>H</em> = <em>U</em> + <em>pV</em></p>
+        <p>Essa é a <strong>entalpia</strong>. Três observações, em ordem de importância.</p>
+
+        <h3>1. A entalpia é função de estado</h3>
+        <p><em>U</em>, <em>p</em> e <em>V</em> são funções de estado, e soma e produto de funções de estado são funções de estado. Logo <em>H</em> também é. Este é o ponto que responde à pergunta clássica de prova: “por que <em>H</em> é função de estado, se o calor não é?”. A resposta é que <em>H</em> não é calor — é a soma de três funções de estado, construída justamente para absorver o calor de um processo específico.</p>
+
+        <h3>2. A pressão constante, Δ<em>H</em> = <em>q</em><sub><em>p</em></sub></h3>
+        <p>Para um processo a pressão constante e sem trabalho não expansivo, a variação de entalpia é igual ao calor trocado:</p>
+        <p class="eqb">Δ<em>H</em> = <em>q</em><sub><em>p</em></sub></p>
+        <p>É o ganho prático decisivo. O calor deixa de ser caminho-dependente na prática, porque a entalpia o absorve dentro de uma função de estado. Compare as duas moedas: calor trocado a volume constante é <span class="eq">Δ<em>U</em></span>; calor trocado a pressão constante é <span class="eq">Δ<em>H</em></span>.</p>
+
+        <h3>3. Para o gás perfeito, <em>H</em> depende só de <em>T</em></h3>
+        <p>Para um gás perfeito, <span class="eq"><em>pV</em> = <em>nRT</em></span>, e portanto</p>
+        <p class="eqb"><em>H</em> = <em>U</em> + <em>nRT</em> &nbsp;&nbsp;⟹&nbsp;&nbsp; Δ<em>H</em> = Δ<em>U</em> + Δ<em>n</em><sub>gás</sub><em>RT</em></p>
+        <p>O subscrito “gás” lembra que esse termo só conta as espécies gasosas do sistema. E o cuidado: a relação só pôde ser deduzida porque usamos <span class="eq"><em>pV</em> = <em>nRT</em></span>. Ela vale para gás — não para qualquer sistema.</p>
+
+        <h3>A analogia que fecha a seção</h3>
+        <p>Se <em>U</em> é o saldo da conta, <em>H</em> é o saldo mais o crédito rotativo disponível: o valor que o sistema pode movimentar apenas expandindo contra a pressão do ambiente. Por isso a entalpia, e não a energia interna, é a moeda corrente da termoquímica — é ela que aparece em toda tabela de calor de reação que você vai usar.</p>
+      </div>
     </section>
     <section id="c10" class="cena">
       <header><h2>Gás perfeito — as duas capacidades se ligam (Cp − Cv = nR)</h2>
-        <span class="t">12:24 · 94s ·
-        24 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p10.png" alt="slide 7 do deck: Gás perfeito — as duas capacidades se ligam (Cp − Cv = nR)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 7 do deck</figcaption></figure></div><div class="fala"><p>Lembra dos polímeros de coordenação da abertura que fundiam e recristalizavam?</p><p>Chegou a hora de dar número a essas mudanças.</p><p>Toda mudança física tem entalpia.</p><p>Vaporização líquido para H.</p><p>Fusão sólido para líquido.</p><p>Sublimação sólido direto para H.</p><p>Cada seta tem um valor, medido no estado padrão, pressão de um bar e temperatura de referência tabelada.</p><p>O sentido importa.</p><p>Vaporizar água custa cerca de 40 kJ por mol, a temperatura ambiente.</p><p>Energia entra para romper as atrações entre moléculas.</p><p>Vaporização endotérmica, ΔH positivo.</p><p>O caminho de volta devolve a mesma energia.</p><p>Condensar vapor libera 40 kJ por mol.</p><p>Exotérmica, ΔH negativo.</p><p>Mesmo módulo, sinais opostos, porque H é função de estado, o caminho reverso só troca a ordem dos estados.</p><p>Essa simetria vale para todo par, fusão e solidificação, sublimação e deposição.</p><p>Se você conhece o valor de um sentido, conhece o outro.</p><p>E uma nota de vocabulário, que evita erro de prova.</p><p>Endotérmico não significa esfria tudo em volta, significa que o processo pede energia da vizinhança.</p><p>Exotérmico devolve.</p><p>O gelo derretendo na sua mão é endotérmico, e sua mão sabe disso.</p><p>Mudança física, entalpia.</p></div>
+        <span class="t">12:24 · 94 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p10.png" alt="slide 7 do deck: Gás perfeito — as duas capacidades se ligam (Cp − Cv = nR)" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 7 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>A entalpia resolveu o problema da pressão constante; falta ligar as duas capacidades caloríficas. A definição é a mesma de antes, agora aplicada a <em>H</em>:</p>
+        <p class="eqb"><em>C</em><sub><em>p</em></sub> = (∂<em>H</em>/∂<em>T</em>)<sub><em>p</em></sub> &nbsp;&nbsp;⟹&nbsp;&nbsp; Δ<em>H</em> = <em>C</em><sub><em>p</em></sub>Δ<em>T</em></p>
+        <p>A pergunta que sobra é quanto <em>C</em><sub><em>p</em></sub> difere de <em>C</em><sub><em>V</em></sub>. A resposta geral envolve duas grandezas que aparecem sempre que se escrevem derivadas em relação a <em>p</em> e a <em>V</em>: o <strong>coeficiente de expansão</strong> <span class="eq">α = (1/<em>V</em>)(∂<em>V</em>/∂<em>T</em>)<sub><em>p</em></sub></span> e a <strong>compressibilidade isotérmica</strong> <span class="eq">κ<sub><em>T</em></sub> = −(1/<em>V</em>)(∂<em>V</em>/∂<em>p</em>)<sub><em>T</em></sub></span>. Com elas,</p>
+        <p class="eqb">(∂<em>U</em>/∂<em>T</em>)<sub><em>p</em></sub> = α π<sub><em>T</em></sub> <em>V</em> + <em>C</em><sub><em>V</em></sub></p>
+        <p>onde <span class="eq">π<sub><em>T</em></sub> = (∂<em>U</em>/∂<em>V</em>)<sub><em>T</em></sub></span> é a <strong>pressão interna</strong> do sistema — a derivada da energia interna em relação ao volume tem unidade de pressão, e é por isso que recebe esse nome. Cuidado com o que entra na fórmula: é a pressão interna, não a pressão <em>p</em> do gás.</p>
+
+        <h3>O caso do gás perfeito</h3>
+        <p>Num gás perfeito não há interações entre as moléculas, então a energia interna não depende do volume: <span class="eq">π<sub><em>T</em></sub> = 0</span>. A relação geral colapsa em algo simples, e as duas derivadas ficam iguais:</p>
+        <p class="eqb">(∂<em>U</em>/∂<em>T</em>)<sub><em>p</em></sub> = (∂<em>U</em>/∂<em>T</em>)<sub><em>V</em></sub> = <em>C</em><sub><em>V</em></sub> &nbsp;&nbsp;⟹&nbsp;&nbsp; <em>C</em><sub><em>p</em></sub> − <em>C</em><sub><em>V</em></sub> = <em>nR</em></p>
+        <p>Na forma molar, <span class="eq"><em>C</em><sub><em>p</em>,m</sub> − <em>C</em><sub><em>V</em>,m</sub> = <em>R</em></span>: a diferença entre as duas capacidades é exatamente o trabalho de expansão que o gás faz a mais quando é aquecido com a pressão livre para variar. O professor pede a dedução como treinamento — ela sai em três linhas a partir de <span class="eq"><em>H</em> = <em>U</em> + <em>nRT</em></span>.</p>
+        <p>A consistência numérica é um bom teste: para o argônio, <span class="eq"><em>C</em><sub><em>V</em>,m</sub> = 12,47</span> e <span class="eq"><em>C</em><sub><em>V</em>,m</sub> + <em>R</em> = 20,78 ≈ <em>C</em><sub><em>p</em>,m</sub></span>; para o N<sub>2</sub>, <span class="eq">20,79 + 8,314 ≈ 29,1 J K<sup>−1</sup> mol<sup>−1</sup></span>. Uma linha de tabela resolve as duas capacidades — e é por isso que as tabelas de termoquímica trazem <em>C</em><sub><em>p</em>,m</sub>.</p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., eqs. 2.20–2.26 (relação entre capacidades caloríficas) e dados de <em>C</em><sub><em>p</em>,m</sub> do cap. 2.</p>
+      </div>
     </section>
     <section id="c11" class="cena">
       <header><h2>Termoquímica — toda mudança física tem entalpia</h2>
-        <span class="t">13:58 · 18s ·
-        6 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p12.png" alt="slide 8 do deck: Termoquímica — toda mudança física tem entalpia" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 8 do deck</figcaption></figure></div><div class="fala"><p>Mudança química, também.</p><p>Quebrar e formar ligações reorganiza a energia das mesmas moléculas e moléculas novas.</p><p>A entalpia de reação, ΔRH, soma tudo isso.</p><p>Duas classes especiais dominam as tabelas, por pura economia de dados.</p></div>
+        <span class="t">13:58 · 18 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p12.png" alt="slide 8 do deck: Termoquímica — toda mudança física tem entalpia" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 8 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Agora os números. Antes de qualquer conta, porém, é preciso definir o que significa “estado padrão” — e aqui há um detalhe que evita muitos erros.</p>
+
+        <h3>Estado padrão</h3>
+        <p><strong>Estado padrão</strong> é a forma pura da substância a <span class="eq"><em>p</em>° = 1 bar</span>. Repare: está relacionado a uma <em>pressão</em>, a pressão padrão. <strong>Não existe temperatura padrão.</strong> Quando se fala do estado padrão do carbono a 20 °C, a 25 °C ou a 35 °C, todos são estados padrão <em>para aquela temperatura</em> — sempre substância pura, sempre a 1 bar. Por isso todo valor de tabela vem acompanhado da temperatura em que foi medido.</p>
+
+        <h3>Toda mudança física tem entalpia</h3>
+        <p>Vaporização é a passagem de líquido a gás; fusão, de sólido a líquido; sublimação, de sólido direto a gás. Cada seta tem um valor, medido no estado padrão.</p>
+        <p>A sublimação tem uma leitura elegante: sólido → gás é a fusão seguida da vaporização. Somando as duas equações,</p>
+        <p class="eqb">Δ<sub>sub</sub><em>H</em> = Δ<sub>fus</sub><em>H</em> + Δ<sub>vap</sub><em>H</em></p>
+
+        <h3>O sentido importa — e a temperatura também</h3>
+        <p>Vaporizar água custa cerca de <strong>41 kJ mol<sup>−1</sup> no ponto de ebulição (373 K)</strong> e cerca de <strong>44 kJ mol<sup>−1</sup> a 25 °C</strong>. Energia entra para romper as atrações entre as moléculas. Condensar devolve a mesma energia, com o sinal trocado. Os dois valores não são contradição: a entalpia de vaporização cai com a temperatura, porque a 373 K o líquido já está mais próximo do gás.</p>
+        <p>Por isso, usar 41 kJ mol<sup>−1</sup> “à temperatura ambiente” é erro de cerca de 8 %. O valor a 298 K é 44,0; o valor 40,66 kJ mol<sup>−1</sup> corresponde a 373,1 K.</p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., Tabela 2.3: Δ<sub>vap</sub><em>H</em>°(H<sub>2</sub>O) = 40,656 kJ mol<sup>−1</sup> a 373,15 K e 44,016 kJ mol<sup>−1</sup> a 298 K; Δ<sub>fus</sub><em>H</em>° = 6,008 kJ mol<sup>−1</sup> a 273,15 K. Levine, <em>Physical Chemistry</em>, Tabela 7.1, p. 214: 40,66 kJ mol<sup>−1</sup> a 373,1 K e 6,01 kJ mol<sup>−1</sup> a 273,2 K.</p>
+        <p>Na fusão do gelo, o valor é bem menor: 6,0 kJ mol<sup>−1</sup> a 273 K. Faz sentido — fundir quebra apenas parte da ordem do cristal; vaporizar desfaz todas as atrações.</p>
+
+        <h3>Endotérmico não é “frio”</h3>
+        <p>Uma nota de vocabulário que evita erro de prova: <strong>endotérmico</strong> não significa que o processo esfria tudo em volta; significa que ele <em>pede</em> energia à vizinhança. <strong>Exotérmico</strong> devolve energia. O gelo derretendo na sua mão é endotérmico, e sua mão sabe disso.</p>
+      </div>
     </section>
     <section id="c12" class="cena">
       <header><h2>Reações — formação e combustão, as duas entalpias especiais</h2>
-        <span class="t">14:16 · 85s ·
-        21 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p13.png" alt="slide 9 do deck: Reações — formação e combustão, as duas entalpias especiais" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 9 do deck</figcaption></figure></div><div class="fala"><p>A primeira, entalpia padrão de formação.</p><p>É a entalpia da reação que forma um mol do composto a partir dos elementos, cada um no seu estado padrão.</p><p>Para a água líquida, hidrogênio gás mais meio oxigênio gás, formando água líquida.</p><p>Todo elemento puro, no estado padrão, tem entalpia de formação igual a zero.</p><p>Por definição, é o ponto zero da régua.</p><p>A segunda, entalpia padrão de combustão.</p><p>Reação do composto com oxigênio, formando os produtos completos de queima.</p><p>Um dado de laboratório fácil de medir com calorímetro e muitos valores de formação nascem na verdade de combustões.</p><p>Por que essas duas bastam?</p><p>Por que qualquer reação pode ser montada como combinação desses blocos padrão?</p><p>A próxima ideia formaliza exatamente isso.</p><p>Em 1840, Germain Hess publicou a observação que organiza toda a termoquímica.</p><p>A entalpia total de uma reação é a mesma, não importa em quantas etapas ela acontece.</p><p>Isso não é uma lei nova.</p><p>É a função de estado funcionando.</p><p>Se H depende só dos estados, então a diferença entre reagentes e produtos é fixa</p><p>e qualquer rota que liga os mesmos pontos dá a mesma soma.</p><p>Volte à montanha, qualquer trilha do acampamento ao acampamento B muda a altitude em mil metros.</p></div>
+        <span class="t">14:16 · 85 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p13.png" alt="slide 9 do deck: Reações — formação e combustão, as duas entalpias especiais" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 9 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Mudança química também tem entalpia: quebrar e formar ligações reorganiza a energia das mesmas moléculas em moléculas novas. O símbolo Δ significa sempre <em>estado final menos estado inicial</em>, de modo que a entalpia padrão de reação é a entalpia padrão dos produtos menos a dos reagentes:</p>
+        <p class="eqb">Δ<sub>r</sub><em>H</em>° = Σ ν Δ<sub>f</sub><em>H</em>°(produtos) − Σ ν Δ<sub>f</sub><em>H</em>°(reagentes)</p>
+        <p>com ν o coeficiente estequiométrico de cada espécie. Um exemplo concreto, a combustão do metano:</p>
+        <p class="eqb">CH<sub>4</sub>(g) + 2 O<sub>2</sub>(g) → CO<sub>2</sub>(g) + 2 H<sub>2</sub>O(l) &nbsp;&nbsp; Δ<sub>r</sub><em>H</em>° = −890 kJ mol<sup>−1</sup></p>
+        <p>O sinal negativo significa que o sistema reacional perdeu energia: a reação é exotérmica.</p>
+
+        <h3>As duas entalpias especiais</h3>
+        <p><strong>Entalpia padrão de formação</strong>, Δ<sub>f</sub><em>H</em>°: a entalpia da reação que forma <em>um mol</em> do composto a partir dos elementos, cada um no seu estado de referência mais estável. Na construção, o produto é um mol do composto e apenas ele; nos reagentes ficam os elementos — o carbono como grafite, sua forma alotrópica mais estável, e o hidrogênio como H<sub>2</sub> gasoso. Depois, balanceia-se.</p>
+        <p>Todo elemento puro, no seu estado de referência, tem entalpia de formação igual a zero, por definição. É o ponto zero da régua. E a régua tem valores negativos <em>e</em> positivos: o benzeno líquido, por exemplo,</p>
+        <p class="eqb">6 C(grafita) + 3 H<sub>2</sub>(g) → C<sub>6</sub>H<sub>6</sub>(l) &nbsp;&nbsp; Δ<sub>f</sub><em>H</em>° = +49 kJ mol<sup>−1</sup></p>
+        <p>é <em>menos</em> estável que seus elementos — formar-se a partir deles custa energia.</p>
+        <p><strong>Entalpia padrão de combustão</strong>, Δ<sub>c</sub><em>H</em>°: a reação do composto com oxigênio, formando sempre os produtos completos de queima, CO<sub>2</sub> e H<sub>2</sub>O. É um dado fácil de medir em calorímetro, e muitos valores de formação nascem, na prática, de combustões.</p>
+        <p>Por que essas duas classes bastam? Porque qualquer reação pode ser montada como combinação desses blocos padrão. A próxima seção formaliza exatamente isso.</p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., cap. 2: definição de entalpia padrão de formação e de combustão; Δ<sub>r</sub><em>H</em>°(CH<sub>4</sub>) = −890 kJ mol<sup>−1</sup> e Δ<sub>f</sub><em>H</em>°(C<sub>6</sub>H<sub>6</sub>, l) = +49,0 kJ mol<sup>−1</sup>.</p>
+      </div>
     </section>
     <section id="c13" class="cena">
       <header><h2>Lei de Hess (1840) — a função de estado vira contabilidade de caminhos</h2>
-        <span class="t">15:41 · 62s ·
-        15 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p14.png" alt="slide 10 do deck: Lei de Hess (1840) — a função de estado vira contabilidade de caminhos" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 10 do deck</figcaption></figure><figure><img src="figuras/apostila-p15.png" alt="slide 11 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 11 do deck</figcaption></figure></div><div class="fala"><p>Termoquimicamente, decompõe a reação em qualquer escada de etapas,</p><p>some as entalpias e você tem a entalpia global.</p><p>O uso mais elegante é a rota padrão.</p><p>Todo composto pode ser desmontado nos elementos e cada elemento remontado nos produtos.</p><p>Como as entalpias de formação medem exatamente essas escadas,</p><p>a entalpia de qualquer reação é a soma das formações dos produtos,</p><p>menos a soma das formações dos reagentes, cada uma multiplicada pelo seu coeficiente estequiométrico.</p><p>É assim que o gráfico da sua apostila resolve a entalpia de reações que nunca ninguém mediu diretamente.</p><p>Você não precisa queimar o composto novo, mede a formação de cada peça, aplica is, pronto.</p><p>Note o ganho prático e também o conceitual.</p><p>A termoquímica vira contabilidade de estados, livros razão de formações, somados com sinais.</p><p>Nenhuma reação precisa ser executada para ter sua entalpia conhecida desde que as peças estejam tabeladas.</p></div>
+        <span class="t">15:41 · 62 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p14.png" alt="slide 10 do deck: Lei de Hess (1840) — a função de estado vira contabilidade de caminhos" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 10 do deck</figcaption></figure><figure><img src="figuras/apostila-p15.png" alt="slide 11 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 11 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Em 1840, Germain Hess publicou a observação que organiza toda a termoquímica: <strong>a entalpia padrão de uma reação global é a soma das entalpias padrão das etapas em que ela pode ser decomposta</strong>. A entalpia total é a mesma, não importa em quantas etapas a reação aconteça.</p>
+        <p>Isso não é lei nova: é a função de estado funcionando. Se <em>H</em> depende só dos estados, a diferença entre reagentes e produtos é fixa, e qualquer rota que ligue os mesmos pontos dá a mesma soma. Volte à montanha: qualquer trilha do acampamento A ao acampamento B muda a altitude nos mesmos 1 000 m.</p>
+
+        <h3>O exemplo do propeno</h3>
+        <p>Dados: a hidrogenação do propeno tem Δ<em>H</em>° = −124 kJ mol<sup>−1</sup>; a combustão do propano tem Δ<em>H</em>° = −2 220 kJ mol<sup>−1</sup>. Pede-se a entalpia padrão da combustão do propeno — uma reação que ninguém mediu diretamente. A escada é esta:</p>
+        <p class="eqb">(1) C<sub>3</sub>H<sub>6</sub>(g) + H<sub>2</sub>(g) → C<sub>3</sub>H<sub>8</sub>(g) &nbsp;&nbsp; −124 kJ mol<sup>−1</sup><br>
+        (2) C<sub>3</sub>H<sub>8</sub>(g) + 5 O<sub>2</sub>(g) → 3 CO<sub>2</sub>(g) + 4 H<sub>2</sub>O(l) &nbsp;&nbsp; −2 220 kJ mol<sup>−1</sup><br>
+        (3) H<sub>2</sub>O(l) → H<sub>2</sub>(g) + ½ O<sub>2</sub>(g) &nbsp;&nbsp; +285,8 kJ mol<sup>−1</sup></p>
+        <p>A terceira etapa é a formação da água <em>invertida</em> — e inverter a equação inverte o sinal do Δ<em>H</em>. Somando as três, o propano cancela, o H<sub>2</sub> cancela, e uma das quatro águas cancela com a água que foi decomposta; sobra exatamente</p>
+        <p class="eqb">C<sub>3</sub>H<sub>6</sub>(g) + (9/2) O<sub>2</sub>(g) → 3 CO<sub>2</sub>(g) + 3 H<sub>2</sub>O(l)</p>
+        <p>Como a soma das equações gerou a equação procurada, a soma das entalpias gera a entalpia procurada:</p>
+        <p class="eqb">Δ<sub>c</sub><em>H</em>°(propeno) = −124 − 2 220 + 285,8 = −2 058 kJ mol<sup>−1</sup></p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., exemplo 2.5 (Lei de Hess): −124, −2 220 e −2 058 kJ mol<sup>−1</sup>; Δ<sub>f</sub><em>H</em>°(H<sub>2</sub>O, l) = −285,83 kJ mol<sup>−1</sup>, apêndice.</p>
+
+        <h3>A rota das formações</h3>
+        <p>O mesmo resultado sai pela rota padrão: desmonte cada composto nos elementos e remonte nos produtos. Como as entalpias de formação medem exatamente essas escadas, a entalpia de qualquer reação é a soma das formações dos produtos menos a soma das formações dos reagentes, cada uma multiplicada pelo seu coeficiente. Duas contabilidades equivalentes — a de Hess, por etapas, e a das formações, por espécie.</p>
+        <p>O ganho é prático e conceitual ao mesmo tempo: a termoquímica vira contabilidade de estados, um livro-razão de formações somadas com sinais. Nenhuma reação precisa ser executada para ter sua entalpia conhecida, desde que as peças estejam tabeladas.</p>
+      </div>
     </section>
     <section id="c14" class="cena">
       <header><h2>Kirchhoff — tabelas a 298 K, reações a qualquer T</h2>
-        <span class="t">16:43 · 83s ·
-        17 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p16.png" alt="slide 12 do deck: Kirchhoff — tabelas a 298 K, reações a qualquer T" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 12 do deck</figcaption></figure><figure><img src="figuras/apostila-p17.png" alt="slide 13 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 13 do deck</figcaption></figure></div><div class="fala"><p>Tabelas nascem a 298 Kelvin.</p><p>Motores, fornos e células de combustível operam um monte disso.</p><p>Como extrapolamos?</p><p>A entalpia de reação a uma temperatura é a entalpia a outra, mais a diferença de aquecimento entre reagentes e produtos.</p><p>Aquecer reagentes custa a soma das capacidades deles, aquecer produtos, a dos produtos.</p><p>O que sobra delta Cp?</p><p>A soma dos Cp dos produtos menos a dos reagentes, ponderada pelos coeficientes.</p><p>A relação de Kirchhoff formaliza, a entalpia de reação na temperatura 2 é a entalpia na temperatura 1, mais a integral de delta Cp na faixa.</p><p>Se as capacidades forem quase constantes, a integral vira um produto simples, delta Cp vezes a variação de temperatura.</p><p>O impacto é duplo.</p><p>Primeiro, com Kirchhoff uma única tabela cobre qualquer temperatura de projeto.</p><p>Segundo, o mesmo raciocínio com capacidade a volume constante entrega variação da energia interna de reação.</p><p>As mudanças de o Seguem Cv, as de H Seguem Cp, o mesmo motor, duas marchas.</p><p>A primeira lei está completa, balanços de energia, funções de estado e contabilidade de calor falta pergunta que ela não responde.</p><p>Para onde o mundo caminha?</p></div>
+        <span class="t">16:43 · 83 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p16.png" alt="slide 12 do deck: Kirchhoff — tabelas a 298 K, reações a qualquer T" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 12 do deck</figcaption></figure><figure><img src="figuras/apostila-p17.png" alt="slide 13 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 13 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>As tabelas nascem a 298,15 K. Motores, fornos e células de combustível operam longe disso. Como extrapolar?</p>
+        <p>A ideia é simples: aquecer os reagentes custa a soma das capacidades deles; aquecer os produtos custa a dos produtos. O que sobra é a diferença,</p>
+        <p class="eqb">Δ<em>C</em><sub><em>p</em></sub> = Σ ν <em>C</em><sub><em>p</em>,m</sub>(produtos) − Σ ν <em>C</em><sub><em>p</em>,m</sub>(reagentes)</p>
+        <p>e a <strong>lei de Kirchhoff</strong> formaliza o resultado:</p>
+        <p class="eqb">Δ<sub>r</sub><em>H</em>(<em>T</em><sub>2</sub>) = Δ<sub>r</sub><em>H</em>(<em>T</em><sub>1</sub>) + ∫ Δ<em>C</em><sub><em>p</em></sub> d<em>T</em> &nbsp;&nbsp;<span class="eq">(entre <em>T</em><sub>1</sub> e <em>T</em><sub>2</sub>)</span></p>
+        <p>Se as capacidades forem quase constantes na faixa, a integral vira um produto simples: <span class="eq">Δ<sub>r</sub><em>H</em>(<em>T</em><sub>2</sub>) = Δ<sub>r</sub><em>H</em>(<em>T</em><sub>1</sub>) + Δ<em>C</em><sub><em>p</em></sub> Δ<em>T</em></span>.</p>
+
+        <h3>Ordem de grandeza — e por que as tabelas a 298 K servem</h3>
+        <p>Δ<em>C</em><sub><em>p</em></sub> costuma ser pequeno, de dezenas de J K<sup>−1</sup> mol<sup>−1</sup>. Um Δ<em>C</em><sub><em>p</em></sub> de −45,5 J K<sup>−1</sup> mol<sup>−1</sup> ao longo de 52 K vale −45,5 × 52 ≈ −2,37 kJ mol<sup>−1</sup> — correção de poucos por cento sobre uma entalpia de reação típica, da ordem de −100 kJ mol<sup>−1</sup>. É por isso que uma tabela a 298 K resolve quase todo problema de engenharia.</p>
+
+        <h3>A mesma ideia para a energia interna</h3>
+        <p>O raciocínio se repete com a capacidade a volume constante, e dá a variação da energia interna de reação: <span class="eq">Δ<sub>r</sub><em>U</em>(<em>T</em><sub>2</sub>) = Δ<sub>r</sub><em>U</em>(<em>T</em><sub>1</sub>) + ∫Δ<em>C</em><sub><em>V</em></sub> d<em>T</em></span>. As mudanças de <em>U</em> seguem <em>C</em><sub><em>V</em></sub>; as de <em>H</em>, <em>C</em><sub><em>p</em></sub> — o mesmo motor, duas marchas.</p>
+        <p>E as duas grandezas se convertem entre si pela relação deduzida na seção da entalpia, válida para gases tratados como perfeitos:</p>
+        <p class="eqb">Δ<sub>r</sub><em>U</em> = Δ<sub>r</sub><em>H</em> − Δ<em>n</em><sub>gás</sub><em>RT</em></p>
+        <p>onde Δ<em>n</em><sub>gás</sub> é a variação do número de mols de gás (produtos menos reagentes). Numa reação em que só há sólidos e líquidos, Δ<em>n</em><sub>gás</sub> = 0 e Δ<sub>r</sub><em>U</em> = Δ<sub>r</sub><em>H</em> — o termo <em>pV</em> praticamente não muda.</p>
+        <p>Com isso a primeira lei está completa: balanços de energia, funções de estado e contabilidade de calor. Falta a pergunta que ela não responde. Para onde o mundo caminha?</p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., lei de Kirchhoff (eq. 2.36a) e relação Δ<em>U</em> = Δ<em>H</em> − Δ<em>n</em><sub>gás</sub><em>RT</em> (cap. 2, termoquímica).</p>
+      </div>
     </section>
     <section id="c15" class="cena">
       <header><h2>Segunda Lei — a bússola que a contabilidade não tem</h2>
-        <span class="t">18:06 · 82s ·
-        24 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p18.png" alt="slide 14 do deck: Segunda Lei — a bússola que a contabilidade não tem" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 14 do deck</figcaption></figure></div><div class="fala"><p>É a segunda lei.</p><p>Antes de virar a página, uma conta que faltava.</p><p>Para reações com gases a pressão constante, a variação da energia interna sai da entalpia menos o termo de expansão, delta igual a delta H, menos delta n de gás, vezes RT.</p><p>Para o gás perfeito, é assim que U e H de reação se convertem um no outro.</p><p>Fechada a conta da energia, olhe para o seu café.</p><p>Ele esfria sozinho.</p><p>Sempre.</p><p>O gelo derrete na mesa, nunca ao contrário.</p><p>O creme se espalha inteiro no café e nunca se junta de volta num pingo.</p><p>Agora, a pergunta incomoda.</p><p>A primeira lei proíbe algum desses processos reversos?</p><p>Não.</p><p>Se o café esquentasse com o ar esfriando, a energia total continuaria constante.</p><p>O balanço fecharia perfeitamente.</p><p>A primeira lei é uma contabilidade, não uma bússola.</p><p>Ela diz quanto, nunca para onde.</p><p>Alguma coisa além da energia decide a direção do mundo.</p><p>Essa coisa precisa ser uma função de estado, porque o sentido não pode depender do caminho que a história percorreu.</p><p>E precisa medir algo que o café esfriando tem de sobra, e o café aquecendo sozinho não tem.</p><p>A segunda lei da termodinâmica nomeia esse critério.</p></div>
+        <span class="t">18:06 · 82 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p18.png" alt="slide 14 do deck: Segunda Lei — a bússola que a contabilidade não tem" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 14 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Fechada a conta da energia, olhe para o seu café. Ele esfria sozinho. Sempre. O gelo derrete na mesa, nunca ao contrário. O creme se espalha no café e nunca se junta de volta num pingo.</p>
+        <p>Agora a pergunta incômoda: a primeira lei proíbe algum desses processos ao contrário? Não. Se o café esquentasse enquanto o ar esfria, a energia total continuaria constante — o balanço fecharia perfeitamente. A primeira lei é uma contabilidade, não uma bússola: ela diz <em>quanto</em>, nunca <em>para onde</em>.</p>
+        <p>Alguma coisa além da energia decide a direção do mundo. Essa coisa tem de satisfazer duas exigências. Primeira: ser função de estado, porque o sentido não pode depender do caminho que a história percorreu. Segunda: medir algo que o café esfriando tem de sobra e que o café aquecendo sozinho não tem.</p>
+        <p>A segunda lei da termodinâmica nomeia esse critério, e a grandeza que o mede mudou a física para sempre: a <strong>entropia</strong>. Note onde o critério é aplicado: não no sistema, mas no <strong>universo termodinâmico</strong> — sistema mais vizinhança. Esse conjunto pode ser reconhecido como um sistema isolado, porque não há vizinhança com quem ele possa trocar qualquer coisa. É por isso que a entropia do universo é o juiz. Um corolário útil e imediato: numa transformação adiabática não há calor trocado, portanto a entropia da vizinhança não varia.</p>
+      </div>
     </section>
     <section id="c16" class="cena">
       <header><h2>Entropia — Clausius, o teste universal de espontaneidade</h2>
-        <span class="t">19:28 · 119s ·
-        29 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p19.png" alt="slide 15 do deck: Entropia — Clausius, o teste universal de espontaneidade" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 15 do deck</figcaption></figure><figure><img src="figuras/apostila-p20.png" alt="slide 16 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 16 do deck</figcaption></figure></div><div class="fala"><p>E a grandeza que o mede mudou a física para sempre, a entropia.</p><p>O gás está confinado na metade esquerda da caixa.</p><p>Removo a divisória.</p><p>O que acontece?</p><p>Você já sabe, ele se espalha e ocupa tudo.</p><p>E aqui vem a armadilha número dois desta aula.</p><p>É comum dizer que o gás quer se espalhar, que a entropia é “vontade de bagunça”.</p><p>Cuidado com essa tradução apressada.</p><p>O que existe a contagem?</p><p>Cada partícula bate ao acaso, e para cada arranjo microscópico existem muito mais configurações com o gás espalhado do que com o gás amontoado.</p><p>A expansão não é desejo, é estatística.</p><p>Nos dizeres de Boltzmann, a entropia conta o logaritmo do número de configurações.</p><p>Espalhado tem mais configurações, ponto.</p><p>Se você disser entropia é desordem na prova, explique o que está contando, senão, meia resposta.</p><p>A termodinâmica clássica define-se sem estatística, como função de estado cuja variação um processo reversível é o calor reversível dividido pela temperatura.</p><p>E a desigualdade de Clausius do teste universal, a variação de entropia é maior ou igual ao calor trocado dividido pela temperatura.</p><p>Igual, no caso reversível, maior, no espontâneo.</p><p>O corolário mais poderoso da aula, para um sistema isolado, que não troca calor nem trabalho, o calor é zero, e a desigualdade vira delta S maior ou igual a zero.</p><p>Num sistema isolado, a entropia nunca diminui.</p><p>Se ela aumenta, o processo é espontâneo.</p><p>Se fica constante, o sistema está em equilíbrio.</p><p>É por isso que o café não esquenta sozinho.</p><p>O café com o ar é, junto, um sistema isolado.</p><p>O café esquentando exigiria entropia total diminuindo, clausos nega no tranco.</p><p>A seta do mundo, enfim, tem régua.</p></div>
+        <span class="t">19:28 · 119 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p19.png" alt="slide 15 do deck: Entropia — Clausius, o teste universal de espontaneidade" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 15 do deck</figcaption></figure><figure><img src="figuras/apostila-p20.png" alt="slide 16 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 16 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>O experimento é o mais simples possível. Um gás está confinado na metade esquerda de uma caixa. Retira-se a divisória. O que acontece? Ele se espalha e ocupa tudo.</p>
+
+        <h3>Não é vontade de bagunça: é contagem</h3>
+        <p>É comum dizer que “o gás quer se espalhar” ou que a entropia é uma “vontade de desordem”. Cuidado com essa tradução apressada. O que existe é uma contagem: cada partícula se move ao acaso, e para cada arranjo microscópico há muito mais configurações com o gás espalhado do que com o gás amontoado. A expansão não é desejo, é estatística.</p>
+        <p>Na formulação de Boltzmann, a entropia é o logaritmo do número de configurações acessíveis:</p>
+        <p class="eqb"><em>S</em> = <em>k</em> ln <em>W</em></p>
+        <p>com <em>k</em> a constante de Boltzmann e <em>W</em> o número de arranjos microscópicos compatíveis com o estado macroscópico. Mais configurações, maior <em>S</em>. Se você escrever na prova que “entropia é desordem”, explique o que está sendo contado — senão é meia resposta.</p>
+
+        <h3>A definição termodinâmica</h3>
+        <p>A termodinâmica clássica define entropia sem estatística, como a função de estado cuja variação, num processo reversível, é o calor reversível dividido pela temperatura:</p>
+        <p class="eqb">d<em>S</em> = δ<em>q</em><sub>rev</sub> / <em>T</em></p>
+        <p>Essa definição se deduz pelo ciclo de Carnot. A entropia é função de estado: a integral de linha em um ciclo fechado é zero, e a variação entre dois estados não depende do caminho.</p>
+
+        <h3>A desigualdade de Clausius</h3>
+        <p>Da primeira lei, comparando um caminho reversível e um irreversível entre os mesmos dois estados, sai o teste universal:</p>
+        <p class="eqb">Δ<em>S</em> ≥ <em>q</em>/<em>T</em></p>
+        <p>Igual no caso reversível, maior no espontâneo. E o corolário mais poderoso da aula: num sistema isolado não há calor trocado, <em>q</em> = 0, e a desigualdade se reduz a</p>
+        <p class="eqb">Δ<em>S</em> ≥ 0</p>
+        <p>Num sistema isolado, a entropia nunca diminui. Se ela aumenta, o processo é espontâneo; se fica constante, o sistema está em equilíbrio.</p>
+        <p>É por isso que o café não esquenta sozinho. Café e ar, juntos, formam um sistema isolado; café esquentando exigiria entropia total diminuindo, e Clausius veta. A seta do mundo, enfim, tem régua.</p>
+        <p class="fonte">Atkins, <em>Physical Chemistry</em>, 9ª ed., eq. 3.5 (<em>S</em> = <em>k</em> ln <em>W</em>), eq. 3.12 (desigualdade de Clausius) e eq. 3.13 (Δ<em>S</em> ≥ 0 para sistema isolado).</p>
+      </div>
     </section>
     <section id="c17" class="cena">
       <header><h2>Entropia na prática — três receitas e o zero da régua</h2>
-        <span class="t">21:27 · 68s ·
-        16 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p21.png" alt="slide 17 do deck: Entropia na prática — três receitas e o zero da régua" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 17 do deck</figcaption></figure><figure><img src="figuras/apostila-p22.png" alt="slide 18 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 18 do deck</figcaption></figure></div><div class="fala"><p>Como usar a entropia na prática?</p><p>Três receitas cobrem quase tudo.</p><p>Primeira, transição de fase à temperatura constante.</p><p>A fusão, a vaporização.</p><p>Como T é fixa, a variação de entropia é simplesmente a entalpia de transição dividida pela temperatura de transição.</p><p>Fundir gelo a zero grau Celsius, ou seja, 273 kelvin, com quase 7 kJ por mol, delta S vale cerca de 26 J por mol por kelvin.</p><p>O degrau do gráfico.</p><p>Segunda, aquecimento sem mudança de fase.</p><p>A entalpia entrega n C delta T, na entropia, o delta T entra dentro do logaritmo.</p><p>n C vezes o logaritmo de T2 sobre T1.</p><p>Aquecer amplia a entropia sempre, qualquer ser positivo, qualquer T maior.</p><p>Terceira, a expansão isotérmica do gás perfeito lembra do trabalho máximo?</p><p>A entropia correspondente a nR vezes o logaritmo do volume final sobre o inicial.</p><p>O gás espalhado do clipe anterior, agora com número.</p></div>
+        <span class="t">21:27 · 68 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p21.png" alt="slide 17 do deck: Entropia na prática — três receitas e o zero da régua" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 17 do deck</figcaption></figure><figure><img src="figuras/apostila-p22.png" alt="slide 18 do deck" width="1920" height="1080" loading="lazy" decoding="async"><figcaption>slide 18 do deck</figcaption></figure></div>
+      <div class="fala">
+        <p>Como usar a entropia na prática? Três receitas, todas deduzidas da definição <span class="eq">d<em>S</em> = δ<em>q</em><sub>rev</sub>/<em>T</em></span>, cobrem quase tudo.</p>
+
+        <h3>1. Transição de fase à temperatura constante</h3>
+        <p>Numa transição, o calor envolvido é o próprio Δ<em>H</em> da transição, e a temperatura é fixa. Então</p>
+        <p class="eqb">Δ<sub>trans</sub><em>S</em> = Δ<sub>trans</sub><em>H</em> / <em>T</em><sub>trans</sub></p>
+        <p>Sem calorímetro nenhum: fundir gelo a 0 °C (273 K) consome 6,0 kJ mol<sup>−1</sup>, e dividir por 273 K dá</p>
+        <p class="eqb">Δ<sub>fus</sub><em>S</em> = 6,0 × 10<sup>3</sup> J mol<sup>−1</sup> / 273 K ≈ 22 J K<sup>−1</sup> mol<sup>−1</sup></p>
+        <p>É o degrau vertical da curva de entropia, exatamente no ponto de fusão. O valor tabelado é 22,0 J K<sup>−1</sup> mol<sup>−1</sup>.</p>
+        <p class="fonte">Levine, <em>Physical Chemistry</em>, Tabela 7.1, p. 214: Δ<sub>fus</sub><em>H</em> = 6,01 kJ mol<sup>−1</sup> e Δ<sub>fus</sub><em>S</em> = 22,0 J K<sup>−1</sup> mol<sup>−1</sup> a 273,2 K; Atkins, 9ª ed., Tabela 3.1: 22,00 J K<sup>−1</sup> mol<sup>−1</sup> a 273,15 K.</p>
+
+        <h3>2. Aquecimento sem mudança de fase</h3>
+        <p>Escrevendo o calor como <em>C</em> d<em>T</em>, a capacidade sai da integral porque é conhecida, e sobra ∫d<em>T</em>/<em>T</em>, que é o logaritmo:</p>
+        <p class="eqb">Δ<em>S</em> = <em>nC</em> ln(<em>T</em><sub>2</sub>/<em>T</em><sub>1</sub>)</p>
+        <p>com <em>C</em> = <em>C</em><sub><em>p</em>,m</sub> se a pressão é constante, <em>C</em><sub><em>V</em>,m</sub> se o volume é constante. Note onde o Δ<em>T</em> entra: na entalpia ele é linear; na entropia, dentro do logaritmo. Como <em>C</em> &gt; 0 e <em>T</em><sub>2</sub> &gt; <em>T</em><sub>1</sub>, aquecer sempre aumenta a entropia.</p>
+
+        <h3>3. Expansão isotérmica do gás perfeito</h3>
+        <p>Lembra do trabalho máximo? A entropia correspondente é</p>
+        <p class="eqb">Δ<em>S</em> = <em>nR</em> ln(<em>V</em><sub>2</sub>/<em>V</em><sub>1</sub>)</p>
+        <p>Para 1 mol dobrando o volume, <span class="eq">Δ<em>S</em> = <em>R</em> ln 2 = 5,76 J K<sup>−1</sup></span> — o gás espalhado da seção anterior, agora com número.</p>
+
+        <h3>O zero da régua: a terceira lei</h3>
+        <p>A terceira lei responde onde a régua começa. Baseada no teorema do calor de Nernst, ela diz que a variação de entropia de qualquer transformação física ou química tende a zero quando a temperatura tende a zero; e, para substâncias perfeitamente ordenadas, em cristais perfeitos,</p>
+        <p class="eqb"><em>S</em> → 0 quando <em>T</em> → 0</p>
+        <p>Um único arranjo possível, <em>W</em> = 1, ln <em>W</em> = 0: zero de espalhamento. O impacto é grande. Com o zero fixado, a entropia deixa de ser uma variação relativa e passa a ter valores <strong>absolutos</strong>, tabelados — as tabelas de <em>S</em>° a 298 K que você vai usar em toda a disciplina existem porque a terceira lei desenhou o ponto de partida da curva. Para a entalpia, ao contrário, não se define valor absoluto: só a variação faz sentido.</p>
+        <p>E fecha-se o ciclo com a entropia padrão de reação, outra vez produtos menos reagentes, a partir das entropias padrão individuais: <span class="eq">Δ<sub>r</sub><em>S</em>° = Σν<em>S</em>°(produtos) − Σν<em>S</em>°(reagentes)</span>. Há uma convenção para íons em solução: a entropia padrão do próton em água é definida como zero.</p>
+      </div>
     </section>
     <section id="c18" class="cena">
       <header><h2>Fechamento — três ideias para levar da aula</h2>
-        <span class="t">22:35 · 46s ·
-        12 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p23.png" alt="Fechamento — três ideias para levar da aula" width="1920" height="1080" loading="lazy" decoding="async"></figure><figure><img src="figuras/apostila-p24.png" alt="Fechamento — três ideias para levar da aula (trecho do mesmo slide)" width="1920" height="250" loading="lazy" decoding="async"></figure></div><div class="fala"><p>E falta peça final, onde a régua da entropia começa?</p><p>A terceira lei responde.</p><p>Do zero absoluto, todo cristal puro e perfeito tem entropia igual a zero.</p><p>Um único arranjo possível, uma única configuração.</p><p>Zero grau de espalhamento.</p><p>O impacto é enorme, com o zero fixado, entropias não são mais variações relativas, são valores absolutos.</p><p>As tabelas de S a 298 Kelvin, que você vai usar em toda a disciplina,</p><p>existem porque a terceira lei desenhou o ponto de partida da curva.</p><p>E a curva inteira agora faz sentido, começa no zero, sobe com aquecimento, salta nas transições.</p><p>A régua completa do sentido.</p></div>
+        <span class="t">22:35 · 46 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p23.png" alt="Fechamento — três ideias para levar da aula" width="1920" height="1080" loading="lazy" decoding="async"></figure><figure><img src="figuras/apostila-p24.png" alt="Fechamento — três ideias para levar da aula (trecho do mesmo slide)" width="1920" height="250" loading="lazy" decoding="async"></figure></div>
+      <div class="fala">
+        <p>Três ideias para levar da aula.</p>
+        <p><strong>Primeira: a energia interna é função de estado, e a primeira lei é a contabilidade.</strong> <span class="eq">Δ<em>U</em> = <em>q</em> + <em>w</em></span> fecha o balanço de qualquer processo. A volume constante, a moeda é <span class="eq">Δ<em>U</em></span>; a pressão constante, ela vira entalpia, <span class="eq">Δ<em>H</em> = <em>q</em><sub><em>p</em></sub></span>, com <span class="eq"><em>H</em> = <em>U</em> + <em>pV</em></span>. E a lei de Hess transforma tabelas de formação na entalpia de qualquer reação.</p>
+        <p><strong>Segunda: espontaneidade não vem da energia, vem da entropia.</strong> Num sistema isolado, <span class="eq">Δ<em>S</em> ≥ 0</span>. Clausius deu a bússola que a primeira lei não tinha: a primeira lei diz quanto, a segunda diz para onde.</p>
+        <p><strong>Terceira: com a terceira lei, a entropia ganha zero absoluto</strong>, e as três receitas — transição de fase, aquecimento, expansão — colocam números na bússola.</p>
+        <div class="qbox"><h4>Pause e pense</h4>
+          <ul>
+            <li>Por que a entalpia é função de estado, se o calor não é?</li>
+            <li>Se a primeira lei não proíbe o café esquentar sozinho, o que impede? Responda em uma frase, com a palavra <em>entropia</em> no lugar certo.</li>
+          </ul>
+        </div>
+        <p>Se você conseguiu dizer que <em>H</em> soma <em>U</em> com <em>pV</em> — que já eram funções de estado — e que a entropia do universo não pode diminuir, está pronto para a próxima aula.</p>
+      </div>
     </section>
     <section id="c19" class="cena">
       <header><h2>Encerramento — capítulos do vídeo e créditos</h2>
-        <span class="t">23:21 · 86s ·
-        23 ações</span></header>
-      <div class="figs"><figure><img src="figuras/apostila-p25.png" alt="Encerramento — capítulos do vídeo e créditos" width="1920" height="1080" loading="lazy" decoding="async"></figure><figure><img src="figuras/apostila-p26.png" alt="Encerramento — capítulos do vídeo e créditos (trecho do mesmo slide)" width="1920" height="250" loading="lazy" decoding="async"></figure></div><div class="fala"><p>Três ideias para levar da aula de hoje.</p><p>Primeira, a energia interna é função de estado.</p><p>E a primeira lei, delta igual a que mais W, é a contabilidade.</p><p>Na pressão constante, a moeda vira a entalpia, delta H igual ao calor do processo,</p><p>e a lei de H transforma tabelas de formação em qualquer reação.</p><p>Segunda, espontaneidade não vem da energia, vem da entropia.</p><p>Num sistema isolado, delta S nunca é negativo.</p><p>Clausius deu a bússola que a primeira lei não tinha.</p><p>Terceira, com a terceira lei, a entropia tem zero absoluto.</p><p>E as três receitas, transição, aquecimento, expansão, colocam números na bússola.</p><p>Agora, olhe para os cartões.</p><p>Se você juntar a moeda da termoquímica com a bússola da espontaneidade, o que obtém?</p><p>Exatamente o próximo capítulo, a energia de Gibbs, delta G igual a delta H menos T delta S</p><p>o critério único que decide, a temperatura e pressão constantes,</p><p>se uma reação caminha sozinha.</p><p>Antes de encerrar, o teste final.</p><p>Sem rever, escreva num papel a equação que define a entalpia e a desigualdade de Clausius</p><p>e diga por que uma conta energia e a outra, direção.</p><p>Confiança de 1 a 5.</p><p>Se ficou abaixo de 3, os capítulos do vídeo são o seu índice de retorno.</p><p>Até a próxima aula.</p></div>
+        <span class="t">23:21 · 86 s</span></header>
+      <div class="figs"><figure><img src="figuras/apostila-p25.png" alt="Encerramento — capítulos do vídeo e créditos" width="1920" height="1080" loading="lazy" decoding="async"></figure><figure><img src="figuras/apostila-p26.png" alt="Encerramento — capítulos do vídeo e créditos (trecho do mesmo slide)" width="1920" height="250" loading="lazy" decoding="async"></figure></div>
+      <div class="fala">
+        <p>O índice lateral desta página lista os capítulos do vídeo, com o tempo de cada um. Ele funciona como índice de retorno: se alguma seção não fechou, volte pelo título.</p>
+
+        <h3>Auto-teste, sem rever</h3>
+        <p>Escreva num papel (a) a equação que define a entalpia e (b) a desigualdade de Clausius; depois diga, em uma frase para cada, por que uma faz <em>conta</em> e a outra dá <em>direção</em>. Dê sua confiança de 1 a 5. Se ficou abaixo de 3, os capítulos do vídeo são o seu roteiro de revisão.</p>
+
+        <h3>Para onde vamos</h3>
+        <p>A próxima aula parte daqui: com a energia de Gibbs,</p>
+        <p class="eqb">Δ<em>G</em> = Δ<em>H</em> − <em>T</em>Δ<em>S</em></p>
+        <p>o critério do universo (Δ<em>S</em><sub>total</sub> ≥ 0) se converte num critério que só olha o sistema, a temperatura e pressão constantes. É a equação que decide se uma reação caminha sozinha.</p>
+
+        <h3>Fontes deste texto</h3>
+        <ul>
+          <li>Atkins, P.; de Paula, J. <em>Physical Chemistry</em>, 9ª ed. — cap. 2 (eqs. 2.3, 2.18, 2.19a, 2.20, 2.26, 2.36a; Tabela 2.3; exemplo 2.5) e cap. 3 (eqs. 3.5, 3.12, 3.13, 3.34; Tabela 3.1).</li>
+          <li>Levine, I. N. <em>Physical Chemistry</em> — Tabela 7.1, p. 214 (Δ<sub>fus</sub><em>H</em> = 6,01 kJ mol<sup>−1</sup>, Δ<sub>fus</sub><em>S</em> = 22,0 J K<sup>−1</sup> mol<sup>−1</sup>, Δ<sub>vap</sub><em>H</em> = 40,66 kJ mol<sup>−1</sup> a 373,1 K).</li>
+          <li>Slides do deck da aula 1, reproduzidos nesta página; os tempos do índice correspondem aos capítulos do vídeo.</li>
+        </ul>
+      </div>
     </section>
   </div>
 

@@ -75,18 +75,55 @@
   }
 
 </style>
+<style>
+/* (CORR) blocos de correcao e de conteudo textual — ver CORRECOES_CONTEUDO_APLICADAS.md */
+.corr{margin-top:14px;border-left:5px solid var(--yellow);background:rgba(255,233,122,.08);
+      border-radius:0 10px 10px 0;padding:12px 15px;font-size:.93rem}
+.corr .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--yellow);margin-bottom:7px}
+.corr p{margin:0 0 9px}
+.corr p:last-child{margin-bottom:0}
+.txt h3{font-size:.97rem;color:var(--yellow);margin:18px 0 7px}
+.txt h3:first-of-type{margin-top:2px}
+.txt p{margin:0 0 11px;font-size:.96rem;line-height:1.66}
+.txt ul,.txt ol{margin:0 0 11px 1.35rem;font-size:.96rem;line-height:1.6}
+.txt li{margin-bottom:6px}
+.eq{background:rgba(127,212,232,.09);border-left:4px solid var(--cyan);border-radius:0 8px 8px 0;
+    padding:10px 14px;margin:12px 0;font-family:"DejaVu Serif",Georgia,serif;font-size:1.04rem;
+    line-height:1.55}
+.eq .lbl{float:right;font-size:.76rem;color:var(--yellow);font-family:"DejaVu Sans",sans-serif}
+.ex{background:rgba(0,0,0,.25);border:1px solid rgba(242,240,230,.16);border-radius:10px;
+    padding:13px 15px;margin:14px 0}
+.ex .rot{display:block;font-size:.71rem;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:8px}
+.ex p{margin:0 0 8px;font-size:.94rem}
+.ex p:last-child{margin-bottom:0}
+.cite{font-size:.81rem;opacity:.8;font-style:italic}
+.txt table{width:100%;border-collapse:collapse;font-size:.89rem;margin:10px 0 14px}
+.txt th,.txt td{text-align:left;padding:7px 9px;border-bottom:1px solid rgba(242,240,230,.14);
+    vertical-align:top}
+.txt th{color:var(--cyan);font-size:.77rem;text-transform:uppercase;letter-spacing:.05em}
+.txt figure{margin:14px 0}
+.txt figure img{width:100%;height:auto;display:block;border-radius:9px}
+.txt figcaption{font-size:.82rem;opacity:.82;margin-top:7px}
+@media print{
+  .corr,.eq,.ex{background:#fff!important;border:1px solid #999!important;color:#111!important}
+  .corr .rot,.ex .rot,.txt h3,.eq .lbl,.cite,.txt figcaption{color:#111!important}
+  .txt table th{color:#111!important}
+}
+</style>
 </head><body>
 <nav aria-label="Índice da aula">
   <p class="nav-tit">Físico-Química II</p>
-  <div class="sub">Misturas simples · 10 páginas</div>
-  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Descrição termodinâmica das misturas</span><em>2</em></a><a href="#p3"><span>Volume molar parcial</span><em>3</em></a><a href="#p4"><span>Energia de Gibbs molar parcial</span><em>4</em></a><a href="#p5"><span>Olhar mais amplo para o potencial químico</span><em>5</em></a><a href="#p6"><span>A equação de Gibbs-Duhem</span><em>6</em></a><a href="#p7"><span>A equação de</span><em>7</em></a><a href="#p8"><span>Termodinâmica das misturas</span><em>8</em></a><a href="#p9"><span>Mistura de gases perfeitos</span><em>9</em></a><a href="#p10"><span>Outras funções termodinâmicas de mistura</span><em>10</em></a>
+  <div class="sub">Misturas simples · 11 páginas</div>
+  <a href="#p1"><span>Capa</span><em>1</em></a><a href="#p2"><span>Descrição termodinâmica das misturas</span><em>2</em></a><a href="#p3"><span>Volume molar parcial</span><em>3</em></a><a href="#p4"><span>Energia de Gibbs molar parcial</span><em>4</em></a><a href="#p5"><span>Olhar mais amplo para o potencial químico</span><em>5</em></a><a href="#p6"><span>A equação de Gibbs-Duhem</span><em>6</em></a><a href="#p7"><span>A equação de</span><em>7</em></a><a href="#p8"><span>Termodinâmica das misturas</span><em>8</em></a><a href="#p9"><span>Mistura de gases perfeitos</span><em>9</em></a><a href="#p10"><span>Outras funções termodinâmicas de mistura</span><em>10</em></a><a href="#p11"><span>Azeótropos e diagrama T–x</span><em>11</em></a>
 </nav>
 <main>
   <div class="top">Navegue pelas seções à esquerda — ou use <kbd>←</kbd> <kbd>→</kbd>.
     Material de estudo; os slides são os da aula.</div>
   <h1 class="tit">Misturas simples</h1>
   <div class="meta">Físico-Química II · Prof. Dr. Rodrigo José de Oliveira (UEPB/PCM Lab)
-    · 10 páginas · arquivo único, funciona offline</div>
+    · 11 páginas (10 dos slides + 1 de texto) · arquivo único, funciona offline</div>
   
     <section class="pg" id="p1">
       <header><span class="num">página 1</span><h2>Capa</h2>
@@ -97,11 +134,40 @@
       <header><span class="num">página 2</span><h2>Descrição termodinâmica das misturas</h2>
       </header>
       <img src="figuras/apostila-p02.jpg" alt="página 2: Descrição termodinâmica das misturas" width="1467" height="825" loading="lazy" decoding="async">
+      <div class="corr">
+        <span class="rot">Correção do slide desta página</span>
+        <p>Faltam as unidades: volume molar é volume <em>por mol</em>. Leia
+        “o volume molar da água é <strong>18 cm³ mol⁻¹</strong>” e, três parágrafos abaixo,
+        “<strong>14 cm³ mol⁻¹</strong> será o volume molar parcial da H₂O no etanol”. Os números 18 e
+        14 estão certos; o que falta é o mol⁻¹ — e o próprio gráfico ao lado já está rotulado em
+        cm³ mol⁻¹.</p>
+        <p>No mesmo parágrafo, o ponto depois de “18 cm³” corta a frase no meio: é
+        “<strong>A</strong> mesma adição ao etanol leva a um aumento de 14 cm³”, com A maiúsculo.</p>
+        <p class="cite">Fonte: Atkins, <em>Physical Chemistry</em>, 9ª ed., §5.1(a) e Fig. 5.3 (eixos
+        em cm³ mol⁻¹); Levine, 6ª ed., §5.1 — volume molar parcial é sempre grandeza molar, por mol.</p>
+      </div>
+
     </section>
     <section class="pg" id="p3">
       <header><span class="num">página 3</span><h2>Volume molar parcial</h2>
       </header>
       <img src="figuras/apostila-p03.jpg" alt="página 3: Volume molar parcial" width="1467" height="825" loading="lazy" decoding="async">
+      <div class="corr">
+        <span class="rot">Correção do slide desta página</span>
+        <p>A última linha da página imprime <strong>5,6664</strong> onde deveria estar
+        <strong>54,6664</strong> — um fator 10. O coeficiente linear da derivada é o mesmo da linha
+        de cima, dv/dx = 54,6664 − 2(0,363 94)x + 3(0,028 256)x², de modo que a expressão correta é:</p>
+        <p style="font-family:'DejaVu Serif',Georgia,serif">V<sub>E</sub>/(cm³ mol⁻¹) =
+        <strong>54,6664</strong> − 0,72788x + 0,084768x²</p>
+        <p>Duas conferências independentes: (i) 5,6664 cm³ mol⁻¹ seria um volume molar absurdo para o
+        etanol, cujo volume molar é ≈ 58 cm³ mol⁻¹; (ii) o gráfico da mesma página (Fig. 5.3) cobre
+        justamente 53–56 cm³ mol⁻¹. O erro é de impressão, não de conta.</p>
+        <p class="cite">Fonte: Atkins, 9ª ed., §5.1(a): o polinômio ajustado é
+        v = 1002,93 + 54,6664x − 0,363 94x² + 0,028 256x³ e
+        “V<sub>E</sub>/(cm³ mol⁻¹) = 54,6664 − 0,72788x + 0,084768x²”; o mesmo ajuste está no
+        Exemplo 5.1 de Levine, 6ª ed.</p>
+      </div>
+
     </section>
     <section class="pg" id="p4">
       <header><span class="num">página 4</span><h2>Energia de Gibbs molar parcial</h2>
@@ -138,6 +204,77 @@
       </header>
       <img src="figuras/apostila-p10.jpg" alt="página 10: Outras funções termodinâmicas de mistura" width="1467" height="825" loading="lazy" decoding="async">
     </section>
+    <section class="pg txt" id="p11">
+      <header><span class="num">página 11</span><h2>Azeótropos e diagrama T–x</h2>
+        <p class="sub">Resumo do que o quiz cobra — desenvolvimento completo na apostila de sistemas
+        binários (5.2), páginas 13 e 14</p></header>
+
+      <p>As páginas anteriores trataram a mistura em função da composição, com p e T fixas. Para
+      destilar, a leitura útil é a inversa: fixa-se a pressão (1 atm) e olha-se a temperatura em
+      função da composição — o <strong>diagrama T–x</strong>. O desenvolvimento completo (curvas de
+      bolha e orvalho, regra da alavanca no T–x e os dois tipos de azeótropo) está em
+      <a href="apostila-sistemas-binarios.html">Sistemas binários (5.2)</a>, páginas 13 e 14.
+      Esta página resume o essencial.</p>
+
+      <h3>Azeótropo</h3>
+      <p>Quando o vapor tem a mesma composição do líquido (y = x), ferver não muda mais a composição:
+      a mistura ferve a temperatura constante, como uma substância pura. Essa composição é o
+      <strong>azeótropo</strong>. A composição azeotrópica depende da pressão — é isso que distingue
+      um azeótropo de um composto definido (Levine, §12.6, p. 369).</p>
+
+      <h3>Desvio positivo ou negativo de Raoult</h3>
+      <table>
+        <tr><th>Tipo</th><th>Desvio de Raoult</th><th>Diagrama p–x</th><th>Diagrama T–x</th><th>Exemplos</th></tr>
+        <tr>
+          <td><strong>Ebulição mínima</strong></td>
+          <td>positivo: interações A–B menos favoráveis que A–A e B–B ⇒ pressão de vapor maior que a
+          ideal; G<sup>E</sup> &gt; 0</td>
+          <td>máximo</td><td>mínimo</td>
+          <td>etanol–água; dioxano–água</td>
+        </tr>
+        <tr>
+          <td><strong>Ebulição máxima</strong></td>
+          <td>negativo: interações A–B mais favoráveis ⇒ pressão de vapor menor que a ideal;
+          G<sup>E</sup> &lt; 0</td>
+          <td>mínimo</td><td>máximo</td>
+          <td>triclorometano–propanona; ácido nítrico–água</td>
+        </tr>
+      </table>
+      <p class="cite">Fonte: Atkins, 9ª ed., §5.6(b), p. 180 (Figs. 5.38 e 5.39): máximo no diagrama
+      de temperatura–composição quando as interações A–B estabilizam o líquido (G<sup>E</sup>
+      negativo); mínimo quando desestabilizam (G<sup>E</sup> positivo), como no etanol–água.</p>
+
+      <h3>Etanol–água, o caso do quiz</h3>
+      <ul>
+        <li>Composição azeotrópica: <strong>95,6 % (m/m) de etanol</strong> — Levine descreve como
+        “96 percent C₂H₅OH by weight (192 proof)” e “4 per cent by mass” de água (Levine, p. 369;
+        Atkins, p. 180).</li>
+        <li>Em <strong>fração molar</strong>, que é o que o eixo do T–x mostra: 95,6 g ÷ 46,07 g mol⁻¹
+        = 2,075 mol de etanol e 4,4 g ÷ 18,015 g mol⁻¹ = 0,244 mol de água ⇒
+        x(C₂H₅OH) = 2,075/(2,075 + 0,244) ≈ <strong>0,90</strong>.</li>
+        <li>Temperatura de ebulição: <strong>78,2 °C = 351,4 K</strong> (Levine, p. 369) — abaixo da
+        água (373,15 K) e um pouco abaixo do etanol puro (78,3 °C = 351,5 K; Levine, Ex. 7.4, p. 217).
+        É o que faz dela um azeótropo de ebulição <em>mínima</em>. (O quiz usa 351,5 K como referência
+        arredondada; a diferença de 0,1 K é justamente o mínimo.)</li>
+        <li>Consequência: de uma solução aquosa diluída de etanol <strong>não se obtém etanol
+        100 %</strong> por destilação a 1 atm — a composição para no azeótropo (Levine, p. 369).</li>
+      </ul>
+
+      <h3>Regra da alavanca no T–x (a conta da questão 5)</h3>
+      <p>Sobre a linha de amarração, as frações molares das fases saem da regra da alavanca
+      n<sub>α</sub>l<sub>α</sub> = n<sub>β</sub>l<sub>β</sub> (Atkins, eq. 5.46, p. 178; Levine,
+      eq. 12.40, p. 366), que em frações fica</p>
+      <div class="eq">f<sub>liq</sub> = (y − z)/(y − x) &nbsp;&nbsp;e&nbsp;&nbsp;
+        f<sub>vap</sub> = (z − x)/(y − x)</div>
+      <div class="ex">
+        <span class="rot">Exemplo resolvido (x = 0,20; y = 0,60; z = 0,30)</span>
+        <p>f<sub>liq</sub> = (0,60 − 0,30)/(0,60 − 0,20) = 0,30/0,40 = <strong>0,75</strong></p>
+        <p>f<sub>vap</sub> = (0,30 − 0,20)/(0,60 − 0,20) = 0,10/0,40 = <strong>0,25</strong></p>
+        <p>As duas somam 1, e z = 0,30 está mais perto de x = 0,20 do que de y = 0,60 — por isso a
+        maior parte da matéria está no líquido: a alavanca pende para o lado do líquido.</p>
+      </div>
+    </section>
+
 <script>
 document.addEventListener("keydown", e => {
   const ids = [...document.querySelectorAll("section.pg")].map(s => s.id);
